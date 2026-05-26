@@ -1,5 +1,5 @@
 import { motion, useSpring, useMotionValue, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network } from "lucide-react";
+import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin } from "lucide-react";
 import { useRef, useMemo, Suspense, useEffect, useState } from "react";
 
 // --- STYLISH SYSTEMS CONSTELLATION ---
@@ -909,47 +909,206 @@ export default function App() {
         <ProcessSection />
 
         {/* CONTACT CALLOUT */}
-        <section id="contact" className="min-h-screen flex items-center justify-center px-6 md:px-24 bg-graphite relative overflow-hidden -mt-[2px] z-20">
-          <div className="absolute inset-0 opacity-10">
-             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,#4B7B7B,transparent)] blur-3xl translate-y-1/2" />
-          </div>
-          
-          <div className="max-w-4xl mx-auto text-center relative z-10">
-            <motion.div
-               initial={{ opacity: 0, scale: 0.95 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ duration: 1 }}
-            >
-            <h2 className="text-5xl md:text-8xl font-serif-display font-extrabold mb-12 text-ivory tracking-tight">
-                Ready to <span className="italic text-teal/80">Synchronize?</span>
-              </h2>
-              <p className="text-ivory/40 mb-16 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed">
-                Our limited capacity ensures deep integration with your engineering leadership. Reach out to discuss your operational roadmap.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a 
-                  href="mailto:orcin.aistudio@gmail.com" 
-                  className="w-full sm:w-auto bg-ivory text-graphite px-12 py-6 rounded-sm font-heading font-bold tracking-widest text-sm hover:scale-105 transition-transform shadow-2xl text-center"
-                >
-                  MAIL US
-                </a>
-                
-                <a 
-                  href="tel:+918870897691" 
-                  className="w-full sm:w-auto border border-ivory/30 text-ivory px-12 py-6 rounded-sm font-heading font-bold tracking-widest text-sm hover:bg-ivory hover:text-graphite hover:scale-105 transition-all shadow-2xl text-center"
-                >
-                  FREE DISCOVERY CALL
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <ContactSection />
       </main>
       
       <Footer />
     </div>
+  );
+}
+
+// --- TEAM DATA AND CAROUSEL SYSTEM ---
+
+const TEAM_MEMBERS = [
+  {
+    name: "Kaushik Rengan",
+    role: "Design & Strategy",
+    location: "Coimbatore, India",
+    initials: "KR",
+    otherRole: "System Requirements Engineer",
+    avatarBg: "from-teal-900 to-[#122424]",
+    linkedin: "https://www.linkedin.com/in/kaushik-rengan-r-540b7818b/"
+  },
+  {
+    name: "Vignesh Manivasagam",
+    role: "AI Architect",
+    location: "Coimbatore, India",
+    initials: "VM",
+    otherRole: "System Requirements Engineer",
+    avatarBg: "from-blue-900 to-[#101F29]",
+    linkedin: "https://www.linkedin.com/in/vignesh-manivasakam-17b0a2128/"
+  },
+  {
+    name: "Ajay Karthick",
+    role: "AI Orchestration & development",
+    location: "Coimbatore, India",
+    initials: "AK",
+    otherRole: "System Requirements Engineer",
+    avatarBg: "from-zinc-800 to-[#121213]",
+    linkedin: "https://www.linkedin.com/in/ajay-k-23495b179/"
+  }
+];
+
+function ContactSection() {
+  const [activeTeamIdx, setActiveTeamIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTeamIdx((prev) => (prev + 1) % TEAM_MEMBERS.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const activeMember = TEAM_MEMBERS[activeTeamIdx];
+
+  return (
+    <section id="contact" className="min-h-screen py-24 flex items-center justify-center px-6 md:px-24 bg-graphite relative overflow-hidden -mt-[2px] z-20">
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,#4B7B7B,transparent)] blur-3xl translate-y-1/2" />
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        {/* Left Column: Contact info */}
+        <div className="flex flex-col text-center lg:text-left items-center lg:items-start select-none">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full flex flex-col items-center lg:items-start"
+          >
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-serif-display font-extrabold mb-6 text-ivory tracking-tight leading-tight">
+              Ready to <span className="italic text-teal/80 block lg:inline">Synchronize?</span>
+            </h2>
+            
+            <p className="text-ivory/50 mb-12 max-w-xl text-center lg:text-left text-base md:text-lg font-light leading-relaxed font-sans">
+              Our limited capacity ensures deep integration with your engineering leadership. Reach out today to schedule an architecture preview and discuss your operational roadmap.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 w-full sm:w-auto">
+              <a 
+                href="mailto:orcin.aistudio@gmail.com" 
+                className="w-full sm:w-auto bg-ivory text-graphite px-10 py-5 rounded-sm font-heading font-bold tracking-widest text-xs hover:scale-[1.03] active:scale-95 transition-all shadow-2xl text-center border-none"
+              >
+                MAIL US
+              </a>
+              
+              <a 
+                href="tel:+918870897691" 
+                className="w-full sm:w-auto border border-ivory/30 text-ivory px-10 py-5 rounded-sm font-heading font-bold tracking-widest text-xs hover:bg-ivory hover:text-[#141717] hover:border-ivory active:scale-95 transition-all shadow-2xl text-center"
+              >
+                FREE DISCOVERY CALL
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Column: Team Carousel */}
+        <div className="w-full flex flex-col items-center">
+          <div className="w-full max-w-[420px] flex justify-between items-center mb-6 select-none">
+            <span className="font-serif-display text-xl text-teal font-extrabold italic flex items-center gap-2">
+              <Sparkles size={14} className="text-teal" /> Our Team
+            </span>
+            <div className="flex gap-2">
+              {TEAM_MEMBERS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveTeamIdx(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 border-none cursor-pointer ${
+                    activeTeamIdx === idx ? "bg-teal w-6" : "bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Go to team member ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full max-w-[420px] h-[350px] relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTeamIdx}
+                initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: -12 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 w-full h-full bg-[#1D2226] border border-white/10 rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between p-6"
+              >
+                {/* Profile Card Body */}
+                <div className="flex flex-col text-left select-none">
+                  <div className="flex items-start justify-between mb-4 w-full">
+                    <div className={`relative w-16 h-16 rounded-full border border-white/10 bg-gradient-to-tr ${activeMember.avatarBg} flex items-center justify-center text-white font-serif-display font-extrabold text-xl shadow-md`}>
+                      {activeMember.initials}
+                      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-[#05a660] border-[2px] border-[#1D2226] shadow-[0_0_8px_rgba(5,166,96,0.85)]" />
+                    </div>
+
+                    <div className="bg-[#e7a33e] text-[#1D2226] w-5 h-5 rounded-sm flex items-center justify-center font-bold text-xs font-sans pb-0.5 mt-1">
+                      in
+                    </div>
+                  </div>
+
+                  <h3 className="font-sans font-semibold text-lg text-white tracking-tight leading-none mb-1.5">
+                    {activeMember.name}
+                  </h3>
+                  
+                  <p className="text-xs sm:text-[13px] text-zinc-300 font-sans font-medium leading-normal tracking-wide text-balance mb-1">
+                    {activeMember.role} @ <span className="text-teal font-semibold">Orcin Studio</span>
+                  </p>
+                  
+                  <p className="text-[10px] text-zinc-400 font-light font-sans tracking-wide">
+                    {activeMember.location}
+                  </p>
+                </div>
+
+                {/* Other Roles Experience Block */}
+                <div className="pt-3 pb-2 border-t border-white/5 flex items-center gap-3 w-full">
+                  <div className="w-8 h-8 rounded bg-[#121619] border border-white/10 flex items-center justify-center p-1.5 shadow-inner select-none shrink-0">
+                    {/* Genuine Robert Bosch Armature Logo */}
+                    <svg viewBox="0 0 100 100" className="w-6 h-6" fill="none">
+                      {/* Double Concentric Silver Rings */}
+                      <circle cx="50" cy="50" r="45" stroke="#D1D5DB" strokeWidth="5.5" />
+                      <circle cx="50" cy="50" r="37" stroke="#9CA3AF" strokeWidth="2" />
+                      
+                      {/* Left Leftmost Guard Crescent */}
+                      <path d="M 23,26 C 14,35 14,65 23,74 C 28,65 28,35 23,26 Z" fill="#D1D5DB" />
+                      
+                      {/* Right Rightmost Guard Crescent */}
+                      <path d="M 77,26 C 86,35 86,65 77,74 C 72,65 72,35 77,26 Z" fill="#D1D5DB" />
+                      
+                      {/* Center Double-Pillar H-Ladder Chassis */}
+                      {/* Left vertical pole */}
+                      <path d="M 31,23 C 31,18 36,18 36,23 L 36,77 C 36,82 31,82 31,77 Z" fill="#D1D5DB" />
+                      {/* Right vertical pole */}
+                      <path d="M 69,23 C 69,18 64,18 64,23 L 64,77 C 64,82 69,82 69,77 Z" fill="#D1D5DB" />
+                      
+                      {/* Twin horizontal core winding rungs producing the signature slot gap */}
+                      <rect x="36" y="38" width="28" height="6" fill="#D1D5DB" />
+                      <rect x="36" y="56" width="28" height="6" fill="#D1D5DB" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col text-left min-w-0">
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-[#e7a33e] leading-none mb-1.5 font-bold">OTHER ROLES</span>
+                    <span className="text-[11px] font-semibold text-zinc-300 leading-tight truncate">{activeMember.otherRole}</span>
+                    <span className="text-[10px] text-zinc-400 font-light mt-0.5">Bosch • Current</span>
+                  </div>
+                </div>
+
+                {/* LinkedIn Action Button Footer */}
+                <div className="pt-3 border-t border-white/5 shrink-0 select-none w-full">
+                  <a
+                    href={activeMember.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-[#0a66c2] hover:bg-[#004182] active:scale-[0.98] text-white font-sans font-semibold text-xs py-2.5 rounded-full transition-all flex items-center justify-center gap-2 border-none cursor-pointer h-10 text-center no-underline"
+                  >
+                    <Linkedin size={14} className="fill-white stroke-none" /> Connect
+                  </a>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
