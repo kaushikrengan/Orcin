@@ -930,7 +930,7 @@ export default function App() {
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <a 
-                  href="mailto:kaushikrengan@gmail.com" 
+                  href="mailto:orcin.aistudio@gmail.com" 
                   className="w-full sm:w-auto bg-ivory text-graphite px-12 py-6 rounded-sm font-heading font-bold tracking-widest text-sm hover:scale-105 transition-transform shadow-2xl text-center"
                 >
                   MAIL US
