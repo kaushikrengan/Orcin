@@ -1,5 +1,5 @@
 import { motion, useSpring, useMotionValue, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin } from "lucide-react";
+import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass } from "lucide-react";
 import { useRef, useMemo, Suspense, useEffect, useState } from "react";
 
 // --- STYLISH SYSTEMS CONSTELLATION ---
@@ -1221,22 +1221,22 @@ function Navbar() {
 
 const SERVICES_DATA = {
   assist: [
-    { title: "AI Assistants & Copilots", description: "Context-aware AI assistants integrated directly into business workflows. Support teams with faster execution, retrieval, and operational coordination." },
-    { title: "Knowledge Management Systems", description: "Centralized systems that organize and retrieve operational knowledge intelligently. Reduce information fragmentation across teams, tools, and workflows." },
-    { title: "Semantic Search Systems", description: "Enable contextual search across documents, systems, and operational data. Help teams retrieve relevant information faster and more accurately." },
-    { title: "RAG-Based Knowledge Systems", description: "AI systems that retrieve and respond using internal business knowledge sources. Deliver contextual answers grounded in operational and organizational data." },
-    { title: "AI Productivity Tools", description: "Custom AI tools designed around operational execution and team productivity. Reduce repetitive work while improving day-to-day workflow efficiency." },
-    { title: "Multi-Agent AI Workflows", description: "Coordinated AI systems designed to manage complex operational processes. Enable intelligent task distribution, coordination, and workflow execution." },
-    { title: "Operational Decision Support Systems", description: "AI-powered systems that assist operational planning and business execution. Improve decision-making speed, visibility, and execution consistency." }
+    { title: "AI Assistants & Copilots", icon: Bot, description: "Context-aware AI assistants integrated directly into business workflows. Support teams with faster execution, retrieval, and operational coordination." },
+    { title: "Knowledge Management Systems", icon: Database, description: "Centralized systems that organize and retrieve operational knowledge intelligently. Reduce information fragmentation across teams, tools, and workflows." },
+    { title: "Semantic Search Systems", icon: Search, description: "Enable contextual search across documents, systems, and operational data. Help teams retrieve relevant information faster and more accurately." },
+    { title: "RAG-Based Knowledge Systems", icon: Layers, description: "AI systems that retrieve and respond using internal business knowledge sources. Deliver contextual answers grounded in operational and organizational data." },
+    { title: "AI Productivity Tools", icon: Zap, description: "Custom AI tools designed around operational execution and team productivity. Reduce repetitive work while improving day-to-day workflow efficiency." },
+    { title: "Multi-Agent AI Workflows", icon: Workflow, description: "Coordinated AI systems designed to manage complex operational processes. Enable intelligent task distribution, coordination, and workflow execution." },
+    { title: "Operational Decision Support Systems", icon: Compass, description: "AI-powered systems that assist operational planning and business execution. Improve decision-making speed, visibility, and execution consistency." }
   ],
   automate: [
-    { title: "AI Workflow Automation", description: "Automate repetitive workflows across business operations using intelligent execution systems. Reduce manual effort, delays, and operational dependency on repetitive tasks." },
-    { title: "Intelligent Document Processing", description: "Extract, organize, validate, and process business documents automatically. Reduce time spent on manual review, classification, and information handling." },
-    { title: "Automated Reporting Systems", description: "Generate operational and business reports without repetitive manual effort. Improve reporting speed, consistency, and operational visibility." },
-    { title: "Business Process Automation", description: "Streamline repetitive operational processes across teams and internal systems. Reduce execution overhead while improving workflow efficiency and scalability." },
-    { title: "Workflow Orchestration", description: "Coordinate workflows, approvals, and operational execution across multiple systems. Ensure smoother execution flow between teams, tools, and business operations." },
-    { title: "Data Processing Automation", description: "Automate structured and unstructured data processing workflows at scale. Reduce manual handling while improving processing speed and operational accuracy." },
-    { title: "Workflow Digitization", description: "Transform manual workflows into intelligent digital operational systems. Improve execution visibility, consistency, and long-term operational scalability." }
+    { title: "AI Workflow Automation", icon: Boxes, description: "Automate repetitive workflows across business operations using intelligent execution systems. Reduce manual effort, delays, and operational dependency on repetitive tasks." },
+    { title: "Intelligent Document Processing", icon: FileText, description: "Extract, organize, validate, and process business documents automatically. Reduce time spent on manual review, classification, and information handling." },
+    { title: "Automated Reporting Systems", icon: LineChart, description: "Generate operational and business reports without repetitive manual effort. Improve reporting speed, consistency, and operational visibility." },
+    { title: "Business Process Automation", icon: Briefcase, description: "Streamline repetitive operational processes across teams and internal systems. Reduce execution overhead while improving workflow efficiency and scalability." },
+    { title: "Workflow Orchestration", icon: Settings, description: "Coordinate workflows, approvals, and operational execution across multiple systems. Ensure smoother execution flow between teams, tools, and business operations." },
+    { title: "Data Processing Automation", icon: Cpu, description: "Automate structured and unstructured data processing workflows at scale. Reduce manual handling while improving processing speed and operational accuracy." },
+    { title: "Workflow Digitization", icon: Network, description: "Transform manual workflows into intelligent digital operational systems. Improve execution visibility, consistency, and long-term operational scalability." }
   ]
 };
 
@@ -1350,45 +1350,71 @@ function ServicesSection() {
               >
                 {/* Services List */}
                 <div className={`flex-1 flex flex-col gap-4 md:gap-6 justify-center py-6 z-20 ${activeCategory === 'assist' ? 'lg:items-start lg:pr-[55%]' : 'lg:items-end lg:pl-[55%]'}`}>
-                  {activeData.map((service, idx) => (
-                    <div key={service.title} className="w-full max-w-2xl">
-                      <motion.div
-                        initial={{ opacity: 0, x: activeCategory === 'assist' ? -30 : 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.05 }}
-                        onClick={() => setExpandedService(expandedService === idx ? null : idx)}
-                        className={`group cursor-pointer p-4 md:p-6 rounded-xl transition-all duration-300 ${expandedService === idx ? 'bg-teal/5' : 'hover:bg-teal/5'}`}
-                      >
-                        <div className="flex items-center justify-between gap-4">
-                          <h4 className={`text-lg md:text-xl font-heading font-medium tracking-tight transition-colors ${expandedService === idx ? 'text-teal' : 'text-graphite/80 group-hover:text-teal'}`}>
-                            {service.title}
-                          </h4>
-                          <div className="text-teal/40 group-hover:text-teal">
-                            {expandedService === idx ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                  {activeData.map((service, idx) => {
+                    const ServiceIcon = service.icon;
+                    return (
+                      <div key={service.title} className="w-full max-w-2xl">
+                        <motion.div
+                          initial={{ opacity: 0, x: activeCategory === 'assist' ? -30 : 30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.05 }}
+                          onClick={() => setExpandedService(expandedService === idx ? null : idx)}
+                          className={`group cursor-pointer p-4 md:p-6 rounded-xl transition-all duration-300 ${expandedService === idx ? 'bg-teal/5 shadow-[0_4px_20px_-4px_rgba(75,123,123,0.08)]' : 'hover:bg-teal/5'}`}
+                        >
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-4">
+                              {ServiceIcon && (
+                                <motion.div
+                                  animate={{
+                                    scale: expandedService === idx ? 1.15 : 1,
+                                    rotate: expandedService === idx ? [0, -10, 10, -5, 5, 0] : 0,
+                                    backgroundColor: expandedService === idx ? "rgba(75, 123, 123, 0.15)" : "rgba(75, 123, 123, 0.03)",
+                                    borderColor: expandedService === idx ? "rgba(75, 123, 123, 0.35)" : "rgba(75, 123, 123, 0.1)"
+                                  }}
+                                  transition={{
+                                    type: "spring",
+                                    stiffness: 280,
+                                    damping: 18,
+                                    rotate: { duration: 0.65, ease: "easeInOut" }
+                                  }}
+                                  className={`p-2.5 rounded-lg flex items-center justify-center shrink-0 border transition-colors ${
+                                    expandedService === idx ? "text-teal shadow-[0_0_12px_rgba(75,123,123,0.15)]" : "text-teal/60 group-hover:text-teal group-hover:scale-105"
+                                  }`}
+                                >
+                                  <ServiceIcon size={18} />
+                                </motion.div>
+                              )}
+                              <h4 className={`text-lg md:text-xl font-heading font-medium tracking-tight transition-colors ${expandedService === idx ? 'text-teal' : 'text-graphite/80 group-hover:text-teal'}`}>
+                                {service.title}
+                              </h4>
+                            </div>
+                            <div className="text-teal/40 group-hover:text-teal">
+                              {expandedService === idx ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                            </div>
                           </div>
-                        </div>
-                        
-                        {/* Description Dropdown */}
-                        <AnimatePresence>
-                          {expandedService === idx && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden"
-                            >
-                              <p className="mt-4 text-slate/60 text-base md:text-lg font-light leading-relaxed pb-2">
-                                {service.description}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-
-                        {/* Visual Decoration */}
-                        <div className="h-[1px] w-full bg-teal/10 mt-4 group-hover:bg-teal/30 transition-colors" />
-                      </motion.div>
-                    </div>
-                  ))}
+                          
+                          {/* Description Dropdown */}
+                          <AnimatePresence>
+                            {expandedService === idx && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <p className="mt-4 text-slate/60 text-base md:text-lg font-light leading-relaxed pb-2 pl-[52px]">
+                                  {service.description}
+                                </p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+  
+                          {/* Visual Decoration */}
+                          <div className="h-[1px] w-full bg-teal/10 mt-4 group-hover:bg-teal/30 transition-colors" />
+                        </motion.div>
+                      </div>
+                    );
+                  })}
                 </div>
               </motion.div>
             )}
