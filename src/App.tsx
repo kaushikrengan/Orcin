@@ -1654,7 +1654,7 @@ function WorkSection() {
         </div>
 
         {/* Carousel Window */}
-        <div className="relative w-full overflow-hidden min-h-[480px]">
+        <div className="relative w-full overflow-hidden min-h-[580px]">
           <AnimatePresence custom={direction} mode="popLayout">
             <motion.div
               key={currentIndex}
@@ -1664,99 +1664,90 @@ function WorkSection() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center bg-white border border-graphite/10 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-[0_24px_50px_rgba(75,123,123,0.06)]"
+              className="flex flex-col items-stretch bg-white border border-graphite/10 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-[0_24px_50px_rgba(75,123,123,0.06)]"
             >
               
-              {/* Product Representation Thumbnail (Desktop/Large screens only) */}
-              <div className="hidden lg:block lg:col-span-5 relative group">
-                {/* Visual Glass Browser-Frame */}
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_32px_64px_-16px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
-                  {/* Miniature Toolbar */}
-                  <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                    <span className="ml-4 font-mono text-[9px] text-white/30 lowercase tracking-wider">
-                      sandbox_environment://{PROJECTS[currentIndex].category.toLowerCase().replace(/\s+/g, '_')}_sys
-                    </span>
-                  </div>
-                  
-                  {/* Interactive Component Container */}
-                  <div className="relative flex-grow h-[calc(100%-32px)]">
-                    {(() => {
-                      const DemoComponent = PROJECTS[currentIndex].demoComponent;
-                      return DemoComponent ? <DemoComponent /> : null;
-                    })()}
-                  </div>
-                </div>
-
-                {/* Grid accent shadow lines */}
-                <div className="absolute -bottom-4 -right-4 w-full h-full border border-teal/10 rounded-2xl -z-10 pointer-events-none translate-x-2 translate-y-2 opacity-30" />
+              {/* Product Heading: 100% width */}
+              <div className="w-full flex flex-col gap-1.5 mb-6 select-none shrink-0 border-b border-graphite/5 pb-4">
+                <h3 className="text-2xl md:text-4xl font-heading font-light text-graphite tracking-tight leading-tight flex flex-wrap items-baseline">
+                  {PROJECTS[currentIndex].title.includes(" — ") ? (
+                    <>
+                      <span className="font-serif-display italic font-semibold text-teal text-3xl md:text-5xl tracking-normal mr-2">
+                        {PROJECTS[currentIndex].title.split(" — ")[0] === "KIRA" ? "Kira" : PROJECTS[currentIndex].title.split(" — ")[0] === "SCAR" ? "Scar" : "Rodds"}
+                      </span>
+                      <span className="text-graphite/30 mx-2 text-xl font-light select-none">—</span>
+                      <span className="font-heading font-light text-graphite/80 text-xl md:text-2xl ml-1">
+                        {PROJECTS[currentIndex].title.split(" — ")[1]}
+                      </span>
+                    </>
+                  ) : (
+                    PROJECTS[currentIndex].title
+                  )}
+                </h3>
               </div>
 
-              {/* Product Content Details and Metrics */}
-              <div className="col-span-1 lg:col-span-7 flex flex-col justify-between py-2">
-                <div className="flex flex-col gap-4">
-                  <h3 className="text-3xl md:text-4xl font-heading font-medium text-graphite tracking-tight leading-tight mt-1">
-                    {PROJECTS[currentIndex].title}
-                  </h3>
-
-                  {/* Product Representation Thumbnail (Mobile only, rendered after title) */}
-                  <div className="block lg:hidden relative group my-4">
-                    {/* Visual Glass Browser-Frame */}
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_16px_36px_-8px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
-                      {/* Miniature Toolbar */}
-                      <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                      </div>
-                      
-                      {/* Interactive Component Container */}
-                      <div className="relative flex-grow h-[calc(100%-32px)]">
-                        {(() => {
-                          const DemoComponent = PROJECTS[currentIndex].demoComponent;
-                          return DemoComponent ? <DemoComponent /> : null;
-                        })()}
-                      </div>
+              {/* Sandbox and Metrics section: Flex Row (Desktop), Stacked (Mobile) */}
+              <div className="w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
+                {/* Sandbox environment: more than 70% of the width on desktop */}
+                <div className="w-full lg:w-[73%] flex-shrink-0 relative group">
+                  {/* Browser-Frame with generous heights to easily avoid internal scrolls */}
+                  <div className="relative w-full h-[470px] sm:h-[450px] md:h-[480px] lg:h-[500px] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_32px_64px_-16px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
+                    {/* Miniature Toolbar */}
+                    <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0 select-none">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                      <span className="ml-4 font-mono text-[9px] text-white/30 lowercase tracking-wider hidden sm:inline">
+                        sandbox_environment://{PROJECTS[currentIndex].category.toLowerCase().replace(/\s+/g, '_')}_sys
+                      </span>
+                    </div>
+                    
+                    {/* Interactive Component Container */}
+                    <div className="relative flex-grow h-[calc(100%-32px)]">
+                      {(() => {
+                        const DemoComponent = PROJECTS[currentIndex].demoComponent;
+                        return DemoComponent ? <DemoComponent /> : null;
+                      })()}
                     </div>
                   </div>
 
-                  <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-2xl">
-                    {PROJECTS[currentIndex].description}
-                  </p>
-
-
+                  {/* Aesthetic offset border lines */}
+                  <div className="absolute -bottom-4 -right-4 w-full h-full border border-teal/10 rounded-2xl -z-10 pointer-events-none translate-x-2 translate-y-2 opacity-30" />
                 </div>
 
-                {/* Savings Metrics Panel */}
-                <div className="mt-8 md:mt-12">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {PROJECTS[currentIndex].metrics.map((metric, mIdx) => (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 * mIdx + 0.2 }}
-                        key={mIdx} 
-                        className="bg-[#FDFCFB]/90 backdrop-blur-sm border border-graphite/10 rounded-xl p-5 hover:border-teal/40 hover:bg-[#F3EFEA]/90 transition-all flex flex-col gap-1 shadow-sm"
-                      >
-                        <span className="font-sans text-3xl md:text-4xl font-semibold text-teal tracking-tight whitespace-nowrap">
-                          {metric.value}
+                {/* Vertical metrics sidebar: balance width (less than 30%) displayed vertically */}
+                <div className="flex-grow lg:w-[27%] flex flex-col justify-between gap-4">
+                  {PROJECTS[currentIndex].metrics.map((metric, mIdx) => (
+                    <motion.div 
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * mIdx + 0.2 }}
+                      key={mIdx} 
+                      className="bg-[#FDFCFB]/90 backdrop-blur-sm border border-graphite/10 rounded-xl p-4 md:p-5 hover:border-teal/40 hover:bg-[#F3EFEA]/90 transition-all flex flex-col justify-center gap-1 shadow-sm flex-grow"
+                    >
+                      <span className="font-sans text-3xl md:text-4xl font-semibold text-teal tracking-tight whitespace-nowrap">
+                        {metric.value}
+                      </span>
+                      <span className="font-mono text-[9px] font-medium tracking-wider text-graphite/60 uppercase leading-normal">
+                        {metric.label}
+                      </span>
+                      {metric.desc && (
+                        <span className="text-[10px] text-graphite/50 font-sans mt-0.5 leading-tight">
+                          {metric.desc}
                         </span>
-                        <span className="font-mono text-[9px] font-medium tracking-wider text-graphite/60 uppercase leading-normal">
-                          {metric.label}
-                        </span>
-                        {metric.desc && (
-                          <span className="text-[10px] text-graphite/50 font-sans mt-0.5 leading-tight">
-                            {metric.desc}
-                          </span>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
+                      )}
+                    </motion.div>
+                  ))}
                 </div>
-
               </div>
+
+              {/* Row 3: Product description details text (100% width) */}
+              <div className="w-full mt-8 border-t border-graphite/5 pt-6">
+                <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-5xl">
+                  {PROJECTS[currentIndex].description}
+                </p>
+              </div>
+
             </motion.div>
           </AnimatePresence>
         </div>

@@ -546,6 +546,9 @@ export function RoddsDemo() {
   const [ttc, setTtc] = useState(4.2);
   const [speed, setSpeed] = useState(24.5);
   
+  // Use a ref to guarantee unique IDs for newly recycled conveyor elements
+  const nextIdRef = React.useRef(505);
+  
   // Dense elements configuration with initial staggered horizontal positions and progression states
   const [items, setItems] = useState<Array<{
     id: string;
@@ -579,8 +582,9 @@ export function RoddsDemo() {
             const selectedName = names[Math.floor(Math.random() * names.length)];
             const rX = Math.floor(Math.random() * 32) - 16;
             const rConf = parseFloat((92 + Math.random() * 7.9).toFixed(1));
+            const newIdVal = nextIdRef.current++;
             return {
-              id: `ID_${Math.floor(100 + Math.random() * 899)}`,
+              id: `ID_${newIdVal}`,
               name: selectedName,
               y: nextY,
               x: rX,
@@ -726,17 +730,17 @@ export function RoddsDemo() {
           return (
             <div
               key={item.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none transition-all duration-100"
+              className="absolute flex flex-col items-center pointer-events-none will-change-transform"
               style={{
                 left: `${50 + (item.x * (0.35 + item.y * 0.0125))}%`,
                 top: `${40 + (item.y * 0.55)}%`,
-                scale: `${0.26 + (item.y * 0.012)}`,
+                transform: `translate3d(-50%, -50%, 0) scale(${0.26 + (item.y * 0.012)})`,
                 zIndex: Math.floor(item.y),
                 opacity: item.y > 84 ? Math.max(0, 1 - (item.y - 84) / 12) : 1,
               }}
             >
-              <div className={`border rounded px-1.5 py-0.5 backdrop-blur-[1px] flex flex-col items-center gap-0.5 font-mono ${boxColorClass}`}>
-                <span className="text-[6.5px] bg-black/75 px-1 py-0.2 rounded-sm tracking-wide text-white/90 mb-0.5 whitespace-nowrap">
+              <div className={`border rounded px-1.5 py-0.5 flex flex-col items-center gap-0.5 font-mono ${boxColorClass}`}>
+                <span className="text-[6.5px] bg-black/85 px-1 py-0.2 rounded-sm tracking-wide text-white/90 mb-0.5 whitespace-nowrap">
                   {item.id} : {item.name}
                 </span>
                 <div className="flex items-center gap-1 text-[7.5px] font-bold">
@@ -771,7 +775,7 @@ export function RoddsDemo() {
         </AnimatePresence>
 
         {/* Telemetry Readout Stats Bar inside Camera Frame */}
-        <div className="w-full bg-black/85 backdrop-blur-md rounded-lg p-2 flex justify-between items-center z-[200] border border-white/10 select-none text-[8.5px] font-mono leading-normal relative">
+        <div className="w-full bg-[#0e1317]/95 rounded-lg p-2 flex justify-between items-center z-[200] border border-white/10 select-none text-[8.5px] font-mono leading-normal relative">
           <div className="flex flex-col">
             <span className="text-white/40">CLOSING_RATE</span>
             <span className="text-white font-bold">{running ? `${speed.toFixed(1)} fps` : "0.0 fps"}</span>
