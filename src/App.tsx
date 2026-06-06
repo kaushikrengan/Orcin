@@ -1,6 +1,7 @@
 import { motion, useSpring, useMotionValue, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass } from "lucide-react";
 import { useRef, useMemo, Suspense, useEffect, useState } from "react";
+import { KiraDemo, ScarDemo, RoddsDemo } from "./components/InteractiveDemos";
 
 // --- STYLISH SYSTEMS CONSTELLATION ---
 
@@ -1429,47 +1430,39 @@ function ServicesSection() {
 
 const PROJECTS = [
   {
-    title: "Knowledge assistant for engineering team",
-    category: "Engineering Operations",
-    description: "A unified technical retrieval system indexing complex CAD schemas, standard operating procedures, and product specification sheets, helping engineering teams resolve design queries instantly.",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    title: "KIRA — Knowledge Integrated Requirement Assistant",
+    category: "Enterprise Data Triage",
+    description: "An enterprise-grade cognitive ingestion and intelligent data management assistant. KIRA automates the front end of complex project lifecycles by parsing unstructured, multi-page technical specification documents—including unformatted text, dense tables, and embedded graphics. The engine automatically categorizes and routes line-item tasks to their respective operational domains. By executing a secure Retrieval-Augmented Generation (RAG) loop against your internal legacy database, KIRA instantly cross-references new client requests with historical engineering data, ensuring your team never wastes resources recreating an existing solution.",
+    demoLink: "Explore the KIRA Interactive Workspace →",
+    demoComponent: KiraDemo,
     metrics: [
-      { label: "Design Query Resolution", value: "< 2.5s" },
-      { label: "Information Search Time Avoided", value: "72%" },
-      { label: "Engineering Productivity Gains", value: "$145,000" }
+      { label: "Triage Optimization", value: "80%", desc: "Reduces manual review and engineering routing from weeks to hours." },
+      { label: "Extraction Accuracy", value: "95%+", desc: "Exceptionally isolates text context, tables, and complex parameters." },
+      { label: "Search Latency", value: "0ms", desc: "Executes searches across tens of thousands of records simultaneously." }
     ]
   },
   {
-    title: "Automated reporting system",
-    category: "Information Automation",
-    description: "An automated data processing and presentation pipeline aggregating multi-sensor logs, telemetry files, and team updates to emit comprehensive compliance reports with zero manual overhead.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    title: "SCAR — Semantic Comparison Assistant for Requirements",
+    category: "Analytical Data Reconciliation",
+    description: "A high-dimensional analytical data reconciliation and verification engine designed to eliminate institutional data amnesia. SCAR ingests a base file and cross-examines it against massive batches of active documents, contracts, or compliance sheets. Moving entirely past basic keyword matching, the tool utilizes a dual-layer validation protocol consisting of a high-speed FAISS vector index and an LLM contextual layer. The system outputs a side-by-side, color-coded interactive layout mapping text relationships to immediately flag exact duplicates, contextual equivalents written in different words, and hidden regulatory contradictions that present major legal or operational risks.",
+    demoLink: "Launch the SCAR Comparison Sandbox →",
+    demoComponent: ScarDemo,
     metrics: [
-      { label: "Manual Report Offset", value: "-98%" },
-      { label: "Weekly Engineering Hours Reclaimed", value: "18h" },
-      { label: "Operational Error Frequency", value: "0.0%" }
+      { label: "Contradiction Capture", value: "100%", desc: "Uncovers hidden conflicts and non-compliance risks buried in historical documentation." },
+      { label: "Vector Performance", value: "< 1s", desc: "Scans, embeds, and aligns thousands of document pages in milliseconds." },
+      { label: "Contextual Filtering", value: "Dual-Lyr", desc: "Splits relationships: Exact, Contextual, Related, and Contradictory." }
     ]
   },
   {
-    title: "Engineering requirements similarity assist",
-    category: "System Architecture",
-    description: "An intelligent similarity analysis utility matching new system specs against legacy requirements databases, identifying duplicated design efforts and conflicting safety constraints in real-time.",
-    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
+    title: "RODDS — Realtime Object Detection and Decision Support",
+    category: "Edge Vision Intelligence",
+    description: "An edge-optimized spatial vision intelligence system built to protect high-stakes physical operational environments. Operating natively on low-latency edge hardware, RODDS processes high-frequency live camera feeds to detect and track multiple target assets simultaneously using persistent IDs and lateral movement analysis. Rather than simply recording data passively, the engine utilizes a kinematic linear regression window to mathematically calculate closing speeds and exact Time-to-Collision (TTC). Detections are filtered through an advanced 6-level threat priority matrix and a consensus-voting decision smoother, delivering ultra-reliable real-time decision support or triggering hard mechanical emergency overrides.",
+    demoLink: "View live RODDS Edge-Inference Logs →",
+    demoComponent: RoddsDemo,
     metrics: [
-      { label: "Duplicate Requirement Matches", value: "94%" },
-      { label: "Design Process Speedup", value: "3.5x" },
-      { label: "Rework Cost Avoided", value: "$85,000" }
-    ]
-  },
-  {
-    title: "AI visual inspection for manufacturing quality control",
-    category: "Computer Vision",
-    description: "A high-frequency neural network model running visual verification sweeps on live assembly conveyors to flag microscopic physical variances, material cracks, and surface blemishes instantly.",
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80",
-    metrics: [
-      { label: "Microscopic Void Detection", value: "99.94%" },
-      { label: "Product Return Reduction", value: "42%" },
-      { label: "Inspection Velocity Reached", value: "60 fps" }
+      { label: "mAP @ 50-95 Accuracy", value: "0.420", desc: "Award-winning performance tracking 13 classes in chaotic environments." },
+      { label: "Inference Speedup", value: "2.4x", desc: "INT8 quantization boosts processing speeds from 12.8 FPS to 24.5 FPS natively." },
+      { label: "Threat Matrix Zones", value: "6-Lvl", desc: "Instantly translates tracking variables into critical emergency commands." }
     ]
   }
 ];
@@ -1677,28 +1670,23 @@ function WorkSection() {
               {/* Product Representation Thumbnail (Desktop/Large screens only) */}
               <div className="hidden lg:block lg:col-span-5 relative group">
                 {/* Visual Glass Browser-Frame */}
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/80 border border-graphite/10 shadow-[0_32px_64px_-16px_rgba(75,123,123,0.15)]">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_32px_64px_-16px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
                   {/* Miniature Toolbar */}
-                  <div className="h-8 bg-graphite/5 border-b border-graphite/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold">
-                    <div className="w-2 h-2 rounded-full bg-graphite/20" />
-                    <div className="w-2 h-2 rounded-full bg-graphite/20" />
-                    <div className="w-2 h-2 rounded-full bg-graphite/20" />
+                  <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                    <span className="ml-4 font-mono text-[9px] text-white/30 lowercase tracking-wider">
+                      sandbox_environment://{PROJECTS[currentIndex].category.toLowerCase().replace(/\s+/g, '_')}_sys
+                    </span>
                   </div>
                   
-                  {/* Product Image Image Tag with Referrer-policy constraint */}
-                  <div className="w-full h-[calc(100%-32px)] relative">
-                    <img
-                      src={PROJECTS[currentIndex].image}
-                      alt={PROJECTS[currentIndex].title}
-                      className="w-full h-full object-cover grayscale brightness-95 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
-                    
-                    {/* Category floating pill top corner */}
-                    <div className="absolute top-4 right-4 bg-teal/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase text-white border border-white/10 font-bold">
-                      {PROJECTS[currentIndex].category}
-                    </div>
+                  {/* Interactive Component Container */}
+                  <div className="relative flex-grow h-[calc(100%-32px)]">
+                    {(() => {
+                      const DemoComponent = PROJECTS[currentIndex].demoComponent;
+                      return DemoComponent ? <DemoComponent /> : null;
+                    })()}
                   </div>
                 </div>
 
@@ -1716,28 +1704,20 @@ function WorkSection() {
                   {/* Product Representation Thumbnail (Mobile only, rendered after title) */}
                   <div className="block lg:hidden relative group my-4">
                     {/* Visual Glass Browser-Frame */}
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/80 border border-graphite/10 shadow-[0_16px_36px_-8px_rgba(75,123,123,0.15)]">
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_16px_36px_-8px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
                       {/* Miniature Toolbar */}
-                      <div className="h-8 bg-graphite/5 border-b border-graphite/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold">
-                        <div className="w-2 h-2 rounded-full bg-graphite/20" />
-                        <div className="w-2 h-2 rounded-full bg-graphite/20" />
-                        <div className="w-2 h-2 rounded-full bg-graphite/20" />
+                      <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
                       </div>
                       
-                      {/* Product Image Image Tag with Referrer-policy constraint */}
-                      <div className="w-full h-[calc(100%-32px)] relative">
-                        <img
-                          src={PROJECTS[currentIndex].image}
-                          alt={PROJECTS[currentIndex].title}
-                          className="w-full h-full object-cover grayscale brightness-95"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
-                        
-                        {/* Category floating pill top corner */}
-                        <div className="absolute top-4 right-4 bg-teal/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase text-white border border-white/10 font-bold">
-                          {PROJECTS[currentIndex].category}
-                        </div>
+                      {/* Interactive Component Container */}
+                      <div className="relative flex-grow h-[calc(100%-32px)]">
+                        {(() => {
+                          const DemoComponent = PROJECTS[currentIndex].demoComponent;
+                          return DemoComponent ? <DemoComponent /> : null;
+                        })()}
                       </div>
                     </div>
                   </div>
@@ -1745,6 +1725,8 @@ function WorkSection() {
                   <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-2xl">
                     {PROJECTS[currentIndex].description}
                   </p>
+
+
                 </div>
 
                 {/* Savings Metrics Panel */}
@@ -1758,12 +1740,17 @@ function WorkSection() {
                         key={mIdx} 
                         className="bg-[#FDFCFB]/90 backdrop-blur-sm border border-graphite/10 rounded-xl p-5 hover:border-teal/40 hover:bg-[#F3EFEA]/90 transition-all flex flex-col gap-1 shadow-sm"
                       >
-                        <span className="font-sans text-3xl md:text-4xl font-semibold text-teal tracking-tight">
+                        <span className="font-sans text-3xl md:text-4xl font-semibold text-teal tracking-tight whitespace-nowrap">
                           {metric.value}
                         </span>
                         <span className="font-mono text-[9px] font-medium tracking-wider text-graphite/60 uppercase leading-normal">
                           {metric.label}
                         </span>
+                        {metric.desc && (
+                          <span className="text-[10px] text-graphite/50 font-sans mt-0.5 leading-tight">
+                            {metric.desc}
+                          </span>
+                        )}
                       </motion.div>
                     ))}
                   </div>
