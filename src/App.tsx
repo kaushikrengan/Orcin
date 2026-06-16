@@ -1,7 +1,7 @@
 import { motion, useSpring, useMotionValue, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass } from "lucide-react";
+import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass, ExternalLink } from "lucide-react";
 import { useRef, useMemo, Suspense, useEffect, useState } from "react";
-import { KiraDemo, ScarDemo, RoddsDemo } from "./components/InteractiveDemos";
+import { KiraDemo, ScarDemo, RoddsDemo, ApolloDemo } from "./components/InteractiveDemos";
 
 // --- STYLISH SYSTEMS CONSTELLATION ---
 
@@ -466,7 +466,7 @@ function StorySection() {
         {/* Header content */}
         <div className="text-center mb-10 max-w-2xl">
           <h2 className="text-3xl md:text-5xl font-serif-display font-extrabold text-graphite tracking-tight leading-tight text-balance">
-            Simulate your impact with <span className="text-teal italic">Orcin&apos;s capabilities.</span>
+            Simulate your impact with <span className="text-teal italic">Orcin AI Studio&apos;s capabilities.</span>
           </h2>
           <p className="text-slate/60 text-sm md:text-base leading-relaxed font-sans font-light mt-3 max-w-lg mx-auto">
             Slide the control below to estimate the impact of automating work from humble adjustments to aggressive intelligence systems.
@@ -1052,7 +1052,7 @@ function ContactSection() {
                   </h3>
                   
                   <p className="text-xs sm:text-[13px] text-zinc-300 font-sans font-medium leading-normal tracking-wide text-balance mb-1">
-                    {activeMember.role} @ <span className="text-teal font-semibold">Orcin Studio</span>
+                    {activeMember.role} @ <span className="text-teal font-semibold">Orcin AI Studio</span>
                   </p>
                   
                   <p className="text-[10px] text-zinc-400 font-light font-sans tracking-wide">
@@ -1155,7 +1155,7 @@ function Navbar() {
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-heading font-bold text-lg tracking-tighter">ORCIN</span>
-              <span className="font-mono text-[8px] font-medium tracking-[0.4em] text-slate/40 uppercase">STUDIO</span>
+              <span className="font-mono text-[8px] font-medium tracking-[0.2em] text-slate/40 uppercase">AI STUDIO</span>
             </div>
           </button>
           
@@ -1430,6 +1430,18 @@ function ServicesSection() {
 
 const PROJECTS = [
   {
+    title: "APOLLO — AI-Native Workforce Development Platform",
+    category: "AI Workforce Development",
+    description: "Apollo is an AI-native competency development platform that helps organizations identify skill gaps, accelerate workforce readiness, and build critical capabilities faster. Managers define the competencies their teams need, and Apollo automatically generates assessments, personalized learning experiences, and continuous development pathways tailored to each employee. With real-time competency tracking and an always-on AI copilot, Apollo enables organizations to reduce training effort, improve learning effectiveness, and ensure teams are prepared for evolving business and industry demands.",
+    demoComponent: ApolloDemo,
+    externalUrl: "https://apollo-by-orcin.vercel.app",
+    metrics: [
+      { label: "Training Reduction", value: "60%", desc: "Directly automates curriculum structuring and continuous assessment loops." },
+      { label: "Evaluation Velocity", value: "10x", desc: "Instantly auto-generates rigorous evaluation rubrics per team competency." },
+      { label: "Organization Readiness", value: "92%", desc: "Accelerates checkout speed and guarantees on-the-job verification benchmarks." }
+    ]
+  },
+  {
     title: "KIRA — Knowledge Integrated Requirement Assistant",
     category: "Enterprise Data Triage",
     description: "An enterprise-grade cognitive ingestion and intelligent data management assistant. KIRA automates the front end of complex project lifecycles by parsing unstructured, multi-page technical specification documents—including unformatted text, dense tables, and embedded graphics. The engine automatically categorizes and routes line-item tasks to their respective operational domains. By executing a secure Retrieval-Augmented Generation (RAG) loop against your internal legacy database, KIRA instantly cross-references new client requests with historical engineering data, ensuring your team never wastes resources recreating an existing solution.",
@@ -1673,7 +1685,14 @@ function WorkSection() {
                   {PROJECTS[currentIndex].title.includes(" — ") ? (
                     <>
                       <span className="font-serif-display italic font-semibold text-teal text-3xl md:text-5xl tracking-normal mr-2">
-                        {PROJECTS[currentIndex].title.split(" — ")[0] === "KIRA" ? "Kira" : PROJECTS[currentIndex].title.split(" — ")[0] === "SCAR" ? "Scar" : "Rodds"}
+                        {(() => {
+                          const part = PROJECTS[currentIndex].title.split(" — ")[0];
+                          if (part === "KIRA") return "Kira";
+                          if (part === "SCAR") return "Scar";
+                          if (part === "RODDS") return "Rodds";
+                          if (part === "APOLLO") return "Apollo";
+                          return part;
+                        })()}
                       </span>
                       <span className="text-graphite/30 mx-2 text-xl font-light select-none">—</span>
                       <span className="font-heading font-light text-graphite/80 text-xl md:text-2xl ml-1">
@@ -1742,10 +1761,21 @@ function WorkSection() {
               </div>
 
               {/* Row 3: Product description details text (100% width) */}
-              <div className="w-full mt-8 border-t border-graphite/5 pt-6">
-                <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-5xl">
+              <div className="w-full mt-8 border-t border-graphite/5 pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-3xl font-light">
                   {PROJECTS[currentIndex].description}
                 </p>
+                {PROJECTS[currentIndex].externalUrl && (
+                  <a 
+                    href={PROJECTS[currentIndex].externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full hover:shadow-lg transition-all cursor-pointer"
+                  >
+                    Launch Live Demo
+                    <ExternalLink className="w-4 h-4 text-teal" />
+                  </a>
+                )}
               </div>
 
             </motion.div>
@@ -1764,7 +1794,7 @@ function Footer() {
         <div className="flex flex-col items-center md:items-start gap-4">
           <div className="flex items-center gap-3 grayscale opacity-30">
             <div className="w-6 h-6 bg-graphite rounded-full" />
-            <span className="font-heading font-bold text-lg tracking-tighter uppercase">ORCIN STUDIO</span>
+            <span className="font-heading font-bold text-lg tracking-tighter uppercase">ORCIN AI STUDIO</span>
           </div>
           <p className="font-mono text-[9px] font-medium tracking-[0.2em] text-slate/30 text-center md:text-left">
             ENGINEERING WORKFLOWS, INTELLIGENTLY ORCHESTRATED
