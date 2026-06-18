@@ -1,7 +1,9 @@
 import { motion, useSpring, useMotionValue, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass, ExternalLink } from "lucide-react";
+import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass, ExternalLink, Home, Lock, MoreVertical } from "lucide-react";
 import { useRef, useMemo, Suspense, useEffect, useState } from "react";
 import { KiraDemo, ScarDemo, RoddsDemo, ApolloDemo } from "./components/InteractiveDemos";
+
+import { ApolloProductPage } from "./pages/ApolloProductPage";
 
 // --- STYLISH SYSTEMS CONSTELLATION ---
 
@@ -857,6 +859,21 @@ function ProcessItem({
 
 
 export default function App() {
+  const [currentView, setCurrentView] = useState<"home" | "apollo">("home");
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentView !== "home") return;
+    const timer = setTimeout(() => {
+      setHeroIndex(prev => (prev + 1) % 2);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [currentView, heroIndex]);
+
+  if (currentView === "apollo") {
+    return <ApolloProductPage onBack={() => setCurrentView("home")} />;
+  }
+
   return (
     <div className="relative min-h-screen selection:bg-teal/20 selection:text-teal bg-cream text-graphite font-sans antialiased">
       <Navbar />
@@ -869,32 +886,121 @@ export default function App() {
             <WorkflowConstellation />
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl mx-auto relative z-10 pointer-events-none text-center px-4"
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif-display font-extrabold tracking-tight leading-[1.1] mb-6 text-graphite text-balance">
-              Eliminate <br />
-              operational costs with <br />
-              <span className="text-teal italic">intelligent workflows.</span>
-            </h1>
-            
-            <p className="text-base md:text-lg text-slate/75 font-sans font-light max-w-xl mx-auto leading-relaxed mb-10 text-balance">
-              We design AI-powered operational systems that automate repetitive work, eliminate workflow friction, and help businesses operate with greater speed, clarity, and efficiency.
-            </p>
-            
-            <div className="flex justify-center pointer-events-auto">
-              <button 
-                onClick={() => document.getElementById("estimator")?.scrollIntoView({ behavior: "smooth" })}
-                className="group bg-graphite text-ivory px-8 py-4 rounded-sm font-heading text-xs tracking-widest hover:bg-teal transition-all flex items-center gap-2 shadow-lg cursor-pointer"
+          <AnimatePresence mode="wait">
+            {heroIndex === 0 ? (
+              <motion.div
+                key="orcin-hero"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-3xl mx-auto relative z-10 pointer-events-none text-center px-4"
               >
-                START SAVING
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </motion.div>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif-display font-extrabold tracking-tight leading-[1.1] mb-6 text-graphite text-balance">
+                  Eliminate <br />
+                  operational costs with <br />
+                  <span className="text-teal italic">intelligent workflows.</span>
+                </h1>
+                
+                <p className="text-base md:text-lg text-slate/75 font-sans font-light max-w-xl mx-auto leading-relaxed mb-10 text-balance">
+                  We design AI-powered operational systems that automate repetitive work, eliminate workflow friction, and help businesses operate with greater speed, clarity, and efficiency.
+                </p>
+                
+                <div className="flex justify-center pointer-events-auto">
+                  <button 
+                    onClick={() => document.getElementById("estimator")?.scrollIntoView({ behavior: "smooth" })}
+                    className="group bg-graphite text-ivory px-8 py-4 rounded-sm font-heading text-xs tracking-widest hover:bg-teal transition-all flex items-center gap-2 shadow-lg cursor-pointer"
+                  >
+                    START SAVING
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="apollo-hero"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-2xl mx-auto relative z-10 pointer-events-auto text-center px-4 w-full"
+              >
+                <div className="bg-white/90 backdrop-blur-lg border border-graphite/5 rounded-[2.5rem] p-6 sm:p-8 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_-10px_rgba(0,0,0,0.09)] transition-all duration-500 overflow-hidden flex flex-col gap-6">
+                  
+                  {/* Text Details ABOVE the image now */}
+                  <div className="flex flex-col items-center">
+                    <div className="flex justify-center mb-3">
+                      <span className="font-mono text-[9px] tracking-[0.3em] font-semibold text-teal uppercase bg-teal/5 px-3 py-1 rounded-full border border-teal/10">
+                         NEW PRODUCT
+                      </span>
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl font-space-grotesk font-bold tracking-[0.25em] text-graphite uppercase mb-2" style={{ letterSpacing: "0.25em" }}>
+                      APOLLO
+                    </h1>
+
+                    <h2 className="text-lg sm:text-xl font-serif-display font-bold tracking-tight text-slate/80 text-balance mb-4">
+                      Define Competencies. <br className="sm:hidden" /> <span className="text-teal italic">AI Builds Capabilities.</span>
+                    </h2>
+
+                    <p className="text-xs sm:text-sm text-slate/75 font-sans font-light max-w-lg leading-relaxed text-balance mb-0">
+                      An AI-native competency development platform. Reduce training overhead and accelerate workforce readiness through personalized, real-time modules.
+                    </p>
+                  </div>
+
+                  {/* Mockup representing the Apollo screen in the screenshot */}
+                  <div className="flex justify-center items-center w-full relative aspect-[4/3] sm:aspect-[16/9] max-h-[40vh] bg-[#FAF9F5]/30 rounded-[2rem] overflow-hidden group">
+                    <img
+                      src="/apollo-mockup.png"
+                      alt="Apollo Interface Mockup"
+                      className="w-full h-full object-cover transform-gpu group-hover:-translate-y-2 transition-transform duration-500 animate-pan-image"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.nextElementSibling) {
+                           (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }}
+                    />
+                    
+                    {/* Fallback CSS Mockup if the image is not uploaded */}
+                    <div className="hidden w-full h-full max-w-[280px] sm:max-w-[320px] bg-white rounded-[2.5rem] p-2 sm:p-2.5 border-[2px] border-graphite/5 shadow-[0_0_0_8px_white,0_20px_40px_-10px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(0,0,0,0.05)] flex-shrink-0 mx-auto transform-gpu hover:-translate-y-2 transition-transform duration-500 relative flex-col" style={{ display: 'none' }}>
+                      <div className="flex-1 w-full bg-[#FAF9F5] rounded-[2rem] overflow-hidden relative border border-graphite/10 flex flex-col items-center justify-center p-6 text-center">
+                        <div className="font-space-grotesk font-bold text-2xl tracking-widest text-graphite mb-4">APOLLO</div>
+                        <p className="text-xs text-graphite/50 mb-8">Please upload your image to the public folder as <br/> <code className="bg-graphite/5 px-1 py-0.5 rounded text-teal">apollo-mockup.png</code></p>
+                        <div className="w-full space-y-3">
+                           <div className="h-16 rounded-xl bg-white shadow-sm border border-graphite/5 w-full"></div>
+                           <div className="h-16 rounded-xl bg-white shadow-sm border border-graphite/5 w-full"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center mt-2">
+                    <button 
+                      onClick={() => setCurrentView("apollo")}
+                      className="group bg-teal hover:bg-teal-dark font-sans text-white px-8 py-3.5 rounded-full font-heading text-xs tracking-widest hover:shadow-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+                    >
+                      EXPLORE APOLLO
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          
+          {/* Carousel Indicators */}
+          <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-20">
+             <button 
+                onClick={() => setHeroIndex(0)}
+                className={`w-12 h-1 rounded-full transition-all ${heroIndex === 0 ? "bg-teal" : "bg-graphite/20 hover:bg-graphite/40"}`}
+             />
+             <button 
+                onClick={() => setHeroIndex(1)}
+                className={`w-12 h-1 rounded-full transition-all ${heroIndex === 1 ? "bg-teal" : "bg-graphite/20 hover:bg-graphite/40"}`}
+             />
+          </div>
         </section>
 
         {/* PROGRESSIVE STORY SECTION */}
@@ -904,7 +1010,7 @@ export default function App() {
         <ServicesSection />
 
         {/* OUR WORK SECTION */}
-        <WorkSection />
+        <WorkSection onExploreApollo={() => setCurrentView("apollo")} />
 
         {/* PROCESS SECTION */}
         <ProcessSection />
@@ -1586,7 +1692,7 @@ function ProjectGridBackground() {
   );
 }
 
-function WorkSection() {
+function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1 = right/next, -1 = left/prev
 
@@ -1765,7 +1871,15 @@ function WorkSection() {
                 <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-3xl font-light">
                   {PROJECTS[currentIndex].description}
                 </p>
-                {PROJECTS[currentIndex].externalUrl && (
+                {PROJECTS[currentIndex].title.includes("APOLLO") && onExploreApollo ? (
+                  <button 
+                    onClick={onExploreApollo}
+                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full hover:shadow-lg transition-all cursor-pointer"
+                  >
+                    EXPLORE APOLLO
+                    <ArrowRight size={14} className="text-teal" />
+                  </button>
+                ) : PROJECTS[currentIndex].externalUrl && (
                   <a 
                     href={PROJECTS[currentIndex].externalUrl}
                     target="_blank"
