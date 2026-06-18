@@ -13,29 +13,7 @@ export function ApolloProductPage({ onBack }: ApolloProductPageProps) {
 
   return (
     <div className="min-h-screen bg-cream text-graphite font-sans selection:bg-teal/20 selection:text-teal antialiased overflow-x-hidden">
-      {/* Product navigation */}
-      <nav className="fixed top-0 left-0 right-0 py-5 px-6 md:px-12 bg-cream/90 backdrop-blur z-50 flex justify-between items-center transition-all duration-300 border-b border-graphite/5">
-        <button 
-          onClick={onBack}
-          className="flex items-center gap-2 text-graphite/60 hover:text-teal transition-all font-sans text-xs sm:text-sm font-semibold tracking-wide cursor-pointer"
-        >
-          <ArrowLeft size={16} /> BACK TO ORCIN
-        </button>
-        <div className="font-mono text-sm tracking-[0.25em] font-semibold text-graphite hidden md:block">
-          APOLLO WORKFORCE
-        </div>
-        <a 
-          href="https://apollo-by-orcin.vercel.app" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="bg-[#0e1317] hover:bg-black font-sans font-semibold text-xs sm:text-sm tracking-wide text-white px-4 py-2 rounded-full flex items-center gap-2 shadow-sm transition-all cursor-pointer"
-        >
-          <span>Live Demo</span>
-          <ExternalLink size={14} className="text-teal" />
-        </a>
-      </nav>
-
-      <main className="pt-32 pb-0 flex flex-col items-center">
+      <main className="pt-40 pb-0 flex flex-col items-center">
         {/* Product Hero */}
         <div className="px-6 md:px-12 max-w-7xl mx-auto w-full flex flex-col items-center">
           <motion.div 
@@ -45,14 +23,23 @@ export function ApolloProductPage({ onBack }: ApolloProductPageProps) {
             className="text-center w-full max-w-3xl flex flex-col items-center mb-16"
           >
             <div className="font-space-grotesk text-sm font-semibold tracking-[0.3em] text-teal uppercase mb-4">
-              APOLLO WORKFORCE
+              APOLLO
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif-display font-extrabold tracking-tight leading-[1.1] mb-6 text-graphite text-balance">
               Define Competencies. <br/> <span className="text-teal italic">Build Capabilities.</span>
             </h1>
-            <p className="text-base md:text-xl text-slate/75 font-sans font-light max-w-2xl mx-auto leading-relaxed text-balance">
+            <p className="text-base md:text-xl text-slate/75 font-sans font-light max-w-2xl mx-auto leading-relaxed text-balance mb-8">
               An AI-native platform that transforms workforce development from static training into measurable competency growth.
             </p>
+            <a 
+              href="https://apollo-by-orcin.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-[#0e1317] hover:bg-black font-sans font-semibold text-sm tracking-wide text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer mx-auto"
+            >
+              <span>Explore Live Platform</span>
+              <ExternalLink size={16} className="text-teal" />
+            </a>
           </motion.div>
 
           {/* Product Device Mockup */}
@@ -60,13 +47,14 @@ export function ApolloProductPage({ onBack }: ApolloProductPageProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full max-w-5xl overflow-hidden flex justify-center mb-24"
+            className="w-full max-w-md mx-auto overflow-hidden flex justify-center mb-24"
           >
-            <div className="w-full max-w-5xl overflow-hidden flex justify-center relative aspect-[4/3] sm:aspect-[16/9] max-h-[70vh] bg-[#FAF9F5]/30 rounded-[2.5rem] group shadow-2xl shadow-graphite/5 border border-graphite/5">
+            <div className="flex justify-center items-center w-full relative aspect-[9/16] bg-[#FAF9F5]/30 rounded-[2rem] overflow-hidden group shadow-2xl shadow-graphite/5 border border-graphite/5">
               <img
-                src="/apollo-mockup.png"
-                alt="Apollo Interface on Tablet"
-                className="w-full h-full object-cover rounded-[2.5rem] transform-gpu group-hover:scale-[1.02] transition-transform duration-700 animate-pan-image"
+                src="/pomelli_photoshoot_image_9_16_0618.png"
+                alt="Apollo Interface Mockup"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center 50%' }}
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   if (e.currentTarget.nextElementSibling) {
@@ -182,32 +170,54 @@ export function ApolloProductPage({ onBack }: ApolloProductPageProps) {
           </section>
 
           {/* Two Realities */}
-          <section className="mb-32 w-full text-center">
-            <h2 className="text-3xl md:text-5xl font-serif-display font-extrabold tracking-tight text-graphite mb-16">
-              One Platform. Two Connected Realities.
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="group bg-white p-10 rounded-[2rem] shadow-sm border border-graphite/5 hover:border-teal/30 hover:shadow-xl transition-all flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-[#FAF9F5] rounded-full flex items-center justify-center mb-6 group-hover:bg-teal/5 transition-colors">
-                  <User size={28} className="text-graphite group-hover:text-teal transition-colors" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 font-sans">Associate Space</h3>
-                <h4 className="text-teal font-medium tracking-wide uppercase text-xs mb-4">Personalized Journeys</h4>
-                <p className="text-slate/70 leading-relaxed">
-                  Where employees execute interactive modules, practice skills, and track their continuous performance progression.
-                </p>
-              </div>
+          <section className="mb-32 w-full flex flex-col items-center gap-16">
+            <div className="text-center w-full max-w-4xl">
+              <h2 className="text-3xl md:text-5xl font-serif-display font-extrabold tracking-tight text-graphite mb-12">
+                One Platform. Two Connected Realities.
+              </h2>
               
-              <div className="group bg-white p-10 rounded-[2rem] shadow-sm border border-graphite/5 hover:border-teal/30 hover:shadow-xl transition-all flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-[#FAF9F5] rounded-full flex items-center justify-center mb-6 group-hover:bg-teal/5 transition-colors">
-                  <Database size={28} className="text-graphite group-hover:text-teal transition-colors" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div className="group bg-white p-8 rounded-3xl shadow-sm border border-graphite/5 hover:border-teal/30 hover:shadow-xl transition-all flex flex-col">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-[#FAF9F5] rounded-full flex items-center justify-center group-hover:bg-teal/5 transition-colors">
+                      <User size={20} className="text-graphite group-hover:text-teal transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold font-sans">Associate Space</h3>
+                      <h4 className="text-teal font-medium tracking-wide uppercase text-[10px]">Personalized Journeys</h4>
+                    </div>
+                  </div>
+                  <p className="text-slate/70 leading-relaxed text-sm">
+                    Where employees execute interactive modules, practice skills, and track continuous performance progression against dynamic benchmarks.
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 font-sans">Manager Space</h3>
-                <h4 className="text-teal font-medium tracking-wide uppercase text-xs mb-4">Strategic Orchestration</h4>
-                <p className="text-slate/70 leading-relaxed">
-                  Where leaders define critical capabilities, leverage AI for skill generation, and monitor overall team health.
-                </p>
+                
+                <div className="group bg-white p-8 rounded-3xl shadow-sm border border-graphite/5 hover:border-teal/30 hover:shadow-xl transition-all flex flex-col">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-[#FAF9F5] rounded-full flex items-center justify-center group-hover:bg-teal/5 transition-colors">
+                      <Database size={20} className="text-graphite group-hover:text-teal transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold font-sans">Manager Space</h3>
+                      <h4 className="text-teal font-medium tracking-wide uppercase text-[10px]">Strategic Orchestration</h4>
+                    </div>
+                  </div>
+                  <p className="text-slate/70 leading-relaxed text-sm">
+                    Where leaders define critical capabilities, leverage AI for skill generation, predict gaps early, and monitor overall team skill health.
+                  </p>
+                </div>
               </div>
+            </div>
+
+            <div className="w-full max-w-5xl overflow-hidden flex justify-center relative aspect-[4/3] sm:aspect-[16/9] max-h-[70vh] bg-[#FAF9F5]/30 rounded-[2.5rem] shadow-2xl shadow-graphite/5 border border-graphite/5">
+              <img
+                src="/1781807072778.png"
+                alt="Apollo Mockup"
+                className="w-full h-full object-cover rounded-[2.5rem] transform-gpu group-hover:scale-[1.02] transition-transform duration-700"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
             </div>
           </section>
 
@@ -297,7 +307,7 @@ export function ApolloProductPage({ onBack }: ApolloProductPageProps) {
           href="https://apollo-by-orcin.vercel.app" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex bg-teal hover:bg-teal-dark text-white px-10 py-5 rounded-full font-heading text-sm tracking-widest transition-all items-center gap-3 shadow-[0_10px_40px_-10px_rgba(75,123,123,0.5)] transform hover:-translate-y-1"
+          className="inline-flex bg-teal hover:bg-teal-dark text-white px-10 py-5 rounded-full font-heading text-sm tracking-widest hover:scale-105 active:scale-95 hover:shadow-2xl transition-all duration-300 items-center gap-3 shadow-[0_10px_40px_-10px_rgba(75,123,123,0.5)] cursor-pointer"
         >
           EXPERIENCE APOLLO LIVE
           <ExternalLink size={16} />
@@ -338,7 +348,7 @@ function ImpactCard({ icon, title, desc }: { icon: React.ReactNode, title: strin
     <div className="bg-[#0e1317] text-white p-10 rounded-[2rem] border border-white/10 hover:border-teal/50 hover:bg-black transition-all duration-300 flex flex-col h-full shadow-2xl">
       {icon}
       <h3 className="text-2xl font-bold mb-4 font-serif-display tracking-tight text-white">{title}</h3>
-      <p className="text-slate/40 leading-relaxed font-sans font-light">{desc}</p>
+      <p className="text-white/70 leading-relaxed font-sans font-light">{desc}</p>
     </div>
   );
 }

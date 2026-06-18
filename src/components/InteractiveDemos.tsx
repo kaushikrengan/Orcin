@@ -179,7 +179,7 @@ export function KiraDemo() {
                     <button
                       key={t}
                       onClick={() => setFilterType(t)}
-                      className={`px-1.5 py-0.5 rounded-[3px] text-[8px] font-mono tracking-tight cursor-pointer transition-all border-none ${
+                      className={`px-1.5 py-0.5 rounded-[3px] text-[8px] font-mono tracking-tight cursor-pointer hover:scale-110 active:scale-95 transition-all duration-200 border-none ${
                         filterType === t
                           ? "bg-teal text-white"
                           : "bg-white/5 text-slate-400 hover:text-white"
@@ -267,7 +267,7 @@ export function KiraDemo() {
                 </span>
                 <button
                   onClick={() => setPhase("idle")}
-                  className="bg-white/5 hover:bg-white/10 active:scale-95 text-white/80 font-mono text-[9px] uppercase px-3 py-1.5 rounded border border-white/10 cursor-pointer transition-all"
+                  className="bg-white/5 hover:bg-white/10 hover:scale-105 active:scale-95 text-white/80 font-mono text-[9px] uppercase px-3 py-1.5 rounded border border-white/10 cursor-pointer transition-all duration-300"
                 >
                   Clear & Re-Upload
                 </button>
@@ -305,7 +305,7 @@ export function ScarDemo() {
                 setActiveTab(tab);
                 setHighlighted(null);
               }}
-              className={`px-2 py-1 rounded text-[9px] uppercase tracking-wider font-semibold font-mono transition-all border-none cursor-pointer ${
+              className={`px-2 py-1 rounded text-[9px] uppercase tracking-wider font-semibold font-mono hover:scale-110 active:scale-95 transition-all duration-300 border-none cursor-pointer ${
                 activeTab === tab
                   ? tab === "match"
                     ? "bg-[#10B981]/20 text-[#10B981] border-none"
@@ -653,7 +653,7 @@ export function RoddsDemo() {
         <div className="flex gap-2 min-w-16 justify-end">
           <button 
             onClick={() => setRunning(!running)}
-            className="bg-white/10 hover:bg-white/20 px-2 py-0.5 rounded text-[9px] border-none font-mono text-white cursor-pointer"
+            className="bg-white/10 hover:bg-white/20 hover:scale-110 active:scale-95 px-2 py-0.5 rounded text-[9px] border-none font-mono text-white cursor-pointer transition-all duration-200"
           >
             {running ? "PAUSE" : "RESUME"}
           </button>
@@ -811,7 +811,7 @@ export function RoddsDemo() {
         <button
           onClick={triggerManualHazard}
           disabled={!running}
-          className="bg-[#EF4444] hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 text-white font-semibold font-mono text-[9px] px-3 py-1.5 rounded transition-all border-none cursor-pointer flex items-center gap-1 uppercase"
+          className="bg-[#EF4444] hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 text-white font-semibold font-mono text-[9px] px-3 py-1.5 rounded transition-all duration-300 border-none cursor-pointer flex items-center gap-1 uppercase"
         >
           <PlayCircle size={10} /> Test Hazard Trap
         </button>
@@ -825,11 +825,12 @@ export function RoddsDemo() {
 // ==========================================
 export function ApolloDemo() {
   return (
-    <div className="w-full h-full bg-[#FAF9F5]/30 overflow-hidden relative group">
+    <div className="w-full h-full bg-[#FAF9F5]/30 overflow-hidden relative flex items-center justify-center">
       <img
-        src="/apollo-mockup-work.png"
-        alt="Apollo Work Interface Mockup"
-        className="w-full h-full object-cover transform-gpu group-hover:scale-[1.02] transition-transform duration-700 animate-pan-image"
+        src="/pomelli_photoshoot_image_9_16_0618.png"
+        alt="Apollo Photoshoot"
+        className="w-full h-full object-cover"
+        style={{ objectPosition: 'center 50%' }}
         onError={(e) => {
            e.currentTarget.style.display = 'none';
         }}

@@ -871,12 +871,17 @@ export default function App() {
   }, [currentView, heroIndex]);
 
   if (currentView === "apollo") {
-    return <ApolloProductPage onBack={() => setCurrentView("home")} />;
+    return (
+      <div className="relative min-h-screen selection:bg-teal/20 selection:text-teal bg-cream text-graphite font-sans antialiased">
+        <Navbar isApollo={true} onNavHome={() => setCurrentView("home")} onExploreApollo={() => setCurrentView("apollo")} />
+        <ApolloProductPage onBack={() => setCurrentView("home")} />
+      </div>
+    );
   }
 
   return (
     <div className="relative min-h-screen selection:bg-teal/20 selection:text-teal bg-cream text-graphite font-sans antialiased">
-      <Navbar />
+      <Navbar onExploreApollo={() => setCurrentView("apollo")} />
       
       <main className="relative">
         {/* HERO SECTION */}
@@ -909,7 +914,7 @@ export default function App() {
                 <div className="flex justify-center pointer-events-auto">
                   <button 
                     onClick={() => document.getElementById("estimator")?.scrollIntoView({ behavior: "smooth" })}
-                    className="group bg-graphite text-ivory px-8 py-4 rounded-sm font-heading text-xs tracking-widest hover:bg-teal transition-all flex items-center gap-2 shadow-lg cursor-pointer"
+                    className="group bg-graphite text-ivory px-8 py-4 rounded-md font-heading text-xs tracking-widest hover:bg-teal hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer"
                   >
                     START SAVING
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -978,7 +983,7 @@ export default function App() {
                   <div className="flex justify-center mt-2">
                     <button 
                       onClick={() => setCurrentView("apollo")}
-                      className="group bg-teal hover:bg-teal-dark font-sans text-white px-8 py-3.5 rounded-full font-heading text-xs tracking-widest hover:shadow-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+                      className="group bg-teal hover:bg-teal-dark font-sans text-white px-8 py-3.5 rounded-full font-heading text-xs tracking-widest hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer"
                     >
                       EXPLORE APOLLO
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -1219,11 +1224,23 @@ function ContactSection() {
   );
 }
 
-function Navbar() {
+function Navbar({ onExploreApollo, onNavHome, isApollo = false }: { onExploreApollo?: () => void, onNavHome?: () => void, isApollo?: boolean }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   const handleScroll = (id: string) => {
     setMobileMenuOpen(false);
+    
+    if (isApollo && onNavHome) {
+      onNavHome();
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+      return;
+    }
     
     // A small timeout ensures that the state update (closing the menu) doesn't interrupt or cancel
     // the smooth scrolling animation on mobile screens due to immediate re-renders/layout shifts.
@@ -1241,7 +1258,7 @@ function Navbar() {
         <div className="flex items-center justify-between w-full">
           <button 
             onClick={() => handleScroll("hero-section")} 
-            className="flex items-center gap-3 cursor-pointer text-left hover:opacity-80 transition-opacity bg-transparent border-none p-0"
+            className="flex items-center gap-3 cursor-pointer text-left hover:scale-[1.03] active:scale-95 transition-all duration-300 bg-transparent border-none p-0"
           >
             <div className="relative w-8 h-8 flex items-center justify-center">
               {/* Rotating Glow shadow behind */}
@@ -1266,19 +1283,55 @@ function Navbar() {
           </button>
           
           <div className="hidden md:flex items-center gap-10">
+            <div 
+              className="relative group"
+              onMouseEnter={() => setProductsOpen(true)}
+              onMouseLeave={() => setProductsOpen(false)}
+            >
+              <button 
+                onClick={() => setProductsOpen(!productsOpen)}
+                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-md hover:bg-teal/5 relative"
+              >
+                PRODUCTS
+                <ChevronDown size={12} className={`transition-transform duration-300 opacity-70 ${productsOpen ? 'rotate-180 text-teal' : 'group-hover:rotate-180 text-teal'}`} />
+                <span className={`absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left transition-transform duration-300 ${productsOpen ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
+              </button>
+              
+              <div className={`absolute top-full -left-2 pt-4 w-48 transition-all duration-300 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}>
+                <div className="bg-white border border-graphite/10 rounded-xl shadow-xl flex flex-col overflow-hidden">
+                  <div className="p-2">
+                    <button 
+                      onClick={() => {
+                        setProductsOpen(false);
+                        if (onExploreApollo) {
+                          onExploreApollo();
+                        } else if (isApollo && onNavHome) {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                      }} 
+                      className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 hover:scale-[1.02] active:scale-98 transition-all cursor-pointer w-full group/item"
+                    >
+                      <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors">APOLLO</span>
+                      <span className="bg-teal/10 text-teal text-[8px] px-1.5 py-0.5 rounded-sm tracking-wide border border-teal/20 group-hover/item:bg-teal group-hover/item:text-white transition-colors">NEW</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
             {["Services", "Work", "Process"].map(item => (
               <button 
                 key={item} 
                 onClick={() => handleScroll(item.toLowerCase())} 
-                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal transition-all relative group cursor-pointer bg-transparent border-none p-0"
+                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal hover:scale-105 active:scale-95 transition-all duration-300 relative group cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-md hover:bg-teal/5"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-[0.5px] bg-teal group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               </button>
             ))}
             <button 
               onClick={() => handleScroll("contact")}
-              className="bg-graphite text-ivory px-6 py-2 rounded-sm font-mono text-[10px] font-medium tracking-[0.2em] hover:bg-teal transition-all flex items-center gap-2 shadow-lg cursor-pointer border-none"
+              className="bg-graphite text-ivory px-6 py-2 pb-2.5 rounded-md font-mono text-[10px] font-medium tracking-[0.2em] hover:bg-teal hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg cursor-pointer border-none"
             >
               CONTACT <Mail size={12} />
             </button>
@@ -1301,8 +1354,24 @@ function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="overflow-hidden md:hidden flex flex-col gap-2.5 mt-4 pt-4 border-t border-graphite/5"
+              className="overflow-hidden md:hidden flex flex-col gap-2 mt-4 pt-4 border-t border-graphite/5"
             >
+              <div className="flex flex-col mb-1 pb-2 border-b border-graphite/5">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] font-medium text-slate/40 px-4 py-2">PRODUCTS</span>
+                {onExploreApollo && (
+                  <button
+                    onClick={() => {
+                       setMobileMenuOpen(false);
+                       onExploreApollo();
+                    }}
+                    className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-teal active:bg-teal/10 px-6 py-3 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between touch-manipulation"
+                  >
+                    APOLLO
+                    <span className="bg-teal/10 text-teal text-[8px] px-2 py-0.5 rounded-sm tracking-wide border border-teal/20">NEW</span>
+                  </button>
+                )}
+              </div>
+              
               {["Services", "Work", "Process"].map(item => (
                 <button
                   key={item}
@@ -1739,7 +1808,7 @@ function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
           <div className="flex items-center gap-6">
             <button 
               onClick={prevProject} 
-              className="w-12 h-12 rounded-full border border-graphite/10 flex items-center justify-center hover:bg-graphite/5 hover:border-graphite/35 transition-all text-graphite cursor-pointer bg-white shadow-sm"
+              className="w-12 h-12 rounded-full border border-graphite/10 flex items-center justify-center hover:bg-graphite/5 hover:border-graphite/35 hover:scale-110 active:scale-90 transition-all duration-300 text-graphite cursor-pointer bg-white shadow-md hover:shadow-lg"
               aria-label="Previous Case Study"
             >
               <ChevronLeft size={20} />
@@ -1755,7 +1824,7 @@ function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
                     setDirection(idx > currentIndex ? 1 : -1);
                     setCurrentIndex(idx);
                   }}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${idx === currentIndex ? 'bg-teal w-8' : 'bg-graphite/20 w-1.5 hover:bg-graphite/40'}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer hover:scale-y-125 ${idx === currentIndex ? 'bg-teal w-8' : 'bg-graphite/20 w-1.5 hover:bg-graphite/40'}`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
@@ -1763,7 +1832,7 @@ function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
 
             <button 
               onClick={nextProject} 
-              className="w-12 h-12 rounded-full border border-graphite/10 flex items-center justify-center hover:bg-graphite/5 hover:border-graphite/35 transition-all text-graphite cursor-pointer bg-white shadow-sm"
+              className="w-12 h-12 rounded-full border border-graphite/10 flex items-center justify-center hover:bg-graphite/5 hover:border-graphite/35 hover:scale-110 active:scale-90 transition-all duration-300 text-graphite cursor-pointer bg-white shadow-md hover:shadow-lg"
               aria-label="Next Case Study"
             >
               <ChevronRight size={20} />
@@ -1818,17 +1887,19 @@ function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
                   {/* Browser-Frame with generous heights to easily avoid internal scrolls */}
                   <div className="relative w-full h-[470px] sm:h-[450px] md:h-[480px] lg:h-[500px] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_32px_64px_-16px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
                     {/* Miniature Toolbar */}
-                    <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0 select-none">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                      <span className="ml-4 font-mono text-[9px] text-white/30 lowercase tracking-wider hidden sm:inline">
-                        sandbox_environment://{PROJECTS[currentIndex].category.toLowerCase().replace(/\s+/g, '_')}_sys
-                      </span>
-                    </div>
+                    {!PROJECTS[currentIndex].title.includes("APOLLO") && (
+                      <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0 select-none">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                        <span className="ml-4 font-mono text-[9px] text-white/30 lowercase tracking-wider hidden sm:inline">
+                          sandbox_environment://{PROJECTS[currentIndex].category.toLowerCase().replace(/\s+/g, '_')}_sys
+                        </span>
+                      </div>
+                    )}
                     
                     {/* Interactive Component Container */}
-                    <div className="relative flex-grow h-[calc(100%-32px)]">
+                    <div className={`relative flex-grow ${PROJECTS[currentIndex].title.includes("APOLLO") ? 'h-full' : 'h-[calc(100%-32px)]'}`}>
                       {(() => {
                         const DemoComponent = PROJECTS[currentIndex].demoComponent;
                         return DemoComponent ? <DemoComponent /> : null;
@@ -1871,20 +1942,20 @@ function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
                 <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-3xl font-light">
                   {PROJECTS[currentIndex].description}
                 </p>
-                {PROJECTS[currentIndex].title.includes("APOLLO") && onExploreApollo ? (
+                 {PROJECTS[currentIndex].title.includes("APOLLO") && onExploreApollo ? (
                   <button 
                     onClick={onExploreApollo}
-                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full hover:shadow-lg transition-all cursor-pointer"
+                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
                   >
                     EXPLORE APOLLO
-                    <ArrowRight size={14} className="text-teal" />
+                    <ArrowRight size={14} className="text-teal group-hover:translate-x-1 transition-transform" />
                   </button>
                 ) : PROJECTS[currentIndex].externalUrl && (
                   <a 
                     href={PROJECTS[currentIndex].externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full hover:shadow-lg transition-all cursor-pointer"
+                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
                   >
                     Launch Live Demo
                     <ExternalLink className="w-4 h-4 text-teal" />
