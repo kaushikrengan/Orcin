@@ -912,13 +912,15 @@ export default function App() {
                 </p>
                 
                 <div className="flex justify-center pointer-events-auto">
-                  <button 
+                  <motion.button 
+                    whileHover={{ scale: 1.06 }}
+                    whileTap={{ scale: 0.94 }}
                     onClick={() => document.getElementById("estimator")?.scrollIntoView({ behavior: "smooth" })}
-                    className="group bg-graphite text-ivory px-8 py-4 rounded-md font-heading text-xs tracking-widest hover:bg-teal hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer"
+                    className="group bg-graphite text-ivory px-8 py-4 rounded-md font-heading text-xs tracking-widest hover:bg-teal hover:shadow-xl transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer border-none"
                   >
                     START SAVING
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
             ) : (
@@ -981,13 +983,15 @@ export default function App() {
                   </div>
 
                   <div className="flex justify-center mt-2">
-                    <button 
+                    <motion.button 
+                      whileHover={{ scale: 1.06, backgroundColor: "#3a6d6d" }}
+                      whileTap={{ scale: 0.94 }}
                       onClick={() => setCurrentView("apollo")}
-                      className="group bg-teal hover:bg-teal-dark font-sans text-white px-8 py-3.5 rounded-full font-heading text-xs tracking-widest hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer"
+                      className="group bg-teal font-sans text-white px-8 py-3.5 rounded-full font-heading text-xs tracking-widest hover:shadow-2xl transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer border-none"
                     >
                       EXPLORE APOLLO
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </motion.button>
                   </div>
 
                 </div>
@@ -1100,14 +1104,14 @@ function ContactSection() {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 w-full sm:w-auto">
               <a 
                 href="mailto:orcin.aistudio@gmail.com" 
-                className="w-full sm:w-auto bg-ivory text-graphite px-10 py-5 rounded-sm font-heading font-bold tracking-widest text-xs hover:scale-[1.03] active:scale-95 transition-all shadow-2xl text-center border-none"
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-ivory text-graphite px-10 py-5 rounded-md font-heading font-bold tracking-widest text-xs hover:bg-teal hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl text-center border-none cursor-pointer"
               >
                 MAIL US
               </a>
               
               <a 
                 href="tel:+918870897691" 
-                className="w-full sm:w-auto border border-ivory/30 text-ivory px-10 py-5 rounded-sm font-heading font-bold tracking-widest text-xs hover:bg-ivory hover:text-[#141717] hover:border-ivory active:scale-95 transition-all shadow-2xl text-center"
+                className="w-full sm:w-auto inline-flex items-center justify-center border border-ivory/30 text-ivory px-10 py-5 rounded-md font-heading font-bold tracking-widest text-xs hover:bg-ivory hover:text-[#141717] hover:border-ivory hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl text-center cursor-pointer"
               >
                 FREE DISCOVERY CALL
               </a>
@@ -1126,8 +1130,8 @@ function ContactSection() {
                 <button
                   key={idx}
                   onClick={() => setActiveTeamIdx(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 border-none cursor-pointer ${
-                    activeTeamIdx === idx ? "bg-teal w-6" : "bg-white/20 hover:bg-white/40"
+                  className={`h-2 rounded-full transition-all duration-300 border-none cursor-pointer hover:scale-y-150 active:scale-75 ${
+                    activeTeamIdx === idx ? "bg-teal w-6" : "bg-white/20 hover:bg-white/45 w-2"
                   }`}
                   aria-label={`Go to team member ${idx + 1}`}
                 />
@@ -1288,19 +1292,23 @@ function Navbar({ onExploreApollo, onNavHome, isApollo = false }: { onExploreApo
               onMouseEnter={() => setProductsOpen(true)}
               onMouseLeave={() => setProductsOpen(false)}
             >
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.93 }}
                 onClick={() => setProductsOpen(!productsOpen)}
-                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-md hover:bg-teal/5 relative"
+                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal transition-all duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-md hover:bg-teal/5 relative"
               >
                 PRODUCTS
                 <ChevronDown size={12} className={`transition-transform duration-300 opacity-70 ${productsOpen ? 'rotate-180 text-teal' : 'group-hover:rotate-180 text-teal'}`} />
-                <span className={`absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left transition-transform duration-300 ${productsOpen ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
-              </button>
+                <span className={`absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left transform transition-transform duration-300 ${productsOpen ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
+              </motion.button>
               
               <div className={`absolute top-full -left-2 pt-4 w-48 transition-all duration-300 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}>
                 <div className="bg-white border border-graphite/10 rounded-xl shadow-xl flex flex-col overflow-hidden">
                   <div className="p-2">
-                    <button 
+                    <motion.button 
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => {
                         setProductsOpen(false);
                         if (onExploreApollo) {
@@ -1309,32 +1317,36 @@ function Navbar({ onExploreApollo, onNavHome, isApollo = false }: { onExploreApo
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         }
                       }} 
-                      className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 hover:scale-[1.02] active:scale-98 transition-all cursor-pointer w-full group/item"
+                      className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 transition-all cursor-pointer w-full group/item"
                     >
                       <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors">APOLLO</span>
                       <span className="bg-teal/10 text-teal text-[8px] px-1.5 py-0.5 rounded-sm tracking-wide border border-teal/20 group-hover/item:bg-teal group-hover/item:text-white transition-colors">NEW</span>
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </div>
             </div>
             
             {["Services", "Work", "Process"].map(item => (
-              <button 
+              <motion.button 
                 key={item} 
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.93 }}
                 onClick={() => handleScroll(item.toLowerCase())} 
-                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal hover:scale-105 active:scale-95 transition-all duration-300 relative group cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-md hover:bg-teal/5"
+                className="font-mono text-[10px] uppercase tracking-[0.2em] font-medium text-slate/60 hover:text-teal transition-all duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-md hover:bg-teal/5 relative group"
               >
                 {item}
-                <span className="absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </button>
+                <span className="absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+              </motion.button>
             ))}
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => handleScroll("contact")}
-              className="bg-graphite text-ivory px-6 py-2 pb-2.5 rounded-md font-mono text-[10px] font-medium tracking-[0.2em] hover:bg-teal hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg cursor-pointer border-none"
+              className="bg-graphite text-ivory px-6 py-2 pb-2.5 rounded-md font-mono text-[10px] font-medium tracking-[0.2em] hover:bg-teal transition-all flex items-center gap-2 shadow-lg cursor-pointer border-none"
             >
               CONTACT <Mail size={12} />
-            </button>
+            </motion.button>
           </div>
           
           <button 

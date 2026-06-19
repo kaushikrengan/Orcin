@@ -328,7 +328,7 @@ export function ScarDemo() {
         {/* Total Ingested CARD */}
         <div 
           onClick={() => { setActiveTab("all"); setHighlighted(null); }}
-          className={`px-2 py-1.5 rounded-lg border transition-all cursor-pointer ${
+          className={`px-2 py-1.5 rounded-lg border cursor-pointer hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 ${
             activeTab === "all" 
               ? "bg-white/5 border-white/20 shadow-sm" 
               : "bg-white/[0.015] border-white/5 hover:border-white/10"
@@ -344,7 +344,7 @@ export function ScarDemo() {
         {/* Exact Matches CARD */}
         <div 
           onClick={() => { setActiveTab("match"); setHighlighted(null); }}
-          className={`px-2 py-1.5 rounded-lg border transition-all cursor-pointer ${
+          className={`px-2 py-1.5 rounded-lg border cursor-pointer hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 ${
             activeTab === "match" 
               ? "bg-[#10B981]/10 border-[#10B981]/30 shadow-sm" 
               : "bg-white/[0.015] border-white/5 hover:border-[#10B981]/20"
@@ -360,7 +360,7 @@ export function ScarDemo() {
         {/* Semantic Equivalents CARD */}
         <div 
           onClick={() => { setActiveTab("eq"); setHighlighted(null); }}
-          className={`px-2 py-1.5 rounded-lg border transition-all cursor-pointer ${
+          className={`px-2 py-1.5 rounded-lg border cursor-pointer hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 ${
             activeTab === "eq" 
               ? "bg-[#F59E0B]/10 border-[#F59E0B]/30 shadow-sm" 
               : "bg-white/[0.015] border-white/5 hover:border-[#F59E0B]/20"
@@ -376,7 +376,7 @@ export function ScarDemo() {
         {/* Contradictions CARD */}
         <div 
           onClick={() => { setActiveTab("conflict"); setHighlighted(null); }}
-          className={`px-2 py-1.5 rounded-lg border transition-all cursor-pointer ${
+          className={`px-2 py-1.5 rounded-lg border cursor-pointer hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 ${
             activeTab === "conflict" 
               ? "bg-[#EF4444]/15 border-[#EF4444]/30 shadow-sm animate-pulse" 
               : "bg-white/[0.015] border-white/5 hover:border-[#EF4444]/20"
@@ -401,8 +401,8 @@ export function ScarDemo() {
             {/* Row 1 */}
             <div
               onClick={() => setHighlighted(0)}
-              className={`p-2 rounded border cursor-pointer transition-all ${
-                highlighted === 0 ? "scale-[1.01]" : ""
+              className={`p-2 rounded border cursor-pointer hover:scale-[1.03] hover:translate-x-1 hover:shadow-md active:scale-[0.98] transition-all duration-300 ${
+                highlighted === 0 ? "scale-[1.03] ring-1 ring-teal/30" : ""
               } ${
                 activeTab === "all" || activeTab === "match"
                   ? "border-[#10B981]/20 bg-[#10B981]/5 text-[#10B981]"
@@ -416,8 +416,8 @@ export function ScarDemo() {
             {/* Row 2 */}
             <div
               onClick={() => setHighlighted(1)}
-              className={`p-2 rounded border cursor-pointer transition-all ${
-                highlighted === 1 ? "scale-[1.01]" : ""
+              className={`p-2 rounded border cursor-pointer hover:scale-[1.03] hover:translate-x-1 hover:shadow-md active:scale-[0.98] transition-all duration-300 ${
+                highlighted === 1 ? "scale-[1.03] ring-1 ring-teal/30" : ""
               } ${
                 activeTab === "all" || activeTab === "eq"
                   ? "border-[#F59E0B]/20 bg-[#F59E0B]/5 text-[#F59E0B]"
@@ -431,8 +431,8 @@ export function ScarDemo() {
             {/* Row 3 */}
             <div
               onClick={() => setHighlighted(2)}
-              className={`p-2 rounded border cursor-pointer transition-all ${
-                highlighted === 2 ? "scale-[1.01]" : ""
+              className={`p-2 rounded border cursor-pointer hover:scale-[1.03] hover:translate-x-1 hover:shadow-md active:scale-[0.98] transition-all duration-300 ${
+                highlighted === 2 ? "scale-[1.03] ring-1 ring-teal/30" : ""
               } ${
                 activeTab === "all" || activeTab === "conflict"
                   ? "border-[#EF4444]/20 bg-[#EF4444]/5 text-[#EF4444]"
@@ -454,8 +454,8 @@ export function ScarDemo() {
             {/* Row 1 */}
             <div
               onClick={() => setHighlighted(0)}
-              className={`p-2 rounded border cursor-pointer transition-all ${
-                highlighted === 0 ? "scale-[1.01]" : ""
+              className={`p-2 rounded border cursor-pointer hover:scale-[1.03] hover:translate-x-1 hover:shadow-md active:scale-[0.98] transition-all duration-300 ${
+                highlighted === 0 ? "scale-[1.03] ring-1 ring-amber-500/30" : ""
               } ${
                 activeTab === "all" || activeTab === "match"
                   ? "border-[#10B981]/20 bg-[#10B981]/5 text-[#10B981]"
@@ -469,8 +469,8 @@ export function ScarDemo() {
             {/* Row 2 */}
             <div
               onClick={() => setHighlighted(1)}
-              className={`p-2 rounded border cursor-pointer transition-all ${
-                highlighted === 1 ? "scale-[1.01]" : ""
+              className={`p-2 rounded border cursor-pointer hover:scale-[1.03] hover:translate-x-1 hover:shadow-md active:scale-[0.98] transition-all duration-300 ${
+                highlighted === 1 ? "scale-[1.03] ring-1 ring-amber-500/30" : ""
               } ${
                 activeTab === "all" || activeTab === "eq"
                   ? "border-[#F59E0B]/20 bg-[#F59E0B]/5 text-[#F59E0B]"
@@ -484,8 +484,8 @@ export function ScarDemo() {
             {/* Row 3 */}
             <div
               onClick={() => setHighlighted(2)}
-              className={`p-2 rounded border cursor-pointer transition-all ${
-                highlighted === 2 ? "scale-[1.01]" : ""
+              className={`p-2 rounded border cursor-pointer hover:scale-[1.03] hover:translate-x-1 hover:shadow-md active:scale-[0.98] transition-all duration-300 ${
+                highlighted === 2 ? "scale-[1.03] ring-1 ring-amber-500/30" : ""
               } ${
                 activeTab === "all" || activeTab === "conflict"
                   ? "border-[#EF4444]/20 bg-[#EF4444]/5 text-[#EF4444]"
