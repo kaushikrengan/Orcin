@@ -862,6 +862,55 @@ export default function App() {
   const [currentView, setCurrentView] = useState<"home" | "apollo">("home");
   const [heroIndex, setHeroIndex] = useState(0);
 
+  // Synchronize state with URL on initial load and keep both path/hash/query updated
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      const search = window.location.search;
+      if (
+        path === "/apollo" || 
+        hash === "#/apollo" || 
+        hash === "#apollo" || 
+        search.includes("view=apollo") || 
+        search.includes("page=apollo")
+      ) {
+        setCurrentView("apollo");
+      } else {
+        setCurrentView("home");
+      }
+    };
+
+    // Run once on load to detect deep link
+    handleUrlChange();
+
+    // Listen to manual browser navigation (back, forward, hash links)
+    window.addEventListener("popstate", handleUrlChange);
+    window.addEventListener("hashchange", handleUrlChange);
+    return () => {
+      window.removeEventListener("popstate", handleUrlChange);
+      window.removeEventListener("hashchange", handleUrlChange);
+    };
+  }, []);
+
+  // Update both standard URL path and Hash for foolproof link sharing
+  useEffect(() => {
+    const targetPath = currentView === "apollo" ? "/apollo" : "/";
+    const targetHash = currentView === "apollo" ? "#/apollo" : "";
+    
+    // Check if URL is already synchronized to prevent redundant history entries
+    if (window.location.pathname !== targetPath) {
+      try {
+        window.history.pushState({ view: currentView }, "", targetPath);
+      } catch (err) {
+        // Fallback for sandboxed iframes that block modifying the outer frame pathname
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      }
+    }
+  }, [currentView]);
+
   useEffect(() => {
     if (currentView !== "home") return;
     const timer = setTimeout(() => {
