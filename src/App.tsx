@@ -1874,8 +1874,10 @@ function ProductCard({
   project: Project;
   onSelectPrism?: () => void;
 }) {
+  const isLumina = project.id === "lumina";
+
   return (
-    <div className="bg-[#FAF8F5] border border-graphite/10 hover:border-teal/40 rounded-2xl p-5 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative h-full">
+    <div className={`bg-[#FAF8F5] border border-graphite/10 ${isLumina ? "hover:border-[#4F46E5]/50 hover:shadow-[#4F46E5]/10" : "hover:border-teal/40"} rounded-2xl p-5 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative h-full`}>
       <div>
         {/* Title */}
         <div className="mb-2.5">
@@ -1983,13 +1985,13 @@ function ProductCard({
         </div>
 
         {/* Thumbnail Preview Frame with Static 16:9 Image */}
-        <div className="relative w-full rounded-xl overflow-hidden bg-[#070A0D] border border-graphite/10 mb-3.5 shadow-inner group-hover:border-teal/30 transition-colors duration-300">
-          <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#070A0D]">
+        <div className={`relative w-full rounded-xl overflow-hidden ${isLumina ? "bg-gradient-to-b from-[#121630] via-[#0C1024] to-[#060814] border-indigo-950/40" : "bg-[#070A0D] border-graphite/10"} border mb-3.5 shadow-inner ${isLumina ? "group-hover:border-[#4F46E5]/50 shadow-[inset_0_2px_12px_rgba(79,70,229,0.08)]" : "group-hover:border-teal/30"} transition-all duration-300`}>
+          <div className="relative w-full aspect-[16/9] overflow-hidden flex items-center justify-center">
             <img
               src={project.image}
               alt={project.name}
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover block transition-all duration-300 group-hover:brightness-[1.03]"
+              className={`w-full h-full ${isLumina ? "object-contain" : "object-cover"} block transition-all duration-300 group-hover:brightness-[1.06] group-hover:scale-[1.02]`}
             />
           </div>
         </div>
@@ -2004,12 +2006,12 @@ function ProductCard({
           {project.metrics.map((metric, idx) => (
             <div
               key={idx}
-              className="bg-[#F8F6F2] border border-graphite/10 rounded-xl p-2 text-center"
+              className={`border rounded-xl p-2 text-center transition-colors ${isLumina ? "bg-[#F7F8FE] border-[#E0E7FF]" : "bg-[#F8F6F2] border-graphite/10"}`}
             >
-              <span className="block font-sans font-bold text-teal text-sm sm:text-base leading-tight">
+              <span className={`block font-sans font-bold ${isLumina ? "text-[#4F46E5]" : "text-teal"} text-sm sm:text-base leading-tight`}>
                 {metric.value}
               </span>
-              <span className="block font-mono text-[8px] sm:text-[9px] text-graphite/60 uppercase tracking-tight mt-0.5 leading-tight">
+              <span className={`block font-mono text-[8px] sm:text-[9px] ${isLumina ? "text-[#4338CA]/70" : "text-graphite/60"} uppercase tracking-tight mt-0.5 leading-tight`}>
                 {metric.label}
               </span>
             </div>
@@ -2024,10 +2026,10 @@ function ProductCard({
             href={project.externalUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0e1317] hover:bg-teal text-white font-sans text-xs sm:text-sm font-semibold py-2.5 px-5 rounded-xl shadow hover:shadow-xl transition-all duration-300 cursor-pointer no-underline"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0e1317] hover:bg-[#4F46E5] text-white font-sans text-xs sm:text-sm font-semibold py-2.5 px-5 rounded-xl shadow hover:shadow-xl hover:shadow-[#4F46E5]/25 transition-all duration-300 cursor-pointer no-underline"
           >
             EXPLORE {project.name.toUpperCase()}
-            <ExternalLink size={13} className="text-teal group-hover:text-white transition-colors" />
+            <ExternalLink size={13} className="text-[#818CF8] group-hover:text-white transition-colors" />
           </a>
         ) : (
           <button
