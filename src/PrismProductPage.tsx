@@ -11,7 +11,6 @@ import {
   Workflow,
   Sparkles,
   ArrowRight,
-  ArrowDown,
   Database,
   Lock,
   ChevronRight,
@@ -178,31 +177,41 @@ Best regards,`;
           TOP HEADER (Minimalist: Back to Orcin & Demo CTA, No Nav Bar)
           ========================================================================= */}
       <header className="sticky top-0 z-50 bg-[#FDFCFB]/85 backdrop-blur-md border-b border-[#E6E2DE] transition-all">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Wordmark & Back Navigation */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <button
               type="button"
               onClick={onBack}
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-[#1A1A1A]/70 hover:text-[#4B7B7B] transition-colors bg-transparent border-none cursor-pointer py-1.5 px-2.5 -ml-2.5 rounded-lg hover:bg-[#1A1A1A]/5"
+              className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#1A1A1A]/70 hover:text-[#4B7B7B] transition-colors bg-transparent border-none cursor-pointer py-1.5 px-2 -ml-1 sm:-ml-2.5 rounded-lg hover:bg-[#1A1A1A]/5 shrink-0"
+              aria-label="Back to Orcin"
             >
-              <ArrowLeft size={14} className="text-[#4B7B7B]" />
-              <span>Back to Orcin</span>
+              <ArrowLeft size={13} className="text-[#4B7B7B] shrink-0" />
+              <span>
+                <span className="hidden sm:inline">Back to </span>Orcin
+              </span>
             </button>
-            <div className="h-4 w-[1px] bg-[#E6E2DE]" aria-hidden="true" />
-            <span className="font-heading font-bold text-sm tracking-tight text-[#1A1A1A]">
-              PRISM (PDF2ReqIf)
-            </span>
+            <div className="h-3.5 sm:h-4 w-[1px] bg-[#E6E2DE] shrink-0" aria-hidden="true" />
+            <div className="flex items-baseline gap-1 sm:gap-1.5 min-w-0">
+              <span className="font-heading font-bold text-xs sm:text-sm tracking-tight text-[#1A1A1A] whitespace-nowrap">
+                PRISM
+              </span>
+              <span className="font-mono font-semibold text-[10px] sm:text-xs text-[#4B7B7B] whitespace-nowrap">
+                (PDF2ReqIf)
+              </span>
+            </div>
           </div>
 
           {/* Primary Action Button (Direct pre-drafted Email to Orcin) */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center shrink-0">
             <a
               href={demoMailtoUrl}
-              className="px-4 py-2 text-xs font-mono uppercase tracking-[0.18em] font-medium text-white bg-[#1A1A1A] hover:bg-[#4B7B7B] rounded-lg shadow-sm hover:shadow transition-all duration-200 cursor-pointer no-underline whitespace-nowrap inline-flex items-center gap-2 group"
+              className="px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.18em] font-medium text-white bg-[#1A1A1A] hover:bg-[#4B7B7B] rounded-lg shadow-sm hover:shadow transition-all duration-200 cursor-pointer no-underline whitespace-nowrap inline-flex items-center gap-1.5 sm:gap-2 group shrink-0"
             >
-              <Mail size={13} className="text-[#4B7B7B] group-hover:text-white transition-colors" />
-              <span>Request a Demo</span>
+              <Mail size={12} className="text-[#4B7B7B] group-hover:text-white transition-colors shrink-0" />
+              <span>
+                <span className="hidden md:inline">Request a </span>Demo
+              </span>
             </a>
           </div>
         </div>
@@ -1434,10 +1443,6 @@ Best regards,`;
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50 border border-rose-200/70 text-[10px] font-mono font-semibold text-rose-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
-                    STREAMING
-                  </div>
                 </div>
 
                 {/* Mobile Traveling Content Tokens in Vertical Conduit Track */}
@@ -1454,12 +1459,6 @@ Best regards,`;
                         }}
                       />
                     </div>
-                  </div>
-
-                  {/* Flow direction indicator badge */}
-                  <div className="absolute right-3 top-3 text-[9px] font-mono uppercase tracking-widest text-[#4B7B7B] bg-[#4B7B7B]/10 px-2 py-0.5 rounded-md flex items-center gap-1 z-10 pointer-events-none">
-                    <span>Continuous Flow</span>
-                    <ArrowDown size={10} className="animate-bounce" />
                   </div>
 
                   {/* Vertically Traveling Requirement Packets (Downward Motion) */}
