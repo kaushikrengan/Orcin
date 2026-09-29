@@ -1,0 +1,347 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="bgGlow" cx="65%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#183636" stop-opacity="0.8" />
+      <stop offset="45%" stop-color="#0E1A1E" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#070A0D" stop-opacity="1" />
+    </radialGradient>
+    <radialGradient id="tealAura" cx="72%" cy="45%" r="35%">
+      <stop offset="0%" stop-color="#4B7B7B" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#224242" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#070A0D" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Metallic Torus / Fluid Gradients -->
+    <linearGradient id="fluidLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D5555" />
+      <stop offset="35%" stop-color="#1F3A3A" />
+      <stop offset="70%" stop-color="#4B7B7B" />
+      <stop offset="100%" stop-color="#122325" />
+    </linearGradient>
+    <linearGradient id="fluidRight" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64B5B5" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#2E5A5A" stop-opacity="0.8" />
+      <stop offset="75%" stop-color="#173133" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0D1A1C" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Robot Metallic Shading Gradients -->
+    <linearGradient id="robotBody" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#4B7B7B" />
+      <stop offset="30%" stop-color="#28484B" />
+      <stop offset="70%" stop-color="#192F32" />
+      <stop offset="100%" stop-color="#0E1C1E" />
+    </linearGradient>
+    <linearGradient id="robotSpecular" x1="0%" y1="0%" x2="50%" y2="50%">
+      <stop offset="0%" stop-color="#B2E0E0" stop-opacity="0.75" />
+      <stop offset="50%" stop-color="#558C8C" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#223E41" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="robotHeadGrad" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#5A8F8F" />
+      <stop offset="25%" stop-color="#32585B" />
+      <stop offset="65%" stop-color="#1A3134" />
+      <stop offset="95%" stop-color="#0C1A1C" />
+    </radialGradient>
+    <radialGradient id="faceVisor" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#0F181B" />
+      <stop offset="85%" stop-color="#06090B" />
+      <stop offset="100%" stop-color="#142B2E" />
+    </radialGradient>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="30%" stop-color="#8CE0E0" />
+      <stop offset="70%" stop-color="#4B7B7B" />
+      <stop offset="100%" stop-color="#4B7B7B" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glassmorphic Filters & Gradients -->
+    <linearGradient id="glassFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#162428" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#0D1619" stop-opacity="0.85" />
+    </linearGradient>
+    <linearGradient id="glassBorder" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64B5B5" stop-opacity="0.5" />
+      <stop offset="50%" stop-color="#2E5252" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#64B5B5" stop-opacity="0.4" />
+    </linearGradient>
+    <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64B5B5" />
+      <stop offset="40%" stop-color="#3B6B6B" />
+      <stop offset="100%" stop-color="#1C3838" />
+    </linearGradient>
+
+    <!-- Filter for Neon Glow -->
+    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <radialGradient id="robotFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.8" />
+      <stop offset="60%" stop-color="#000000" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="675" fill="url(#bgGlow)" />
+  <circle cx="860" cy="335" r="340" fill="url(#tealAura)" />
+
+  <g transform="translate(0, 97)">
+
+  <!-- Blueprint Coordinate Grid (Orcin signature design) -->
+  <g stroke="#4B7B7B" stroke-opacity="0.12" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="480" />
+    <line x1="200" y1="0" x2="200" y2="480" />
+    <line x1="320" y1="0" x2="320" y2="480" />
+    <line x1="440" y1="0" x2="440" y2="480" />
+    <line x1="560" y1="0" x2="560" y2="480" />
+    <line x1="680" y1="0" x2="680" y2="480" />
+    <line x1="800" y1="0" x2="800" y2="480" />
+    <line x1="920" y1="0" x2="920" y2="480" />
+    <line x1="1040" y1="0" x2="1040" y2="480" />
+    
+    <line x1="0" y1="80" x2="1200" y2="80" />
+    <line x1="0" y1="180" x2="1200" y2="180" />
+    <line x1="0" y1="280" x2="1200" y2="280" />
+    <line x1="0" y1="380" x2="1200" y2="380" />
+  </g>
+
+  <!-- Grid Intersecting Coordinate Pluses (+) -->
+  <g fill="#4B7B7B" opacity="0.35">
+    <path d="M 197 79 h 6 v 2 h -6 z M 199 77 h 2 v 6 h -2 z" />
+    <path d="M 437 79 h 6 v 2 h -6 z M 439 77 h 2 v 6 h -2 z" />
+    <path d="M 677 79 h 6 v 2 h -6 z M 679 77 h 2 v 6 h -2 z" />
+    <path d="M 917 79 h 6 v 2 h -6 z M 919 77 h 2 v 6 h -2 z" />
+    <path d="M 197 279 h 6 v 2 h -6 z M 199 277 h 2 v 6 h -2 z" />
+    <path d="M 437 279 h 6 v 2 h -6 z M 439 277 h 2 v 6 h -2 z" />
+    <path d="M 677 279 h 6 v 2 h -6 z M 679 277 h 2 v 6 h -2 z" />
+    <path d="M 197 379 h 6 v 2 h -6 z M 199 377 h 2 v 6 h -2 z" />
+    <path d="M 437 379 h 6 v 2 h -6 z M 439 377 h 2 v 6 h -2 z" />
+  </g>
+
+  <!-- Abstract Metallic Torus Fluid Sculptures (Edge Accents) -->
+  <!-- Left Torus Wave -->
+  <g opacity="0.85">
+    <path d="M -60 420 C -20 300, 30 260, 110 320 C 180 370, 150 490, 40 500 C -40 510, -70 480, -60 420 Z" fill="url(#fluidLeft)" />
+    <path d="M -40 430 C -10 330, 40 300, 100 350 C 140 390, 100 470, 20 470 Z" fill="none" stroke="#64B5B5" stroke-opacity="0.4" stroke-width="3" />
+    <path d="M -20 450 C 0 370, 40 350, 80 390 C 100 410, 60 460, 10 460 Z" fill="#132729" opacity="0.6" />
+  </g>
+  <!-- Right Torus Arch -->
+  <g opacity="0.9">
+    <path d="M 1120 -40 C 1170 30, 1220 150, 1180 280 C 1140 400, 1060 450, 1040 390 C 1020 320, 1070 200, 1100 110 C 1120 40, 1080 -20, 1120 -40 Z" fill="url(#fluidRight)" />
+    <path d="M 1140 -20 C 1180 50, 1200 160, 1160 270 C 1130 360, 1070 380, 1060 340 C 1040 280, 1080 180, 1110 100 Z" fill="none" stroke="#8CE0E0" stroke-opacity="0.35" stroke-width="2.5" />
+  </g>
+
+  <!-- TOP LEFT BADGE: "Lumina Multimodal RAG" with connected glass folder -->
+  <g transform="translate(180, 50)">
+    <!-- Container Pill -->
+    <rect x="0" y="0" width="370" height="74" rx="37" fill="url(#glassFill)" stroke="url(#glassBorder)" stroke-width="1.5" />
+    
+    <!-- Left badge text -->
+    <text x="36" y="44" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="750" fill="#FFFFFF" letter-spacing="-0.5">
+      Lumina RAG
+    </text>
+    
+    <!-- Connector dumbbell waist -->
+    <path d="M 270 25 C 282 25, 285 37, 292 37 C 299 37, 302 25, 314 25 L 314 49 C 302 49, 299 37, 292 37 C 285 37, 282 49, 270 49 Z" fill="#0C1417" stroke="url(#glassBorder)" stroke-width="1.2" />
+
+    <!-- 3D Glass Folder Icon in Right Bulb -->
+    <g transform="translate(304, 18)">
+      <circle cx="20" cy="19" r="23" fill="#182E32" stroke="#4B7B7B" stroke-opacity="0.4" stroke-width="1" />
+      <!-- Folder Back -->
+      <path d="M 8 16 L 16 16 L 20 20 L 32 20 C 33.5 20, 34 21, 34 22 L 34 31 C 34 32.5, 33 33, 31.5 33 L 8.5 33 C 7 33, 6 32, 6 30.5 L 6 18.5 C 6 17, 7 16, 8 16 Z" fill="url(#folderGrad)" />
+      <!-- Paper inside -->
+      <rect x="11" y="14" width="18" height="12" rx="1.5" fill="#E2F1F1" opacity="0.9" />
+      <line x1="14" y1="17" x2="25" y2="17" stroke="#4B7B7B" stroke-width="1" />
+      <line x1="14" y1="20" x2="22" y2="20" stroke="#4B7B7B" stroke-width="1" />
+      <!-- Folder Front Flap (Glass slant) -->
+      <path d="M 6 22 L 20 22 L 35 22 C 36 22, 36.5 23, 35.8 24.2 L 32.5 32 C 32 33, 31 33.5, 29.8 33.5 L 8 33.5 C 6.8 33.5, 6 32.5, 6.2 31.2 Z" fill="#4B7B7B" opacity="0.85" stroke="#8CE0E0" stroke-opacity="0.5" stroke-width="1" />
+    </g>
+  </g>
+
+  <!-- FLOATING MULTI-MODAL DATA CARDS (Representing Lumina indexing existing files) -->
+  <!-- Card 1: PDF Document (Top Center) -->
+  <g transform="translate(560, 52)" opacity="0.92">
+    <rect width="170" height="52" rx="10" fill="#111B1E" stroke="#4B7B7B" stroke-opacity="0.3" stroke-width="1.2" />
+    <rect x="10" y="11" width="30" height="30" rx="6" fill="#7F1D1D" fill-opacity="0.4" stroke="#EF4444" stroke-opacity="0.5" stroke-width="1" />
+    <text x="25" y="29" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#FCA5A5" text-anchor="middle">PDF</text>
+    <text x="48" y="26" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Financial_Audit.pdf</text>
+    <text x="48" y="38" font-family="monospace" font-size="8" fill="#4B7B7B">42 pgs • 98.6% vector</text>
+  </g>
+
+  <!-- Card 2: Enterprise SQL Database (Mid Left) -->
+  <g transform="translate(180, 160)" opacity="0.9">
+    <rect width="165" height="52" rx="10" fill="#111B1E" stroke="#4B7B7B" stroke-opacity="0.3" stroke-width="1.2" />
+    <rect x="10" y="11" width="30" height="30" rx="6" fill="#064E3B" fill-opacity="0.4" stroke="#10B981" stroke-opacity="0.5" stroke-width="1" />
+    <text x="25" y="29" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#6EE7B7" text-anchor="middle">SQL</text>
+    <text x="48" y="26" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Enterprise_DB.sql</text>
+    <text x="48" y="38" font-family="monospace" font-size="8" fill="#4B7B7B">85k records indexed</text>
+  </g>
+
+  <!-- Card 3: Audio / Video Transcripts (Floating Above Input) -->
+  <g transform="translate(370, 160)" opacity="0.9">
+    <rect width="165" height="52" rx="10" fill="#111B1E" stroke="#4B7B7B" stroke-opacity="0.3" stroke-width="1.2" />
+    <rect x="10" y="11" width="30" height="30" rx="6" fill="#0C4A6E" fill-opacity="0.4" stroke="#38BDF8" stroke-opacity="0.5" stroke-width="1" />
+    <text x="25" y="29" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" fill="#7DD3FC" text-anchor="middle">AV</text>
+    <text x="48" y="26" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Meeting_Sync.m4a</text>
+    <text x="48" y="38" font-family="monospace" font-size="8" fill="#4B7B7B">Audio transcript sync</text>
+  </g>
+
+  <!-- BOTTOM SEARCH / INPUT BAR (Glassmorphism ask bar from reference) -->
+  <g transform="translate(180, 245)">
+    <!-- Main Glass Container -->
+    <rect x="0" y="0" width="550" height="155" rx="24" fill="#070D10" opacity="0.45" />
+    <rect x="0" y="0" width="550" height="155" rx="24" fill="url(#glassFill)" stroke="url(#glassBorder)" stroke-width="1.6" />
+
+    <!-- Query placeholder text with cursor -->
+    <text x="32" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="400" fill="#99BCBC">
+      Consult Lumina across enterprise data...
+    </text>
+    <rect x="424" y="38" width="2" height="20" fill="#64B5B5" opacity="0.9" rx="1" />
+
+    <!-- Bottom Controls Row -->
+    <g transform="translate(24, 88)">
+      <!-- Plus Button -->
+      <circle cx="20" cy="20" r="20" fill="#1C2E33" stroke="#4B7B7B" stroke-opacity="0.5" stroke-width="1" />
+      <path d="M 20 13 L 20 27 M 13 20 L 27 20" stroke="#8CE0E0" stroke-width="2" stroke-linecap="round" />
+
+      <!-- Pill 1: Hybrid RAG Mode -->
+      <g transform="translate(56, 0)">
+        <rect width="135" height="40" rx="20" fill="#182A2E" stroke="#4B7B7B" stroke-opacity="0.5" stroke-width="1" />
+        <!-- Feather / Mode Icon -->
+        <path d="M 18 20 C 18 15, 23 13, 27 13 C 27 18, 24 23, 19 25 Z" fill="none" stroke="#8CE0E0" stroke-width="1.5" />
+        <line x1="16" y1="26" x2="23" y2="19" stroke="#8CE0E0" stroke-width="1.5" />
+        <text x="35" y="25" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#E2F1F1">Hybrid RAG</text>
+        <path d="M 116 19 L 121 24 L 126 19" fill="none" stroke="#8CE0E0" stroke-width="1.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Pill 2: DeepReason Mode -->
+      <g transform="translate(202, 0)">
+        <rect width="145" height="40" rx="20" fill="#182A2E" stroke="#4B7B7B" stroke-opacity="0.5" stroke-width="1" />
+        <!-- Lightning / Spark Icon -->
+        <path d="M 19 14 L 15 22 L 20 22 L 18 28 L 24 19 L 19 19 Z" fill="#FBBF24" opacity="0.9" />
+        <text x="33" y="25" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#E2F1F1">DeepReason</text>
+        <path d="M 125 19 L 130 24 L 135 19" fill="none" stroke="#8CE0E0" stroke-width="1.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Status indicator tag -->
+      <g transform="translate(360, 4)">
+        <rect width="135" height="32" rx="16" fill="#0C1D20" stroke="#4B7B7B" stroke-opacity="0.3" stroke-width="1" />
+        <circle cx="16" cy="16" r="4" fill="#34D399" filter="url(#glowFilter)" />
+        <text x="27" y="20" font-family="monospace" font-size="9.5" font-weight="600" fill="#6EE7B7" letter-spacing="0.5">GROUNDED: 100%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- 3D ROBOT AGENT (Center-Right, sculpted in Orcin's Titanium & Teal theme) -->
+  <g transform="translate(850, 40)">
+    <!-- Base Shadow beneath Robot -->
+    <ellipse cx="60" cy="405" rx="140" ry="24" fill="url(#robotFloorShadow)" />
+
+    <!-- Robot Left Arm (Viewer's left) -->
+    <g transform="translate(-50, 240)">
+      <!-- Shoulder Ball -->
+      <circle cx="20" cy="20" r="16" fill="url(#robotHeadGrad)" stroke="#64B5B5" stroke-opacity="0.4" stroke-width="1.5" />
+      <!-- Upper Arm -->
+      <path d="M 10 25 C 0 50, 2 80, 14 100 C 26 85, 28 55, 26 28 Z" fill="url(#robotBody)" stroke="#4B7B7B" stroke-width="1.2" />
+      <!-- Forearm & Hand -->
+      <ellipse cx="14" cy="115" rx="12" ry="16" fill="url(#robotHeadGrad)" />
+      <circle cx="14" cy="132" r="7" fill="#28484B" />
+    </g>
+
+    <!-- Robot Right Arm (Viewer's right) -->
+    <g transform="translate(130, 240)">
+      <!-- Shoulder Ball -->
+      <circle cx="20" cy="20" r="16" fill="url(#robotHeadGrad)" stroke="#64B5B5" stroke-opacity="0.4" stroke-width="1.5" />
+      <!-- Upper Arm -->
+      <path d="M 28 25 C 40 50, 38 80, 26 100 C 14 85, 12 55, 14 28 Z" fill="url(#robotBody)" stroke="#4B7B7B" stroke-width="1.2" />
+      <!-- Forearm & Hand -->
+      <ellipse cx="26" cy="115" rx="12" ry="16" fill="url(#robotHeadGrad)" />
+      <circle cx="26" cy="132" r="7" fill="#28484B" />
+    </g>
+
+    <!-- Robot Torso Body -->
+    <g transform="translate(0, 235)">
+      <!-- Main Body Shell -->
+      <path d="M -15 0 C 40 -12, 80 -12, 135 0 C 145 45, 145 105, 120 145 C 85 160, 35 160, 0 145 C -25 105, -25 45, -15 0 Z" fill="url(#robotBody)" stroke="#64B5B5" stroke-opacity="0.35" stroke-width="2" />
+      <!-- Specular Torso Sheen -->
+      <path d="M 0 15 C 35 5, 75 5, 110 15 C 100 45, 80 75, 45 75 C 15 75, 5 45, 0 15 Z" fill="url(#robotSpecular)" opacity="0.45" />
+
+      <!-- Glowing Chest Beacon (Orcin Intelligence Unit) -->
+      <g transform="translate(60, 55)">
+        <!-- Outer Glowing Rim -->
+        <path d="M -26 0 C -26 -16, 26 -16, 26 0 C 26 14, 0 20, 0 20 C 0 20, -26 14, -26 0 Z" fill="#0C1D20" stroke="#4B7B7B" stroke-width="1.5" />
+        <!-- Inner Core Arc -->
+        <path d="M -18 2 C -18 -8, 18 -8, 18 2 C 18 9, 0 13, 0 13 C 0 13, -18 9, -18 2 Z" fill="#8CE0E0" filter="url(#glowFilter)" />
+        <circle cx="0" cy="26" r="4.5" fill="#64B5B5" filter="url(#glowFilter)" />
+      </g>
+
+      <!-- Mechanical segmented waist rings -->
+      <path d="M 8 135 C 35 145, 85 145, 112 135 L 108 152 C 80 162, 40 162, 12 152 Z" fill="#132326" stroke="#4B7B7B" stroke-opacity="0.4" stroke-width="1" />
+      <path d="M 18 152 C 40 160, 80 160, 102 152 L 98 165 C 75 172, 45 172, 22 165 Z" fill="#0C1719" stroke="#4B7B7B" stroke-opacity="0.3" stroke-width="1" />
+    </g>
+
+    <!-- Robot Neck Joint -->
+    <path d="M 38 215 C 45 205, 75 205, 82 215 L 86 240 C 70 245, 50 245, 34 240 Z" fill="#152629" stroke="#4B7B7B" stroke-width="1" />
+
+    <!-- Robot Head (Smooth Cybernetic Helmet) -->
+    <g transform="translate(60, 120)">
+      <!-- Outer Helmet Shell -->
+      <ellipse cx="0" cy="0" rx="108" ry="102" fill="url(#robotHeadGrad)" stroke="#8CE0E0" stroke-opacity="0.45" stroke-width="2.5" />
+      <!-- Specular Helmet Rim Highlight -->
+      <path d="M -85 -35 C -65 -85, 30 -95, 80 -45 C 50 -75, -20 -80, -85 -35 Z" fill="url(#robotSpecular)" opacity="0.65" />
+
+      <!-- Headphone / Ear Cylinders (Left & Right) -->
+      <!-- Left Ear Cup -->
+      <g transform="translate(-112, 0)">
+        <ellipse cx="0" cy="0" rx="12" ry="26" fill="#142629" stroke="#4B7B7B" stroke-width="2" />
+        <ellipse cx="0" cy="0" rx="6" ry="16" fill="#284E52" />
+        <circle cx="0" cy="0" r="5" fill="#64B5B5" filter="url(#glowFilter)" />
+      </g>
+      <!-- Right Ear Cup -->
+      <g transform="translate(112, 0)">
+        <ellipse cx="0" cy="0" rx="12" ry="26" fill="#142629" stroke="#4B7B7B" stroke-width="2" />
+        <ellipse cx="0" cy="0" rx="6" ry="16" fill="#284E52" />
+        <circle cx="0" cy="0" r="5" fill="#64B5B5" filter="url(#glowFilter)" />
+      </g>
+
+      <!-- Glossy Dark Glass Visor Screen -->
+      <rect x="-82" y="-62" width="164" height="124" rx="55" fill="url(#faceVisor)" stroke="#4B7B7B" stroke-opacity="0.6" stroke-width="2" />
+      <!-- Visor curved reflection highlight line -->
+      <path d="M -60 -45 C -20 -60, 20 -60, 60 -45" fill="none" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Glowing Curved Happy Eyes (Orcin Cyan/Mint Glow from reference) -->
+      <!-- Left Eye -->
+      <g transform="translate(-36, -6)">
+        <path d="M -22 6 C -18 -14, 18 -14, 22 6" fill="none" stroke="#8CE0E0" stroke-width="7.5" stroke-linecap="round" filter="url(#glowFilter)" />
+        <path d="M -22 6 C -18 -14, 18 -14, 22 6" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+      </g>
+      <!-- Right Eye -->
+      <g transform="translate(36, -6)">
+        <path d="M -22 6 C -18 -14, 18 -14, 22 6" fill="none" stroke="#8CE0E0" stroke-width="7.5" stroke-linecap="round" filter="url(#glowFilter)" />
+        <path d="M -22 6 C -18 -14, 18 -14, 22 6" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Glowing Friendly Curved Smile -->
+      <g transform="translate(0, 30)">
+        <path d="M -18 -3 C -10 12, 10 12, 18 -3" fill="none" stroke="#8CE0E0" stroke-width="5" stroke-linecap="round" filter="url(#glowFilter)" />
+        <path d="M -18 -3 C -10 12, 10 12, 18 -3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      </g>
+
+      <!-- Soft Visor Ambient Reflection -->
+      <path d="M -70 20 C -50 45, 50 45, 70 20 C 50 35, -50 35, -70 20 Z" fill="#64B5B5" opacity="0.08" />
+    </g>
+  </g>
+
+  <!-- Ambient Micro Particles & Neural Sparks around Lumina -->
+  <g fill="#8CE0E0" opacity="0.6">
+    <circle cx="530" cy="130" r="2" filter="url(#glowFilter)" />
+    <circle cx="760" cy="180" r="2.5" filter="url(#glowFilter)" />
+    <circle cx="820" cy="70" r="1.5" filter="url(#glowFilter)" />
+    <circle cx="1060" cy="210" r="2" filter="url(#glowFilter)" />
+    <circle cx="730" cy="270" r="2" filter="url(#glowFilter)" />
+  </g>
+  </g>
+</svg>

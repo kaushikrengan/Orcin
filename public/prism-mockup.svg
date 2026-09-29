@@ -1,0 +1,508 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="100%" height="100%">
+  <defs>
+    <!-- Dark Studio Gradients -->
+    <linearGradient id="bgStudio" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B12" />
+      <stop offset="50%" stop-color="#0B111C" />
+      <stop offset="100%" stop-color="#060910" />
+    </linearGradient>
+
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E1624" />
+      <stop offset="100%" stop-color="#090E17" />
+    </linearGradient>
+
+    <linearGradient id="sidebarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0A0E17" />
+      <stop offset="100%" stop-color="#080C14" />
+    </linearGradient>
+
+    <linearGradient id="docShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Glowing filters -->
+    <filter id="neonTeal" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="boxShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1280" height="720" fill="url(#bgStudio)" />
+
+  <!-- TOP APP BAR -->
+  <rect width="1280" height="52" fill="url(#headerGrad)" stroke="#1E293B" stroke-width="1" />
+  
+  <!-- App Title & Badges -->
+  <g transform="translate(18, 12)">
+    <!-- App Logo Icon -->
+    <rect width="28" height="28" rx="6" fill="#0284C7" />
+    <path d="M 8 9 L 20 9 M 8 14 L 17 14 M 8 19 L 20 19" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" />
+    
+    <text x="38" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="-0.3">
+      Requirements Engineering Studio
+    </text>
+    
+    <rect x="256" y="4" width="76" height="17" rx="3" fill="#0369A1" fill-opacity="0.3" stroke="#0284C7" stroke-width="1" />
+    <text x="294" y="16" font-family="monospace" font-size="9" font-weight="700" fill="#38BDF8" text-anchor="middle">
+      ENTERPRISE
+    </text>
+    
+    <text x="38" y="27" font-family="monospace" font-size="8" fill="#64748B" letter-spacing="0.5">
+      ISO 26262 // SIEMENS POLARION &amp; RM REQIF
+    </text>
+  </g>
+
+  <!-- Center Tabs -->
+  <g transform="translate(420, 10)">
+    <!-- Tab 1: Upload -->
+    <g transform="translate(0, 0)">
+      <path d="M 12 18 L 12 12 M 9 15 L 12 12 L 15 15 M 6 18 C 4 18, 3 16, 3 14 C 3 12, 5 10, 7 10 C 8 7, 12 6, 15 8 C 17 7, 20 9, 20 12 C 21 14, 20 18, 17 18" fill="none" stroke="#10B981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="28" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94A3B8">Upload &amp; Process</text>
+    </g>
+
+    <!-- Tab 2: Layout -->
+    <g transform="translate(160, 0)">
+      <rect x="4" y="8" width="16" height="16" rx="2" fill="none" stroke="#10B981" stroke-width="1.6" />
+      <line x1="12" y1="8" x2="12" y2="24" stroke="#10B981" stroke-width="1.4" />
+      <text x="28" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94A3B8">Layout Confirmation</text>
+    </g>
+
+    <!-- Tab 3: Block Editor (ACTIVE) -->
+    <g transform="translate(325, 0)">
+      <rect x="-4" y="2" width="124" height="28" rx="5" fill="#0284C7" fill-opacity="0.2" stroke="#0284C7" stroke-width="1.2" />
+      <path d="M 6 18 L 18 6 L 22 10 L 10 22 L 6 22 Z" fill="none" stroke="#38BDF8" stroke-width="1.6" />
+      <text x="30" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#38BDF8">Block Editor</text>
+    </g>
+
+    <!-- Tab 4: Export -->
+    <g transform="translate(470, 0)">
+      <path d="M 10 14 L 18 14 M 14 10 L 18 14 L 14 18 M 6 8 L 6 20" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="28" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#94A3B8">Export</text>
+    </g>
+  </g>
+
+  <!-- Right App Bar Status Badges -->
+  <g transform="translate(1010, 11)">
+    <!-- Document file badge -->
+    <rect width="130" height="30" rx="5" fill="#1E293B" fill-opacity="0.6" stroke="#334155" stroke-width="1" />
+    <path d="M 12 9 L 18 9 L 22 13 L 22 22 L 12 22 Z" fill="#DC2626" fill-opacity="0.3" stroke="#EF4444" stroke-width="1" />
+    <text x="28" y="19" font-family="monospace" font-size="10" font-weight="500" fill="#E2E8F0">sample_spec.pdf</text>
+    <rect x="108" y="7" width="16" height="16" rx="3" fill="#334155" />
+    <text x="116" y="18" font-family="monospace" font-size="9" fill="#94A3B8" text-anchor="middle">2p</text>
+
+    <!-- Secure badge -->
+    <g transform="translate(142, 0)">
+      <rect width="112" height="30" rx="5" fill="#064E3B" fill-opacity="0.3" stroke="#059669" stroke-width="1" />
+      <circle cx="12" cy="15" r="3.5" fill="#10B981" />
+      <text x="22" y="19" font-family="monospace" font-size="8.5" font-weight="700" fill="#34D399" letter-spacing="0.3">ENTERPRISE SECURE</text>
+    </g>
+  </g>
+
+  <!-- SECONDARY TOOLBAR -->
+  <rect y="52" width="1280" height="46" fill="#0C131F" stroke="#1E293B" stroke-width="1" />
+  
+  <g transform="translate(18, 65)">
+    <text x="0" y="16" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">
+      Interactive Block Workbench
+    </text>
+    <rect x="210" y="2" width="62" height="20" rx="4" fill="#047857" fill-opacity="0.3" stroke="#10B981" stroke-width="1" />
+    <text x="241" y="16" font-family="monospace" font-size="9.5" font-weight="600" fill="#34D399" text-anchor="middle">PAGE 1 / 2</text>
+  </g>
+
+  <!-- Page Controls & Utilities -->
+  <g transform="translate(550, 60)">
+    <rect width="60" height="30" rx="5" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="30" y="19" font-family="system-ui, sans-serif" font-size="11" font-weight="500" fill="#E2E8F0" text-anchor="middle">&#8592; Back</text>
+    
+    <g transform="translate(68, 0)">
+      <rect width="76" height="30" rx="5" fill="#111827" stroke="#334155" stroke-width="1" />
+      <text x="38" y="19" font-family="monospace" font-size="11" fill="#E2E8F0" text-anchor="middle">&#10216; Page 1 / 2 &#10217;</text>
+    </g>
+
+    <g transform="translate(152, 0)">
+      <rect width="90" height="30" rx="5" fill="#1E293B" stroke="#334155" stroke-width="1" />
+      <text x="45" y="19" font-family="system-ui, sans-serif" font-size="11" fill="#E2E8F0" text-anchor="middle">&#128269; Find &amp; Clean</text>
+    </g>
+
+    <g transform="translate(250, 0)">
+      <rect width="95" height="30" rx="5" fill="#881337" fill-opacity="0.3" stroke="#E11D48" stroke-width="1" />
+      <text x="47" y="19" font-family="system-ui, sans-serif" font-size="11" font-weight="500" fill="#FDA4AF" text-anchor="middle">&#128465; Cleanup Page</text>
+    </g>
+
+    <g transform="translate(353, 0)">
+      <rect width="85" height="30" rx="5" fill="#1E293B" stroke="#334155" stroke-width="1" />
+      <text x="42" y="19" font-family="system-ui, sans-serif" font-size="11" fill="#E2E8F0" text-anchor="middle">&#9881; Re-Detect</text>
+    </g>
+
+    <g transform="translate(446, 0)">
+      <rect width="80" height="30" rx="5" fill="#0284C7" stroke="#38BDF8" stroke-width="1" />
+      <text x="40" y="19" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">&#8594; Export</text>
+    </g>
+  </g>
+
+  <!-- Drawing Tools Toolbar -->
+  <g transform="translate(18, 108)">
+    <text x="0" y="16" font-family="monospace" font-size="10" font-weight="700" fill="#64748B" letter-spacing="0.5">DRAW TOOL:</text>
+    
+    <g transform="translate(85, 0)">
+      <rect width="58" height="24" rx="4" fill="#0C4A6E" stroke="#0284C7" stroke-width="1" />
+      <text x="29" y="16" font-family="monospace" font-size="10" font-weight="600" fill="#38BDF8" text-anchor="middle">&#128196; Text</text>
+    </g>
+
+    <g transform="translate(150, 0)">
+      <rect width="58" height="24" rx="4" fill="#881337" stroke="#E11D48" stroke-width="1" />
+      <text x="29" y="16" font-family="monospace" font-size="10" font-weight="600" fill="#FDA4AF" text-anchor="middle">&#127991; Title</text>
+    </g>
+
+    <g transform="translate(215, 0)">
+      <rect width="62" height="24" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1" />
+      <text x="31" y="16" font-family="monospace" font-size="10" font-weight="600" fill="#6EE7B7" text-anchor="middle">&#9638; Table</text>
+    </g>
+
+    <g transform="translate(284, 0)">
+      <rect width="62" height="24" rx="4" fill="#581C87" stroke="#A855F7" stroke-width="1" />
+      <text x="31" y="16" font-family="monospace" font-size="10" font-weight="600" fill="#D8B4FE" text-anchor="middle">&#128444; Image</text>
+    </g>
+  </g>
+
+  <!-- LEFT SIDEBAR: Block Explorer -->
+  <g transform="translate(0, 140)">
+    <rect width="215" height="550" fill="url(#sidebarGrad)" stroke="#1E293B" stroke-width="1" />
+    
+    <!-- Search / Filter -->
+    <rect x="10" y="10" width="195" height="28" rx="4" fill="#0E1624" stroke="#334155" stroke-width="1" />
+    <text x="22" y="28" font-family="system-ui, sans-serif" font-size="10.5" fill="#64748B">&#128269; Search text or ID...</text>
+
+    <rect x="10" y="44" width="195" height="26" rx="4" fill="#0E1624" stroke="#334155" stroke-width="1" />
+    <text x="20" y="61" font-family="system-ui, sans-serif" font-size="10" fill="#64748B">Filter by label &#8744;</text>
+
+    <text x="14" y="90" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748B">Hide discarded</text>
+    <rect x="175" y="80" width="28" height="14" rx="7" fill="#334155" />
+    <circle cx="182" cy="87" r="5" fill="#94A3B8" />
+
+    <!-- Block List -->
+    <!-- Block 1 -->
+    <g transform="translate(10, 105)">
+      <rect width="195" height="42" rx="4" fill="#0C4A6E" fill-opacity="0.3" stroke="#0284C7" stroke-width="1" />
+      <text x="8" y="18" font-family="monospace" font-size="10" font-weight="700" fill="#E2E8F0">1</text>
+      <text x="20" y="18" font-family="monospace" font-size="9" fill="#94A3B8">#1</text>
+      <rect x="36" y="8" width="34" height="14" rx="3" fill="#E11D48" />
+      <text x="53" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">Title</text>
+      <rect x="74" y="8" width="22" height="14" rx="3" fill="#E11D48" />
+      <text x="85" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">H2</text>
+      <rect x="170" y="8" width="16" height="14" rx="3" fill="#F59E0B" />
+      <text x="178" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#000000" text-anchor="middle">U</text>
+      <text x="8" y="34" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8" truncate="true">Automated Driving Domain Controller Spe...</text>
+    </g>
+
+    <!-- Block 2 -->
+    <g transform="translate(10, 153)">
+      <rect width="195" height="42" rx="4" fill="#0E1624" stroke="#1E293B" stroke-width="1" />
+      <text x="8" y="18" font-family="monospace" font-size="10" font-weight="700" fill="#64748B">2</text>
+      <text x="20" y="18" font-family="monospace" font-size="9" fill="#64748B">#2</text>
+      <rect x="36" y="8" width="32" height="14" rx="3" fill="#0284C7" />
+      <text x="52" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">Text</text>
+      <rect x="72" y="8" width="80" height="14" rx="3" fill="#064E3B" />
+      <text x="112" y="18" font-family="monospace" font-size="7.5" fill="#6EE7B7" text-anchor="middle">SPEC-ADDC-2026-V1</text>
+      <text x="8" y="34" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748B">Document Ref: SPEC-ADDC-2026-V1.0 | Cl...</text>
+    </g>
+
+    <!-- Block 3 -->
+    <g transform="translate(10, 201)">
+      <rect width="195" height="38" rx="4" fill="#0E1624" stroke="#1E293B" stroke-width="1" />
+      <text x="8" y="18" font-family="monospace" font-size="10" font-weight="700" fill="#64748B">3</text>
+      <text x="20" y="18" font-family="monospace" font-size="9" fill="#64748B">#3</text>
+      <rect x="36" y="8" width="32" height="14" rx="3" fill="#0284C7" />
+      <text x="52" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">Text</text>
+      <text x="8" y="31" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748B">1. Scope and System Architecture</text>
+    </g>
+
+    <!-- Block 4 -->
+    <g transform="translate(10, 245)">
+      <rect width="195" height="38" rx="4" fill="#0E1624" stroke="#1E293B" stroke-width="1" />
+      <text x="8" y="18" font-family="monospace" font-size="10" font-weight="700" fill="#64748B">4</text>
+      <text x="20" y="18" font-family="monospace" font-size="9" fill="#64748B">#4</text>
+      <rect x="36" y="8" width="32" height="14" rx="3" fill="#0284C7" />
+      <text x="52" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">Text</text>
+      <text x="8" y="31" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748B">This document defines high-level functional...</text>
+    </g>
+
+    <!-- Block 6 / Req -->
+    <g transform="translate(10, 289)">
+      <rect width="195" height="42" rx="4" fill="#0E1624" stroke="#1E293B" stroke-width="1" />
+      <text x="8" y="18" font-family="monospace" font-size="10" font-weight="700" fill="#64748B">6</text>
+      <text x="20" y="18" font-family="monospace" font-size="9" fill="#64748B">#6</text>
+      <rect x="36" y="8" width="32" height="14" rx="3" fill="#0284C7" />
+      <text x="52" y="18" font-family="monospace" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">Text</text>
+      <rect x="72" y="8" width="65" height="14" rx="3" fill="#064E3B" />
+      <text x="104" y="18" font-family="monospace" font-size="7.5" font-weight="700" fill="#6EE7B7" text-anchor="middle">REQ-SYS-101</text>
+      <text x="8" y="34" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748B">REQ-SYS-101</text>
+    </g>
+
+    <!-- Total blocks footer -->
+    <text x="12" y="535" font-family="monospace" font-size="9" fill="#64748B">13 blocks detected</text>
+  </g>
+
+  <!-- CENTER CANVAS: PDF Spec Sheet with Konva Bounding Boxes -->
+  <g transform="translate(225, 140)">
+    <!-- Canvas background area with drop shadow -->
+    <rect width="765" height="550" fill="#0F172A" />
+
+    <!-- Zoom floating widget -->
+    <g transform="translate(520, 15)">
+      <rect width="125" height="26" rx="13" fill="#000000" fill-opacity="0.75" stroke="#334155" stroke-width="1" />
+      <text x="14" y="17" font-family="monospace" font-size="10" fill="#94A3B8">-</text>
+      <text x="42" y="17" font-family="monospace" font-size="9" font-weight="700" fill="#F1F5F9">100%</text>
+      <text x="76" y="17" font-family="monospace" font-size="10" fill="#94A3B8">+</text>
+      <text x="96" y="17" font-family="monospace" font-size="9" fill="#94A3B8">&#x26F6;</text>
+      <circle cx="114" cy="13" r="3.5" fill="#38BDF8" />
+    </g>
+
+    <!-- The White Technical PDF Document Sheet -->
+    <g transform="translate(25, 50)" filter="url(#boxShadow)">
+      <rect width="715" height="480" rx="2" fill="#FFFFFF" />
+
+      <!-- Bounding Box #1: Automated Driving Domain Controller Specification -->
+      <g transform="translate(40, 40)">
+        <rect x="-8" y="-6" width="105" height="15" rx="3" fill="#E11D48" />
+        <text x="44" y="5" font-family="monospace" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">#1 Title H2 [U]</text>
+        <rect width="450" height="26" fill="none" stroke="#10B981" stroke-width="2.5" />
+        <text x="6" y="19" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" fill="#1E293B" letter-spacing="-0.3">
+          Automated Driving Domain Controller Specification
+        </text>
+      </g>
+
+      <!-- Bounding Box #2: Metadata / Classification -->
+      <g transform="translate(40, 80)">
+        <rect x="-4" y="-5" width="46" height="12" rx="2" fill="#0284C7" />
+        <text x="19" y="4" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#2 text</text>
+        <rect width="380" height="18" fill="none" stroke="#0284C7" stroke-width="1.8" />
+        <text x="6" y="13" font-family="monospace" font-size="10" fill="#334155">
+          Document Ref: SPEC-ADDC-2026-V1.0 | Classification: Systems Engineering
+        </text>
+      </g>
+
+      <!-- Bounding Box #3: 1. Scope and System Architecture -->
+      <g transform="translate(40, 120)">
+        <rect x="-4" y="-5" width="46" height="12" rx="2" fill="#0284C7" />
+        <text x="19" y="4" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#3 text</text>
+        <rect width="235" height="20" fill="none" stroke="#0284C7" stroke-width="1.8" />
+        <text x="6" y="15" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#0F172A">
+          1. Scope and System Architecture
+        </text>
+      </g>
+
+      <!-- Bounding Box #4: Scope Paragraph -->
+      <g transform="translate(40, 150)">
+        <rect x="-4" y="-5" width="46" height="12" rx="2" fill="#0284C7" />
+        <text x="19" y="4" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#4 text</text>
+        <rect width="425" height="42" fill="none" stroke="#0284C7" stroke-width="1.8" />
+        <text x="6" y="14" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+          This document defines the high-level functional and safety requirements for the
+        </text>
+        <text x="6" y="27" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+          next-generation Automated Driving Domain Controller (ADDC). The system interfaces
+        </text>
+        <text x="6" y="40" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+          with long-range LiDAR, stereoscopic front cameras, and high-bandwidth radar clusters.
+        </text>
+      </g>
+
+      <!-- Bounding Box #5: 2. Functional Safety & Performance Requirements -->
+      <g transform="translate(40, 215)">
+        <rect x="-4" y="-5" width="46" height="12" rx="2" fill="#0284C7" />
+        <text x="19" y="4" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#5 text</text>
+        <rect width="335" height="22" fill="none" stroke="#0284C7" stroke-width="1.8" />
+        <text x="6" y="16" font-family="system-ui, sans-serif" font-size="13.5" font-weight="700" fill="#0F172A">
+          2. Functional Safety &amp; Performance Requirements
+        </text>
+      </g>
+
+      <!-- Requirements Spec Section (Bordered table/group) -->
+      <g transform="translate(40, 255)">
+        <rect width="530" height="185" rx="3" fill="none" stroke="#E2E8F0" stroke-width="1" />
+
+        <!-- Requirement 1 (REQ-SYS-101) -->
+        <g transform="translate(10, 15)">
+          <rect x="-4" y="-6" width="46" height="12" rx="2" fill="#0284C7" />
+          <text x="19" y="3" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#7 text</text>
+          <rect width="480" height="20" fill="none" stroke="#0284C7" stroke-width="1.8" />
+          <text x="6" y="14" font-family="system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#0F172A">
+            The domain controller shall process synchronized camera and radar frames within 40 ms of reception.
+          </text>
+        </g>
+
+        <!-- Requirement 2 (REQ-SYS-102) -->
+        <g transform="translate(10, 60)">
+          <rect x="-4" y="-6" width="46" height="12" rx="2" fill="#0284C7" />
+          <text x="19" y="3" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#9 text</text>
+          <rect width="485" height="20" fill="none" stroke="#0284C7" stroke-width="1.8" />
+          <text x="6" y="14" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#0F172A">
+            Under degraded optical visibility (&lt; 20 m), the system shall trigger acoustic driver takeover alerts within 150 ms.
+          </text>
+        </g>
+
+        <!-- Requirement 3 (REQ-SYS-103) -->
+        <g transform="translate(10, 105)">
+          <rect x="-4" y="-6" width="46" height="12" rx="2" fill="#0284C7" />
+          <text x="19" y="3" font-family="monospace" font-size="7" font-weight="700" fill="#FFFFFF" text-anchor="middle">#11 text</text>
+          <rect width="440" height="20" fill="none" stroke="#0284C7" stroke-width="1.8" />
+          <text x="6" y="14" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#0F172A">
+            The microcontroller diagnostic watchdog shall achieve ASIL-D single-point fault metric &gt;= 99.0%.
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- RIGHT SIDEBAR: Triage, Properties & ISO 26262 ASIL Ratings -->
+  <g transform="translate(990, 140)">
+    <rect width="290" height="550" fill="url(#sidebarGrad)" stroke="#1E293B" stroke-width="1" />
+
+    <!-- Current Block Inspector Card -->
+    <g transform="translate(14, 14)">
+      <rect width="262" height="110" rx="6" fill="#0C131F" stroke="#1E293B" stroke-width="1" />
+      
+      <text x="12" y="22" font-family="monospace" font-size="11" font-weight="700" fill="#FFFFFF">Block #1</text>
+      <rect x="74" y="10" width="34" height="16" rx="3" fill="#E11D48" />
+      <text x="91" y="22" font-family="monospace" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle">Title</text>
+      <rect x="114" y="10" width="16" height="16" rx="3" fill="#F59E0B" />
+      <text x="122" y="22" font-family="monospace" font-size="9" font-weight="700" fill="#000000" text-anchor="middle">U</text>
+
+      <text x="12" y="44" font-family="system-ui, sans-serif" font-size="9" fill="#64748B">Heading Level: H2</text>
+
+      <text x="12" y="66" font-family="system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#F8FAFC">
+        Automated Driving Domain Controller
+      </text>
+      <text x="12" y="80" font-family="system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#F8FAFC">
+        Specification
+      </text>
+
+      <!-- Discard block button -->
+      <g transform="translate(12, 90)">
+        <rect width="238" height="24" rx="4" fill="#881337" fill-opacity="0.2" stroke="#E11D48" stroke-width="1" />
+        <text x="119" y="16" font-family="system-ui, sans-serif" font-size="10" font-weight="500" fill="#FDA4AF" text-anchor="middle">
+          &#128465; Discard Block
+        </text>
+      </g>
+    </g>
+
+    <!-- SYSTEMS ENGINEERING TRIAGE -->
+    <g transform="translate(14, 150)">
+      <path d="M 4 12 L 8 4 L 14 4 L 10 10 L 15 10 L 6 22 L 8 13 Z" fill="#F59E0B" />
+      <text x="22" y="15" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8FAFC">
+        Systems Engineering Triage
+      </text>
+
+      <!-- Fast Classification -->
+      <text x="4" y="38" font-family="monospace" font-size="9" font-weight="600" fill="#64748B" letter-spacing="0.3">
+        FAST CLASSIFICATION (H / R / I)
+      </text>
+
+      <g transform="translate(0, 48)">
+        <rect width="76" height="26" rx="4" fill="#881337" stroke="#E11D48" stroke-width="1.2" />
+        <text x="38" y="17" font-family="monospace" font-size="9.5" font-weight="700" fill="#FDA4AF" text-anchor="middle">[H] Heading</text>
+
+        <rect x="84" width="76" height="26" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="122" y="17" font-family="monospace" font-size="9.5" fill="#94A3B8" text-anchor="middle">[R] Req</text>
+
+        <rect x="168" width="76" height="26" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="206" y="17" font-family="monospace" font-size="9.5" fill="#94A3B8" text-anchor="middle">[I] Info</text>
+      </g>
+
+      <!-- ISO 26262 ASIL Rating -->
+      <text x="4" y="100" font-family="monospace" font-size="9" font-weight="600" fill="#64748B" letter-spacing="0.3">
+        ISO 26262 ASIL RATING
+      </text>
+
+      <g transform="translate(0, 110)">
+        <rect width="36" height="22" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="18" y="15" font-family="monospace" font-size="8" fill="#94A3B8" text-anchor="middle">N/A</text>
+
+        <rect x="42" width="36" height="22" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="60" y="15" font-family="monospace" font-size="8" fill="#94A3B8" text-anchor="middle">QM</text>
+
+        <rect x="84" width="46" height="22" rx="3" fill="#581C87" fill-opacity="0.4" stroke="#7C3AED" stroke-width="1" />
+        <text x="107" y="15" font-family="monospace" font-size="8" fill="#C4B5FD" text-anchor="middle">ASIL A</text>
+
+        <rect x="136" width="46" height="22" rx="3" fill="#581C87" fill-opacity="0.4" stroke="#7C3AED" stroke-width="1" />
+        <text x="159" y="15" font-family="monospace" font-size="8" fill="#C4B5FD" text-anchor="middle">ASIL B</text>
+
+        <rect x="188" width="46" height="22" rx="3" fill="#581C87" fill-opacity="0.4" stroke="#7C3AED" stroke-width="1" />
+        <text x="211" y="15" font-family="monospace" font-size="8" fill="#C4B5FD" text-anchor="middle">ASIL C</text>
+
+        <!-- ASIL D HIGHLIGHTED -->
+        <rect x="240" width="46" height="22" rx="3" fill="#701A75" stroke="#E879F9" stroke-width="1.5" />
+        <text x="263" y="15" font-family="monospace" font-size="8" font-weight="700" fill="#FDF4FF" text-anchor="middle">ASIL D</text>
+      </g>
+
+      <!-- Discipline Allocation -->
+      <text x="4" y="155" font-family="monospace" font-size="9" font-weight="600" fill="#64748B" letter-spacing="0.3">
+        DISCIPLINE ALLOCATION (MULTI-SELECT)
+      </text>
+
+      <g transform="translate(0, 166)">
+        <rect width="60" height="20" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="30" y="14" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">System</text>
+
+        <rect x="66" width="60" height="20" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="96" y="14" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">Software</text>
+
+        <rect x="132" width="60" height="20" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="162" y="14" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">Hardware</text>
+
+        <rect x="198" width="55" height="20" rx="3" fill="#0C4A6E" stroke="#0284C7" stroke-width="1" />
+        <text x="225" y="14" font-family="system-ui, sans-serif" font-size="8.5" font-weight="600" fill="#38BDF8" text-anchor="middle">Safety</text>
+      </g>
+
+      <g transform="translate(0, 192)">
+        <rect width="70" height="20" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="35" y="14" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">Mechanical</text>
+
+        <rect x="76" width="85" height="20" rx="3" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="118" y="14" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">Cybersecurity</text>
+      </g>
+
+      <!-- Change Type Section -->
+      <text x="4" y="245" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8FAFC">
+        Actions
+      </text>
+      <text x="4" y="270" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8">Change Type</text>
+
+      <g transform="translate(0, 280)">
+        <rect width="125" height="32" rx="5" fill="#1E293B" stroke="#334155" stroke-width="1" />
+        <text x="62" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#E2E8F0" text-anchor="middle">Text</text>
+
+        <rect x="135" width="125" height="32" rx="5" fill="#E11D48" />
+        <text x="197" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Title</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- BOTTOM STATUS BAR -->
+  <rect y="692" width="1280" height="28" fill="#080C14" stroke="#1E293B" stroke-width="1" />
+  
+  <g transform="translate(18, 710)">
+    <rect width="14" height="14" rx="3" fill="#0284C7" />
+    <path d="M 4 5 L 10 5 M 4 7 L 8 7 M 4 9 L 10 9" stroke="#FFFFFF" stroke-width="1.2" />
+    <text x="22" y="10" font-family="monospace" font-size="9" fill="#64748B">
+      Requirements Management Studio v1.2.0 &#8211; Enterprise Requirements Engineering Pipeline
+    </text>
+  </g>
+
+  <g transform="translate(680, 710)">
+    <text x="0" y="10" font-family="monospace" font-size="9" fill="#64748B">
+      Target: Siemens Polarion ALM / Requirements Management / ReqIFZ
+    </text>
+    <circle cx="410" cy="7" r="3" fill="#10B981" />
+    <text x="420" y="10" font-family="monospace" font-size="9" font-weight="600" fill="#34D399">
+      Zero External Telemetry
+    </text>
+  </g>
+</svg>

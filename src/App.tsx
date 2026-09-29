@@ -1,9 +1,7 @@
 import { motion, useSpring, useMotionValue, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, Briefcase, Boxes, Compass, ExternalLink, Home, Lock, MoreVertical } from "lucide-react";
+import { ArrowRight, Box as BoxIcon, Cpu, Workflow, Zap, Banknote, Clock, Database, LineChart, Mail, Menu, X, Wand2, Settings, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, CheckCircle2, User, Sparkles, Network, Linkedin, Bot, Search, Layers, RefreshCw, FileText, FileCheck, Briefcase, Boxes, Compass, ExternalLink, Home, Lock, MoreVertical } from "lucide-react";
 import { useRef, useMemo, Suspense, useEffect, useState } from "react";
-import { KiraDemo, ScarDemo, RoddsDemo, ApolloDemo } from "./components/InteractiveDemos";
-
-import { ApolloProductPage } from "./pages/ApolloProductPage";
+import { PrismProductPage } from "./PrismProductPage";
 
 // --- STYLISH SYSTEMS CONSTELLATION ---
 
@@ -51,6 +49,7 @@ function WorkflowConstellation() {
       const dpr = window.devicePixelRatio || 1;
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
 
@@ -311,6 +310,7 @@ function EstimatorGrid() {
       const dpr = window.devicePixelRatio || 1;
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
 
@@ -859,206 +859,82 @@ function ProcessItem({
 
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<"home" | "apollo">("home");
-  const [heroIndex, setHeroIndex] = useState(0);
+  const [currentView, setCurrentView] = useState<"home" | "prism">(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#prism") {
+      return "prism";
+    }
+    return "home";
+  });
 
-  // Synchronize state with URL on initial load and keep both path/hash/query updated
   useEffect(() => {
-    const handleUrlChange = () => {
-      const path = window.location.pathname;
-      const hash = window.location.hash;
-      const search = window.location.search;
-      if (
-        path === "/apollo" || 
-        hash === "#/apollo" || 
-        hash === "#apollo" || 
-        search.includes("view=apollo") || 
-        search.includes("page=apollo")
-      ) {
-        setCurrentView("apollo");
+    const handleHashChange = () => {
+      if (window.location.hash === "#prism") {
+        setCurrentView("prism");
       } else {
         setCurrentView("home");
       }
     };
-
-    // Run once on load to detect deep link
-    handleUrlChange();
-
-    // Listen to manual browser navigation (back, forward, hash links)
-    window.addEventListener("popstate", handleUrlChange);
-    window.addEventListener("hashchange", handleUrlChange);
-    return () => {
-      window.removeEventListener("popstate", handleUrlChange);
-      window.removeEventListener("hashchange", handleUrlChange);
-    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // Update both standard URL path and Hash for foolproof link sharing
-  useEffect(() => {
-    const targetPath = currentView === "apollo" ? "/apollo" : "/";
-    const targetHash = currentView === "apollo" ? "#/apollo" : "";
-    
-    // Check if URL is already synchronized to prevent redundant history entries
-    if (window.location.pathname !== targetPath) {
-      try {
-        window.history.pushState({ view: currentView }, "", targetPath);
-      } catch (err) {
-        // Fallback for sandboxed iframes that block modifying the outer frame pathname
-        if (window.location.hash !== targetHash) {
-          window.location.hash = targetHash;
-        }
-      }
-    }
-  }, [currentView]);
+  const navigateToPrism = () => {
+    window.location.hash = "#prism";
+    setCurrentView("prism");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  useEffect(() => {
-    if (currentView !== "home") return;
-    const timer = setTimeout(() => {
-      setHeroIndex(prev => (prev + 1) % 2);
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, [currentView, heroIndex]);
+  const navigateToHome = () => {
+    window.location.hash = "";
+    setCurrentView("home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  if (currentView === "apollo") {
-    return (
-      <div className="relative min-h-screen selection:bg-teal/20 selection:text-teal bg-cream text-graphite font-sans antialiased">
-        <Navbar isApollo={true} onNavHome={() => setCurrentView("home")} onExploreApollo={() => setCurrentView("apollo")} />
-        <ApolloProductPage onBack={() => setCurrentView("home")} />
-      </div>
-    );
+  if (currentView === "prism") {
+    return <PrismProductPage onBack={navigateToHome} />;
   }
 
   return (
     <div className="relative min-h-screen selection:bg-teal/20 selection:text-teal bg-cream text-graphite font-sans antialiased">
-      <Navbar onExploreApollo={() => setCurrentView("apollo")} />
+      <Navbar onSelectPrism={navigateToPrism} />
       
       <main className="relative">
         {/* HERO SECTION */}
         <section id="hero-section" className="relative min-h-screen flex flex-col justify-center px-6 md:px-24 pt-32 pb-20 overflow-hidden">
-          {/* Background Canvas - Changed to pointer-events-auto to capture mouse move */}
+          {/* Background Canvas - Captures mouse move */}
           <div className="absolute inset-0 z-0">
             <WorkflowConstellation />
           </div>
 
-          <AnimatePresence mode="wait">
-            {heroIndex === 0 ? (
-              <motion.div
-                key="orcin-hero"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-3xl mx-auto relative z-10 pointer-events-none text-center px-4"
+          <motion.div
+            key="orcin-hero"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl mx-auto relative z-10 pointer-events-none text-center px-4"
+          >
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif-display font-extrabold tracking-tight leading-[1.1] mb-6 text-graphite text-balance">
+              Eliminate <br />
+              operational costs with <br />
+              <span className="text-teal italic">intelligent workflows.</span>
+            </h1>
+            
+            <p className="text-base md:text-lg text-slate/75 font-sans font-light max-w-xl mx-auto leading-relaxed mb-10 text-balance">
+              We design AI-powered operational systems that automate repetitive work, eliminate workflow friction, and help businesses operate with greater speed, clarity, and efficiency.
+            </p>
+            
+            <div className="flex justify-center pointer-events-auto">
+              <motion.button 
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.94 }}
+                onClick={() => document.getElementById("estimator")?.scrollIntoView({ behavior: "smooth" })}
+                className="group bg-graphite text-ivory px-8 py-4 rounded-md font-heading text-xs tracking-widest hover:bg-teal hover:shadow-xl transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer border-none"
               >
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif-display font-extrabold tracking-tight leading-[1.1] mb-6 text-graphite text-balance">
-                  Eliminate <br />
-                  operational costs with <br />
-                  <span className="text-teal italic">intelligent workflows.</span>
-                </h1>
-                
-                <p className="text-base md:text-lg text-slate/75 font-sans font-light max-w-xl mx-auto leading-relaxed mb-10 text-balance">
-                  We design AI-powered operational systems that automate repetitive work, eliminate workflow friction, and help businesses operate with greater speed, clarity, and efficiency.
-                </p>
-                
-                <div className="flex justify-center pointer-events-auto">
-                  <motion.button 
-                    whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.94 }}
-                    onClick={() => document.getElementById("estimator")?.scrollIntoView({ behavior: "smooth" })}
-                    className="group bg-graphite text-ivory px-8 py-4 rounded-md font-heading text-xs tracking-widest hover:bg-teal hover:shadow-xl transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer border-none"
-                  >
-                    START SAVING
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="apollo-hero"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-2xl mx-auto relative z-10 pointer-events-auto text-center px-4 w-full"
-              >
-                <div className="bg-white/90 backdrop-blur-lg border border-graphite/5 rounded-[2.5rem] p-6 sm:p-8 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_-10px_rgba(0,0,0,0.09)] transition-all duration-500 overflow-hidden flex flex-col gap-6">
-                  
-                  {/* Text Details ABOVE the image now */}
-                  <div className="flex flex-col items-center">
-                    <div className="flex justify-center mb-3">
-                      <span className="font-mono text-[9px] tracking-[0.3em] font-semibold text-teal uppercase bg-teal/5 px-3 py-1 rounded-full border border-teal/10">
-                         NEW PRODUCT
-                      </span>
-                    </div>
-
-                    <h1 className="text-3xl sm:text-5xl font-space-grotesk font-bold tracking-[0.25em] text-graphite uppercase mb-2" style={{ letterSpacing: "0.25em" }}>
-                      APOLLO
-                    </h1>
-
-                    <h2 className="text-lg sm:text-xl font-serif-display font-bold tracking-tight text-slate/80 text-balance mb-4">
-                      Define Competencies. <br className="sm:hidden" /> <span className="text-teal italic">AI Builds Capabilities.</span>
-                    </h2>
-
-                    <p className="text-xs sm:text-sm text-slate/75 font-sans font-light max-w-lg leading-relaxed text-balance mb-0">
-                      An AI-native competency development platform. Reduce training overhead and accelerate workforce readiness through personalized, real-time modules.
-                    </p>
-                  </div>
-
-                  {/* Mockup representing the Apollo screen in the screenshot */}
-                  <div className="flex justify-center items-center w-full relative aspect-[4/3] sm:aspect-[16/9] max-h-[40vh] bg-[#FAF9F5]/30 rounded-[2rem] overflow-hidden group">
-                    <img
-                      src="/apollo-mockup.png"
-                      alt="Apollo Interface Mockup"
-                      className="w-full h-full object-cover transform-gpu group-hover:-translate-y-2 transition-transform duration-500 animate-pan-image"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        if (e.currentTarget.nextElementSibling) {
-                           (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
-                        }
-                      }}
-                    />
-                    
-                    {/* Fallback CSS Mockup if the image is not uploaded */}
-                    <div className="hidden w-full h-full max-w-[280px] sm:max-w-[320px] bg-white rounded-[2.5rem] p-2 sm:p-2.5 border-[2px] border-graphite/5 shadow-[0_0_0_8px_white,0_20px_40px_-10px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(0,0,0,0.05)] flex-shrink-0 mx-auto transform-gpu hover:-translate-y-2 transition-transform duration-500 relative flex-col" style={{ display: 'none' }}>
-                      <div className="flex-1 w-full bg-[#FAF9F5] rounded-[2rem] overflow-hidden relative border border-graphite/10 flex flex-col items-center justify-center p-6 text-center">
-                        <div className="font-space-grotesk font-bold text-2xl tracking-widest text-graphite mb-4">APOLLO</div>
-                        <p className="text-xs text-graphite/50 mb-8">Please upload your image to the public folder as <br/> <code className="bg-graphite/5 px-1 py-0.5 rounded text-teal">apollo-mockup.png</code></p>
-                        <div className="w-full space-y-3">
-                           <div className="h-16 rounded-xl bg-white shadow-sm border border-graphite/5 w-full"></div>
-                           <div className="h-16 rounded-xl bg-white shadow-sm border border-graphite/5 w-full"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-center mt-2">
-                    <motion.button 
-                      whileHover={{ scale: 1.06, backgroundColor: "#3a6d6d" }}
-                      whileTap={{ scale: 0.94 }}
-                      onClick={() => setCurrentView("apollo")}
-                      className="group bg-teal font-sans text-white px-8 py-3.5 rounded-full font-heading text-xs tracking-widest hover:shadow-2xl transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer border-none"
-                    >
-                      EXPLORE APOLLO
-                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
-                  </div>
-
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          
-          {/* Carousel Indicators */}
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-20">
-             <button 
-                onClick={() => setHeroIndex(0)}
-                className={`w-12 h-1 rounded-full transition-all ${heroIndex === 0 ? "bg-teal" : "bg-graphite/20 hover:bg-graphite/40"}`}
-             />
-             <button 
-                onClick={() => setHeroIndex(1)}
-                className={`w-12 h-1 rounded-full transition-all ${heroIndex === 1 ? "bg-teal" : "bg-graphite/20 hover:bg-graphite/40"}`}
-             />
-          </div>
+                START SAVING
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+            </div>
+          </motion.div>
         </section>
 
         {/* PROGRESSIVE STORY SECTION */}
@@ -1068,7 +944,7 @@ export default function App() {
         <ServicesSection />
 
         {/* OUR WORK SECTION */}
-        <WorkSection onExploreApollo={() => setCurrentView("apollo")} />
+        <WorkSection onSelectPrism={navigateToPrism} />
 
         {/* PROCESS SECTION */}
         <ProcessSection />
@@ -1114,10 +990,14 @@ const TEAM_MEMBERS = [
   }
 ];
 
+// Toggle to activate/deactivate the Team section (set to true to reactivate)
+const SHOW_TEAM_SECTION = false;
+
 function ContactSection() {
   const [activeTeamIdx, setActiveTeamIdx] = useState(0);
 
   useEffect(() => {
+    if (!SHOW_TEAM_SECTION) return;
     const timer = setInterval(() => {
       setActiveTeamIdx((prev) => (prev + 1) % TEAM_MEMBERS.length);
     }, 5500);
@@ -1132,25 +1012,25 @@ function ContactSection() {
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,#4B7B7B,transparent)] blur-3xl translate-y-1/2" />
       </div>
 
-      <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div className={`max-w-7xl mx-auto w-full relative z-10 ${SHOW_TEAM_SECTION ? "grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center" : "flex flex-col items-center text-center max-w-3xl"}`}>
         {/* Left Column: Contact info */}
-        <div className="flex flex-col text-center lg:text-left items-center lg:items-start select-none">
+        <div className={`flex flex-col ${SHOW_TEAM_SECTION ? "text-center lg:text-left items-center lg:items-start" : "text-center items-center"} select-none`}>
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="w-full flex flex-col items-center lg:items-start"
+            className={`w-full flex flex-col ${SHOW_TEAM_SECTION ? "items-center lg:items-start" : "items-center"}`}
           >
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-serif-display font-extrabold mb-6 text-ivory tracking-tight leading-tight">
               Ready to <span className="italic text-teal/80 block lg:inline">Synchronize?</span>
             </h2>
             
-            <p className="text-ivory/50 mb-12 max-w-xl text-center lg:text-left text-base md:text-lg font-light leading-relaxed font-sans">
+            <p className={`text-ivory/50 mb-12 max-w-xl ${SHOW_TEAM_SECTION ? "text-center lg:text-left" : "text-center"} text-base md:text-lg font-light leading-relaxed font-sans`}>
               Our limited capacity ensures deep integration with your engineering leadership. Reach out today to schedule an architecture preview and discuss your operational roadmap.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 w-full sm:w-auto">
+            <div className={`flex flex-col sm:flex-row items-center ${SHOW_TEAM_SECTION ? "justify-center lg:justify-start" : "justify-center"} gap-5 w-full sm:w-auto`}>
               <a 
                 href="mailto:orcin.aistudio@gmail.com" 
                 className="w-full sm:w-auto inline-flex items-center justify-center bg-ivory text-graphite px-10 py-5 rounded-md font-heading font-bold tracking-widest text-xs hover:bg-teal hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl text-center border-none cursor-pointer"
@@ -1168,7 +1048,8 @@ function ContactSection() {
           </motion.div>
         </div>
 
-        {/* Right Column: Team Carousel */}
+        {/* Right Column: Team Carousel (Deactivated for now, can be reactivated by setting SHOW_TEAM_SECTION = true) */}
+        {SHOW_TEAM_SECTION && (
         <div className="w-full flex flex-col items-center">
           <div className="w-full max-w-[420px] flex justify-between items-center mb-6 select-none">
             <span className="font-serif-display text-xl text-teal font-extrabold italic flex items-center gap-2">
@@ -1272,28 +1153,29 @@ function ContactSection() {
             </AnimatePresence>
           </div>
         </div>
+        )}
       </div>
     </section>
   );
 }
 
-function Navbar({ onExploreApollo, onNavHome, isApollo = false }: { onExploreApollo?: () => void, onNavHome?: () => void, isApollo?: boolean }) {
+function Navbar({ onSelectPrism }: { onSelectPrism?: () => void }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
 
+  const handlePrismClick = () => {
+    setProductsOpen(false);
+    setMobileMenuOpen(false);
+    if (onSelectPrism) {
+      onSelectPrism();
+    } else {
+      window.location.hash = "#prism";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const handleScroll = (id: string) => {
     setMobileMenuOpen(false);
-    
-    if (isApollo && onNavHome) {
-      onNavHome();
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 100);
-      return;
-    }
     
     // A small timeout ensures that the state update (closing the menu) doesn't interrupt or cancel
     // the smooth scrolling animation on mobile screens due to immediate re-renders/layout shifts.
@@ -1352,25 +1234,38 @@ function Navbar({ onExploreApollo, onNavHome, isApollo = false }: { onExploreApo
                 <span className={`absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left transform transition-transform duration-300 ${productsOpen ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
               </motion.button>
               
-              <div className={`absolute top-full -left-2 pt-4 w-48 transition-all duration-300 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}>
+              <div className={`absolute top-full -left-2 pt-4 w-56 transition-all duration-300 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}>
                 <div className="bg-white border border-graphite/10 rounded-xl shadow-xl flex flex-col overflow-hidden">
-                  <div className="p-2">
-                    <motion.button 
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => {
-                        setProductsOpen(false);
-                        if (onExploreApollo) {
-                          onExploreApollo();
-                        } else if (isApollo && onNavHome) {
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
-                      }} 
+                  <div className="p-2 flex flex-col gap-1">
+                    {/* PRISM (before Lumina) */}
+                    <button
+                      type="button"
+                      onClick={handlePrismClick}
                       className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 transition-all cursor-pointer w-full group/item"
                     >
-                      <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors">APOLLO</span>
+                      <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors flex items-center gap-1.5">
+                        PRISM (PDF2ReqIf)
+                        <ArrowRight size={11} className="opacity-70 group-hover/item:translate-x-0.5 transition-transform" />
+                      </span>
+                      <span className="bg-teal/10 text-teal text-[8px] px-1.5 py-0.5 rounded-sm tracking-wide border border-teal/20 group-hover/item:bg-teal group-hover/item:text-white transition-colors">
+                        ENTERPRISE
+                      </span>
+                    </button>
+
+                    {/* LUMINA */}
+                    <motion.a 
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      href="https://lumina-chat-flame.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 transition-all cursor-pointer w-full group/item"
+                    >
+                      <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors flex items-center gap-1">
+                        LUMINA <ExternalLink size={10} className="opacity-70" />
+                      </span>
                       <span className="bg-teal/10 text-teal text-[8px] px-1.5 py-0.5 rounded-sm tracking-wide border border-teal/20 group-hover/item:bg-teal group-hover/item:text-white transition-colors">NEW</span>
-                    </motion.button>
+                    </motion.a>
                   </div>
                 </div>
               </div>
@@ -1419,18 +1314,27 @@ function Navbar({ onExploreApollo, onNavHome, isApollo = false }: { onExploreApo
             >
               <div className="flex flex-col mb-1 pb-2 border-b border-graphite/5">
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] font-medium text-slate/40 px-4 py-2">PRODUCTS</span>
-                {onExploreApollo && (
-                  <button
-                    onClick={() => {
-                       setMobileMenuOpen(false);
-                       onExploreApollo();
-                    }}
-                    className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-teal active:bg-teal/10 px-6 py-3 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between touch-manipulation"
-                  >
-                    APOLLO
-                    <span className="bg-teal/10 text-teal text-[8px] px-2 py-0.5 rounded-sm tracking-wide border border-teal/20">NEW</span>
-                  </button>
-                )}
+                
+                {/* PRISM (before Lumina) */}
+                <button
+                  type="button"
+                  onClick={handlePrismClick}
+                  className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-teal active:bg-teal/10 px-6 py-3 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between touch-manipulation"
+                >
+                  PRISM (PDF2ReqIf)
+                  <span className="bg-teal/10 text-teal text-[8px] px-2 py-0.5 rounded-sm tracking-wide border border-teal/20">ENTERPRISE</span>
+                </button>
+
+                {/* LUMINA */}
+                <a
+                  href="https://lumina-chat-flame.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-teal active:bg-teal/10 px-6 py-3 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between touch-manipulation"
+                >
+                  LUMINA
+                  <span className="bg-teal/10 text-teal text-[8px] px-2 py-0.5 rounded-sm tracking-wide border border-teal/20">NEW</span>
+                </a>
               </div>
               
               {["Services", "Work", "Process"].map(item => (
@@ -1664,53 +1568,54 @@ function ServicesSection() {
 
 // --- OUR WORK SECTION ---
 
-const PROJECTS = [
+interface ProjectMetric {
+  label: string;
+  value: string;
+}
+
+interface Project {
+  id: string;
+  name: string;
+  tagline: string;
+  category: string;
+  shortDesc: string;
+  image: string;
+  externalUrl?: string | null;
+  statusBadge?: string;
+  targetSystems?: string;
+  metrics: ProjectMetric[];
+}
+
+const PROJECTS: Project[] = [
   {
-    title: "APOLLO — AI-Native Workforce Development Platform",
-    category: "AI Workforce Development",
-    description: "Apollo is an AI-native competency development platform that helps organizations identify skill gaps, accelerate workforce readiness, and build critical capabilities faster. Managers define the competencies their teams need, and Apollo automatically generates assessments, personalized learning experiences, and continuous development pathways tailored to each employee. With real-time competency tracking and an always-on AI copilot, Apollo enables organizations to reduce training effort, improve learning effectiveness, and ensure teams are prepared for evolving business and industry demands.",
-    demoComponent: ApolloDemo,
-    externalUrl: "https://apollo-by-orcin.vercel.app",
+    id: "prism",
+    name: "PRISM (PDF2ReqIf)",
+    tagline: "Requirements Interchange Pipeline",
+    category: "Systems Engineering",
+    shortDesc: "Transforms complex engineering PDF specifications into structured, standards-compliant requirements for IBM DOORS and Siemens Polarion with zero data degradation.",
+    image: "/prism-mockup.svg",
+    externalUrl: null, // No link button for now
+    statusBadge: "Enterprise In Production",
+    targetSystems: "Target: IBM DOORS • Polarion ALM • ReqIFz",
     metrics: [
-      { label: "Training Reduction", value: "60%", desc: "Directly automates curriculum structuring and continuous assessment loops." },
-      { label: "Evaluation Velocity", value: "10x", desc: "Instantly auto-generates rigorous evaluation rubrics per team competency." },
-      { label: "Organization Readiness", value: "92%", desc: "Accelerates checkout speed and guarantees on-the-job verification benchmarks." }
+      { label: "Extraction", value: "99.8%" },
+      { label: "Interchange", value: "ReqIF 1.2" },
+      { label: "Compliance", value: "ASIL-D" }
     ]
   },
   {
-    title: "KIRA — Knowledge Integrated Requirement Assistant",
-    category: "Enterprise Data Triage",
-    description: "An enterprise-grade cognitive ingestion and intelligent data management assistant. KIRA automates the front end of complex project lifecycles by parsing unstructured, multi-page technical specification documents—including unformatted text, dense tables, and embedded graphics. The engine automatically categorizes and routes line-item tasks to their respective operational domains. By executing a secure Retrieval-Augmented Generation (RAG) loop against your internal legacy database, KIRA instantly cross-references new client requests with historical engineering data, ensuring your team never wastes resources recreating an existing solution.",
-    demoLink: "Explore the KIRA Interactive Workspace →",
-    demoComponent: KiraDemo,
+    id: "lumina",
+    name: "Lumina",
+    tagline: "Multimodal Agentic RAG",
+    category: "Cognitive Knowledge Engine",
+    shortDesc: "Unifies documents, audio, and databases into a multimodal operational brain, extracting grounded answers with pinpoint source citations.",
+    image: "/lumina-mockup.svg",
+    externalUrl: "https://lumina-chat-flame.vercel.app/",
+    statusBadge: "Live Production App",
     metrics: [
-      { label: "Triage Optimization", value: "80%", desc: "Reduces manual review and engineering routing from weeks to hours." },
-      { label: "Extraction Accuracy", value: "95%+", desc: "Exceptionally isolates text context, tables, and complex parameters." },
-      { label: "Search Latency", value: "0ms", desc: "Executes searches across tens of thousands of records simultaneously." }
-    ]
-  },
-  {
-    title: "SCAR — Semantic Comparison Assistant for Requirements",
-    category: "Analytical Data Reconciliation",
-    description: "A high-dimensional analytical data reconciliation and verification engine designed to eliminate institutional data amnesia. SCAR ingests a base file and cross-examines it against massive batches of active documents, contracts, or compliance sheets. Moving entirely past basic keyword matching, the tool utilizes a dual-layer validation protocol consisting of a high-speed FAISS vector index and an LLM contextual layer. The system outputs a side-by-side, color-coded interactive layout mapping text relationships to immediately flag exact duplicates, contextual equivalents written in different words, and hidden regulatory contradictions that present major legal or operational risks.",
-    demoLink: "Launch the SCAR Comparison Sandbox →",
-    demoComponent: ScarDemo,
-    metrics: [
-      { label: "Contradiction Capture", value: "100%", desc: "Uncovers hidden conflicts and non-compliance risks buried in historical documentation." },
-      { label: "Vector Performance", value: "< 1s", desc: "Scans, embeds, and aligns thousands of document pages in milliseconds." },
-      { label: "Contextual Filtering", value: "Dual-Lyr", desc: "Splits relationships: Exact, Contextual, Related, and Contradictory." }
-    ]
-  },
-  {
-    title: "RODDS — Realtime Object Detection and Decision Support",
-    category: "Edge Vision Intelligence",
-    description: "An edge-optimized spatial vision intelligence system built to protect high-stakes physical operational environments. Operating natively on low-latency edge hardware, RODDS processes high-frequency live camera feeds to detect and track multiple target assets simultaneously using persistent IDs and lateral movement analysis. Rather than simply recording data passively, the engine utilizes a kinematic linear regression window to mathematically calculate closing speeds and exact Time-to-Collision (TTC). Detections are filtered through an advanced 6-level threat priority matrix and a consensus-voting decision smoother, delivering ultra-reliable real-time decision support or triggering hard mechanical emergency overrides.",
-    demoLink: "View live RODDS Edge-Inference Logs →",
-    demoComponent: RoddsDemo,
-    metrics: [
-      { label: "mAP @ 50-95 Accuracy", value: "0.420", desc: "Award-winning performance tracking 13 classes in chaotic environments." },
-      { label: "Inference Speedup", value: "2.4x", desc: "INT8 quantization boosts processing speeds from 12.8 FPS to 24.5 FPS natively." },
-      { label: "Threat Matrix Zones", value: "6-Lvl", desc: "Instantly translates tracking variables into critical emergency commands." }
+      { label: "Search", value: "0ms" },
+      { label: "Accuracy", value: "95%+" },
+      { label: "Modalities", value: "4+ Inputs" }
     ]
   }
 ];
@@ -1725,92 +1630,97 @@ function ProjectGridBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
     let width = 0;
     let height = 0;
+    let rafId: number | null = null;
 
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-    };
+    const drawGrid = (w: number, h: number) => {
+      ctx.clearRect(0, 0, w, h);
 
-    const resizeObserver = new ResizeObserver(() => {
-      resize();
-    });
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-    resize();
+      const isMobile = w < 768;
+      const marginX = isMobile ? 24 : 48;
+      const marginY = isMobile ? 24 : 48;
+      const step = isMobile ? 48 : 64;
 
-    let time = 0;
-    const render = () => {
-      time += 1;
-      ctx.clearRect(0, 0, width, height);
-
-      const isMobile = width < 768;
-      const colsCount = isMobile ? 6 : 10;
-      const rowsCount = isMobile ? 6 : 5;
-
-      const marginX = isMobile ? 32 : 60;
-      const marginY = isMobile ? 32 : 60;
-
-      const gridWidth = width - marginX * 2;
-      const gridHeight = height - marginY * 2;
-
-      const colWidth = gridWidth / colsCount;
-      const rowHeight = gridHeight / rowsCount;
-
-      // Coordinate systems grid (checked pattern)
+      // Coordinate systems grid (checked pattern with stationary fixed coordinates)
       ctx.strokeStyle = "rgba(75, 123, 123, 0.12)";
       ctx.lineWidth = 1.0;
-      for (let c = 0; c <= colsCount; c++) {
-        const x = marginX + c * colWidth;
+
+      // Vertical lines anchored to margins
+      for (let x = marginX; x <= w - marginX; x += step) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
+        ctx.lineTo(x, h);
         ctx.stroke();
       }
-      for (let r = 0; r <= rowsCount; r++) {
-        const y = marginY + r * rowHeight;
+
+      // Horizontal lines anchored to margins
+      for (let y = marginY; y <= h - marginY; y += step) {
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
+        ctx.lineTo(w, y);
         ctx.stroke();
       }
 
       // Intersecting nodes grid details (+)
       ctx.fillStyle = "rgba(75, 123, 123, 0.35)";
-      for (let c = 0; c <= colsCount; c++) {
-        for (let r = 0; r <= rowsCount; r++) {
-          const x = marginX + c * colWidth;
-          const y = marginY + r * rowHeight;
+      for (let x = marginX; x <= w - marginX; x += step) {
+        for (let y = marginY; y <= h - marginY; y += step) {
           ctx.fillRect(x - 5, y - 1, 10, 2);
           ctx.fillRect(x - 1, y - 5, 2, 10);
         }
       }
 
-      // Elegant background glowing radial gradient
-      const glowX = width * 0.3 + Math.sin(time * 0.002) * width * 0.1;
-      const glowY = height * 0.5 + Math.cos(time * 0.001) * height * 0.05;
-      const r1 = Math.max(width, height) * 0.45;
+      // Background ambient glowing radial gradient
+      const glowX = w * 0.35;
+      const glowY = h * 0.45;
+      const r1 = Math.max(w, h) * 0.5;
       const grad = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, r1);
       grad.addColorStop(0, "rgba(75, 123, 123, 0.08)");
       grad.addColorStop(1, "rgba(75, 123, 123, 0)");
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, width, height);
-
-      animationFrameId = requestAnimationFrame(render);
+      ctx.fillRect(0, 0, w, h);
     };
 
-    render();
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const newW = Math.round(rect.width);
+      const newH = Math.round(rect.height);
+
+      if (newW === 0 || newH === 0) return;
+      // Skip redundant buffer recreation if dimensions haven't significantly changed
+      if (Math.abs(newW - width) < 4 && Math.abs(newH - height) < 4) return;
+
+      width = newW;
+      height = newH;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      drawGrid(width, height);
+    };
+
+    const handleResize = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(resize);
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+    resize();
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", handleResize);
       resizeObserver.disconnect();
     };
   }, []);
@@ -1822,212 +1732,112 @@ function ProjectGridBackground() {
   );
 }
 
-function WorkSection({ onExploreApollo }: { onExploreApollo?: () => void }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = right/next, -1 = left/prev
-
-  const nextProject = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % PROJECTS.length);
-  };
-
-  const prevProject = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-  };
-
-  const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? "115%" : "-115%",
-    }),
-    center: {
-      x: 0,
-    },
-    exit: (dir: number) => ({
-      x: dir < 0 ? "115%" : "-115%",
-    }),
-  };
-
+function ProductCard({
+  project,
+  onSelectPrism
+}: {
+  project: Project;
+  onSelectPrism?: () => void;
+}) {
   return (
-    <section className="py-24 px-6 md:px-24 bg-[#F3EFEA] text-graphite min-h-[700px] flex flex-col relative overflow-hidden border-b border-graphite/5" id="work">
+    <div className="bg-[#FAF8F5] border border-graphite/10 hover:border-teal/40 rounded-2xl p-5 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative h-full">
+      <div>
+        {/* Title */}
+        <div className="mb-2.5">
+          <h3 className="font-serif-display italic font-bold text-2xl lg:text-3xl text-teal tracking-tight">
+            {project.name}
+          </h3>
+        </div>
+
+        {/* Thumbnail Preview Frame with Static 16:9 Image */}
+        <div className="relative w-full rounded-xl overflow-hidden bg-[#070A0D] border border-graphite/10 mb-3.5 shadow-inner group-hover:border-teal/30 transition-colors duration-300">
+          <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#070A0D]">
+            <img
+              src={project.image}
+              alt={project.name}
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover block transition-all duration-300 group-hover:brightness-[1.03]"
+            />
+          </div>
+        </div>
+
+        {/* Short description */}
+        <p className="text-xs sm:text-sm text-graphite/75 font-sans font-light leading-relaxed mb-4">
+          {project.shortDesc}
+        </p>
+
+        {/* Compact Key Metrics */}
+        <div className="grid grid-cols-3 gap-2 pt-3 border-t border-graphite/10">
+          {project.metrics.map((metric, idx) => (
+            <div
+              key={idx}
+              className="bg-[#F8F6F2] border border-graphite/10 rounded-xl p-2 text-center"
+            >
+              <span className="block font-sans font-bold text-teal text-sm sm:text-base leading-tight">
+                {metric.value}
+              </span>
+              <span className="block font-mono text-[8px] sm:text-[9px] text-graphite/60 uppercase tracking-tight mt-0.5 leading-tight">
+                {metric.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Action CTA Button */}
+      <div className="mt-4 pt-3 border-t border-graphite/5 flex justify-end items-center">
+        {project.externalUrl ? (
+          <a
+            href={project.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0e1317] hover:bg-teal text-white font-sans text-xs sm:text-sm font-semibold py-2.5 px-5 rounded-xl shadow hover:shadow-xl transition-all duration-300 cursor-pointer no-underline"
+          >
+            EXPLORE {project.name.toUpperCase()}
+            <ExternalLink size={13} className="text-teal group-hover:text-white transition-colors" />
+          </a>
+        ) : (
+          <button
+            type="button"
+            onClick={onSelectPrism}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0e1317] hover:bg-teal text-white font-sans text-xs sm:text-sm font-semibold py-2.5 px-5 rounded-xl shadow hover:shadow-xl transition-all duration-300 cursor-pointer border-none"
+          >
+            PRODUCT INFO
+            <ArrowRight size={13} className="text-teal group-hover:text-white transition-colors" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function WorkSection({ onSelectPrism }: { onSelectPrism?: () => void }) {
+  return (
+    <section className="py-12 md:py-16 px-5 sm:px-6 md:px-12 bg-[#F3EFEA] text-graphite flex flex-col relative overflow-hidden border-b border-graphite/5" id="work">
       {/* Visual blueprint checked grid background */}
       <ProjectGridBackground />
 
-      <div className="w-full max-w-7xl mx-auto z-10 relative flex-grow flex flex-col justify-between">
-        
+      <div className="w-full max-w-6xl mx-auto z-10 relative">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center gap-4 mb-4">
-          <div className="flex flex-col items-center gap-2">
-            <h2 className="text-4xl md:text-6xl font-serif-display font-extrabold text-graphite tracking-tight leading-tight mt-2 pb-1 text-balance">
-              Our work in <span className="text-teal font-semibold italic">production.</span>
-            </h2>
-          </div>
+        <div className="flex flex-col items-center text-center gap-1.5 mb-7 md:mb-9">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif-display font-extrabold text-graphite tracking-tight leading-tight pb-0.5 text-balance">
+            Our work in <span className="text-teal font-semibold italic">production.</span>
+          </h2>
+          <p className="text-slate/60 text-xs sm:text-sm font-sans font-light max-w-md mx-auto">
+            Intelligent operational platforms built for real-world enterprise scale.
+          </p>
         </div>
 
-        {/* Carousel Navigation Controls moved to top */}
-        <div className="flex justify-center items-center mb-8 md:mb-12">
-          <div className="flex items-center gap-6">
-            <button 
-              onClick={prevProject} 
-              className="w-12 h-12 rounded-full border border-graphite/10 flex items-center justify-center hover:bg-graphite/5 hover:border-graphite/35 hover:scale-110 active:scale-90 transition-all duration-300 text-graphite cursor-pointer bg-white shadow-md hover:shadow-lg"
-              aria-label="Previous Case Study"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* Little Carousel Dot Steppers */}
-            <div className="flex justify-center items-center gap-2">
-              {PROJECTS.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    if (idx === currentIndex) return;
-                    setDirection(idx > currentIndex ? 1 : -1);
-                    setCurrentIndex(idx);
-                  }}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer hover:scale-y-125 ${idx === currentIndex ? 'bg-teal w-8' : 'bg-graphite/20 w-1.5 hover:bg-graphite/40'}`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            <button 
-              onClick={nextProject} 
-              className="w-12 h-12 rounded-full border border-graphite/10 flex items-center justify-center hover:bg-graphite/5 hover:border-graphite/35 hover:scale-110 active:scale-90 transition-all duration-300 text-graphite cursor-pointer bg-white shadow-md hover:shadow-lg"
-              aria-label="Next Case Study"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
+        {/* Product Showcase Cards: Side by side on Desktop/Tablet, vertical on Mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full items-stretch">
+          {PROJECTS.map((project) => (
+            <ProductCard
+              key={project.id}
+              project={project}
+              onSelectPrism={project.id === "prism" ? onSelectPrism : undefined}
+            />
+          ))}
         </div>
-
-        {/* Carousel Window */}
-        <div className="relative w-full overflow-hidden min-h-[580px]">
-          <AnimatePresence custom={direction} mode="popLayout">
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
-              className="flex flex-col items-stretch bg-white border border-graphite/10 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-[0_24px_50px_rgba(75,123,123,0.06)]"
-            >
-              
-              {/* Product Heading: 100% width */}
-              <div className="w-full flex flex-col gap-1.5 mb-6 select-none shrink-0 border-b border-graphite/5 pb-4">
-                <h3 className="text-2xl md:text-4xl font-heading font-light text-graphite tracking-tight leading-tight flex flex-wrap items-baseline">
-                  {PROJECTS[currentIndex].title.includes(" — ") ? (
-                    <>
-                      <span className="font-serif-display italic font-semibold text-teal text-3xl md:text-5xl tracking-normal mr-2">
-                        {(() => {
-                          const part = PROJECTS[currentIndex].title.split(" — ")[0];
-                          if (part === "KIRA") return "Kira";
-                          if (part === "SCAR") return "Scar";
-                          if (part === "RODDS") return "Rodds";
-                          if (part === "APOLLO") return "Apollo";
-                          return part;
-                        })()}
-                      </span>
-                      <span className="text-graphite/30 mx-2 text-xl font-light select-none">—</span>
-                      <span className="font-heading font-light text-graphite/80 text-xl md:text-2xl ml-1">
-                        {PROJECTS[currentIndex].title.split(" — ")[1]}
-                      </span>
-                    </>
-                  ) : (
-                    PROJECTS[currentIndex].title
-                  )}
-                </h3>
-              </div>
-
-              {/* Sandbox and Metrics section: Flex Row (Desktop), Stacked (Mobile) */}
-              <div className="w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
-                {/* Sandbox environment: more than 70% of the width on desktop */}
-                <div className="w-full lg:w-[73%] flex-shrink-0 relative group">
-                  {/* Browser-Frame with generous heights to easily avoid internal scrolls */}
-                  <div className="relative w-full h-[470px] sm:h-[450px] md:h-[480px] lg:h-[500px] rounded-2xl overflow-hidden bg-[#0a0d10] border border-graphite/10 shadow-[0_32px_64px_-16px_rgba(75,123,123,0.15)] flex flex-col justify-stretch">
-                    {/* Miniature Toolbar */}
-                    {!PROJECTS[currentIndex].title.includes("APOLLO") && (
-                      <div className="h-8 bg-black/40 border-b border-white/5 px-4 flex items-center gap-1.5 pointer-events-none font-bold shrink-0 select-none">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                        <span className="ml-4 font-mono text-[9px] text-white/30 lowercase tracking-wider hidden sm:inline">
-                          sandbox_environment://{PROJECTS[currentIndex].category.toLowerCase().replace(/\s+/g, '_')}_sys
-                        </span>
-                      </div>
-                    )}
-                    
-                    {/* Interactive Component Container */}
-                    <div className={`relative flex-grow ${PROJECTS[currentIndex].title.includes("APOLLO") ? 'h-full' : 'h-[calc(100%-32px)]'}`}>
-                      {(() => {
-                        const DemoComponent = PROJECTS[currentIndex].demoComponent;
-                        return DemoComponent ? <DemoComponent /> : null;
-                      })()}
-                    </div>
-                  </div>
-
-                  {/* Aesthetic offset border lines */}
-                  <div className="absolute -bottom-4 -right-4 w-full h-full border border-teal/10 rounded-2xl -z-10 pointer-events-none translate-x-2 translate-y-2 opacity-30" />
-                </div>
-
-                {/* Vertical metrics sidebar: balance width (less than 30%) displayed vertically */}
-                <div className="flex-grow lg:w-[27%] flex flex-col justify-between gap-4">
-                  {PROJECTS[currentIndex].metrics.map((metric, mIdx) => (
-                    <motion.div 
-                      initial={{ opacity: 0, x: 15 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * mIdx + 0.2 }}
-                      key={mIdx} 
-                      className="bg-[#FDFCFB]/90 backdrop-blur-sm border border-graphite/10 rounded-xl p-4 md:p-5 hover:border-teal/40 hover:bg-[#F3EFEA]/90 transition-all flex flex-col justify-center gap-1 shadow-sm flex-grow"
-                    >
-                      <span className="font-sans text-3xl md:text-4xl font-semibold text-teal tracking-tight whitespace-nowrap">
-                        {metric.value}
-                      </span>
-                      <span className="font-mono text-[9px] font-medium tracking-wider text-graphite/60 uppercase leading-normal">
-                        {metric.label}
-                      </span>
-                      {metric.desc && (
-                        <span className="text-[10px] text-graphite/50 font-sans mt-0.5 leading-tight">
-                          {metric.desc}
-                        </span>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Row 3: Product description details text (100% width) */}
-              <div className="w-full mt-8 border-t border-graphite/5 pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <p className="text-graphite/70 text-base md:text-lg leading-relaxed font-sans font-light max-w-3xl font-light">
-                  {PROJECTS[currentIndex].description}
-                </p>
-                 {PROJECTS[currentIndex].title.includes("APOLLO") && onExploreApollo ? (
-                  <button 
-                    onClick={onExploreApollo}
-                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
-                  >
-                    EXPLORE APOLLO
-                    <ArrowRight size={14} className="text-teal group-hover:translate-x-1 transition-transform" />
-                  </button>
-                ) : PROJECTS[currentIndex].externalUrl && (
-                  <a 
-                    href={PROJECTS[currentIndex].externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 inline-flex items-center gap-2 bg-[#0e1317] hover:bg-black font-sans text-xs sm:text-sm font-semibold text-white px-5 py-3 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
-                  >
-                    Launch Live Demo
-                    <ExternalLink className="w-4 h-4 text-teal" />
-                  </a>
-                )}
-              </div>
-
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
       </div>
     </section>
   );
