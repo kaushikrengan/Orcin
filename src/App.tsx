@@ -1606,16 +1606,16 @@ const PROJECTS: Project[] = [
   {
     id: "lumina",
     name: "Lumina",
-    tagline: "Multimodal Agentic RAG",
-    category: "Cognitive Knowledge Engine",
-    shortDesc: "Unifies documents, audio, and databases into a multimodal operational brain, extracting grounded answers with pinpoint source citations.",
+    tagline: "Enterprise Knowledge Assistant",
+    category: "AI Knowledge Search",
+    shortDesc: "An AI search assistant for your organization. Ask questions in plain English and get instant, accurate answers directly from your company's documents, PDFs, spreadsheets, and recordings—with exact source links so your team never wastes time searching.",
     image: "/lumina-mockup.svg",
     externalUrl: "https://lumina-chat-flame.vercel.app/",
     statusBadge: "Live Production App",
     metrics: [
-      { label: "Search", value: "0ms" },
-      { label: "Accuracy", value: "95%+" },
-      { label: "Modalities", value: "4+ Inputs" }
+      { label: "Search Speed", value: "Instant" },
+      { label: "Answer Accuracy", value: "95%+" },
+      { label: "Supported Files", value: "PDFs & Audio" }
     ]
   }
 ];
