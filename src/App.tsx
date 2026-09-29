@@ -1234,37 +1234,102 @@ function Navbar({ onSelectPrism }: { onSelectPrism?: () => void }) {
                 <span className={`absolute -bottom-0.5 left-3 right-3 h-[2px] bg-teal origin-left transform transition-transform duration-300 ${productsOpen ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
               </motion.button>
               
-              <div className={`absolute top-full -left-2 pt-4 w-56 transition-all duration-300 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}>
+              <div className={`absolute top-full -left-2 pt-4 w-72 transition-all duration-300 ${productsOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}>
                 <div className="bg-white border border-graphite/10 rounded-xl shadow-xl flex flex-col overflow-hidden">
-                  <div className="p-2 flex flex-col gap-1">
-                    {/* PRISM (before Lumina) */}
+                  <div className="p-2 flex flex-col gap-1.5">
+                    {/* PRISM (with 3D Obsidian Prism Logo & Typography) */}
                     <button
                       type="button"
                       onClick={handlePrismClick}
-                      className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 transition-all cursor-pointer w-full group/item"
+                      className="flex justify-between items-center px-3.5 py-2.5 rounded-lg bg-transparent border-none text-left hover:bg-[#FAF8F5] transition-all cursor-pointer w-full group/item"
                     >
-                      <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors flex items-center gap-1.5">
-                        PRISM (PDF2ReqIf)
-                        <ArrowRight size={11} className="opacity-70 group-hover/item:translate-x-0.5 transition-transform" />
-                      </span>
-                      <span className="bg-teal/10 text-teal text-[8px] px-1.5 py-0.5 rounded-sm tracking-wide border border-teal/20 group-hover/item:bg-teal group-hover/item:text-white transition-colors">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        {/* 3D Obsidian Prism Logo */}
+                        <div className="relative w-5 h-5 flex items-center justify-center shrink-0">
+                          <svg viewBox="0 0 32 32" fill="none" className="w-5 h-5 drop-shadow-xs overflow-visible">
+                            <defs>
+                              <linearGradient id="prismNavLeft" x1="15%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#2E353D" />
+                                <stop offset="30%" stopColor="#1C2127" />
+                                <stop offset="70%" stopColor="#0B0D10" />
+                                <stop offset="100%" stopColor="#020304" />
+                              </linearGradient>
+                              <linearGradient id="prismNavRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#20252B" />
+                                <stop offset="40%" stopColor="#121519" />
+                                <stop offset="80%" stopColor="#07080A" />
+                                <stop offset="100%" stopColor="#000000" />
+                              </linearGradient>
+                              <linearGradient id="prismNavSheen" x1="0%" y1="0%" x2="100%" y2="85%">
+                                <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+                                <stop offset="35%" stopColor="#FFFFFF" stopOpacity="0.18" />
+                                <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                              </linearGradient>
+                            </defs>
+                            <ellipse cx="16" cy="29" rx="11" ry="2.5" fill="#000000" opacity="0.22" />
+                            <polygon points="16,4 6,26 16,28" fill="url(#prismNavLeft)" stroke="#0B0D10" strokeWidth="0.5" />
+                            <polygon points="16,4 26,26 16,28" fill="url(#prismNavRight)" stroke="#07080A" strokeWidth="0.5" />
+                            <polygon points="16,4 11,17 16,19" fill="url(#prismNavSheen)" />
+                            <line x1="16" y1="4" x2="16" y2="28" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.95" />
+                            <circle cx="16" cy="4" r="1.4" fill="#FFFFFF" />
+                          </svg>
+                        </div>
+                        <div className="flex items-baseline gap-1.5 min-w-0">
+                          <span className="font-heading font-extrabold text-sm text-[#1A1A1A] group-hover/item:text-[#4B7B7B] transition-colors tracking-tight">
+                            PRISM
+                          </span>
+                          <span className="font-mono font-bold text-[10px] text-[#4B7B7B] tracking-tight">
+                            (PDF2ReqIf)
+                          </span>
+                        </div>
+                      </div>
+                      <span className="bg-[#4B7B7B]/10 text-[#4B7B7B] text-[8px] font-mono font-semibold px-1.5 py-0.5 rounded tracking-wide border border-[#4B7B7B]/20 shrink-0">
                         ENTERPRISE
                       </span>
                     </button>
 
-                    {/* LUMINA */}
+                    {/* LUMINA (with Radiant AI Light Spark Logo & Outfit Typography) */}
                     <motion.a 
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       href="https://lumina-chat-flame.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex justify-between items-center px-4 py-3 rounded-lg bg-transparent border-none text-left hover:bg-teal/5 transition-all cursor-pointer w-full group/item"
+                      className="flex justify-between items-center px-3.5 py-2.5 rounded-lg bg-transparent border-none text-left hover:bg-[#FAF8F5] transition-all cursor-pointer w-full group/item no-underline"
                     >
-                      <span className="font-mono text-[10px] font-medium tracking-[0.1em] text-teal group-hover/item:text-teal-dark transition-colors flex items-center gap-1">
-                        LUMINA <ExternalLink size={10} className="opacity-70" />
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        {/* Radiant Lumina Illumination Star Logo */}
+                        <div className="relative w-5 h-5 flex items-center justify-center shrink-0">
+                          <svg viewBox="0 0 32 32" fill="none" className="w-5 h-5 drop-shadow-xs">
+                            <defs>
+                              <linearGradient id="luminaNavGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#4338CA" />
+                                <stop offset="50%" stopColor="#6366F1" />
+                                <stop offset="100%" stopColor="#8B5CF6" />
+                              </linearGradient>
+                              <radialGradient id="luminaNavGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stopColor="#818CF8" stopOpacity="0.35" />
+                                <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
+                              </radialGradient>
+                            </defs>
+                            <circle cx="16" cy="16" r="14" fill="url(#luminaNavGlow)" />
+                            <path
+                              d="M 16 3 C 16 10.5, 21.5 16, 29 16 C 21.5 16, 16 21.5, 16 29 C 16 21.5, 10.5 16, 3 16 C 10.5 16, 16 10.5, 16 3 Z"
+                              fill="url(#luminaNavGrad)"
+                            />
+                            <circle cx="16" cy="16" r="2.2" fill="#FFFFFF" />
+                          </svg>
+                        </div>
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="font-outfit font-extrabold text-sm text-[#4F46E5] group-hover/item:text-[#6366F1] transition-colors tracking-tight">
+                            Lumina
+                          </span>
+                          <ExternalLink size={10} className="text-[#818CF8] opacity-75 group-hover/item:opacity-100 transition-opacity" />
+                        </div>
+                      </div>
+                      <span className="bg-[#EEF2FF] text-[#4F46E5] text-[8px] font-sans font-semibold px-1.5 py-0.5 rounded tracking-wide border border-[#C7D2FE] shrink-0">
+                        NEW
                       </span>
-                      <span className="bg-teal/10 text-teal text-[8px] px-1.5 py-0.5 rounded-sm tracking-wide border border-teal/20 group-hover/item:bg-teal group-hover/item:text-white transition-colors">NEW</span>
                     </motion.a>
                   </div>
                 </div>
@@ -1312,28 +1377,98 @@ function Navbar({ onSelectPrism }: { onSelectPrism?: () => void }) {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="overflow-hidden md:hidden flex flex-col gap-2 mt-4 pt-4 border-t border-graphite/5"
             >
-              <div className="flex flex-col mb-1 pb-2 border-b border-graphite/5">
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] font-medium text-slate/40 px-4 py-2">PRODUCTS</span>
+              <div className="flex flex-col mb-1 pb-2 border-b border-graphite/5 gap-1">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] font-medium text-slate/40 px-4 py-1.5">PRODUCTS</span>
                 
-                {/* PRISM (before Lumina) */}
+                {/* PRISM (with 3D Obsidian Prism Logo & Typography) */}
                 <button
                   type="button"
                   onClick={handlePrismClick}
-                  className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-teal active:bg-teal/10 px-6 py-3 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between touch-manipulation"
+                  className="px-4 py-2.5 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between active:bg-graphite/5 touch-manipulation rounded-lg"
                 >
-                  PRISM (PDF2ReqIf)
-                  <span className="bg-teal/10 text-teal text-[8px] px-2 py-0.5 rounded-sm tracking-wide border border-teal/20">ENTERPRISE</span>
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="relative w-5 h-5 flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 32 32" fill="none" className="w-5 h-5 drop-shadow-xs overflow-visible">
+                        <defs>
+                          <linearGradient id="prismMobileNavLeft" x1="15%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#2E353D" />
+                            <stop offset="30%" stopColor="#1C2127" />
+                            <stop offset="70%" stopColor="#0B0D10" />
+                            <stop offset="100%" stopColor="#020304" />
+                          </linearGradient>
+                          <linearGradient id="prismMobileNavRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#20252B" />
+                            <stop offset="40%" stopColor="#121519" />
+                            <stop offset="80%" stopColor="#07080A" />
+                            <stop offset="100%" stopColor="#000000" />
+                          </linearGradient>
+                          <linearGradient id="prismMobileNavSheen" x1="0%" y1="0%" x2="100%" y2="85%">
+                            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+                            <stop offset="35%" stopColor="#FFFFFF" stopOpacity="0.18" />
+                            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <ellipse cx="16" cy="29" rx="11" ry="2.5" fill="#000000" opacity="0.22" />
+                        <polygon points="16,4 6,26 16,28" fill="url(#prismMobileNavLeft)" stroke="#0B0D10" strokeWidth="0.5" />
+                        <polygon points="16,4 26,26 16,28" fill="url(#prismMobileNavRight)" stroke="#07080A" strokeWidth="0.5" />
+                        <polygon points="16,4 11,17 16,19" fill="url(#prismMobileNavSheen)" />
+                        <line x1="16" y1="4" x2="16" y2="28" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.95" />
+                        <circle cx="16" cy="4" r="1.4" fill="#FFFFFF" />
+                      </svg>
+                    </div>
+                    <div className="flex items-baseline gap-1.5 min-w-0">
+                      <span className="font-heading font-extrabold text-sm text-[#1A1A1A] tracking-tight">
+                        PRISM
+                      </span>
+                      <span className="font-mono font-bold text-[10px] text-[#4B7B7B] tracking-tight">
+                        (PDF2ReqIf)
+                      </span>
+                    </div>
+                  </div>
+                  <span className="bg-[#4B7B7B]/10 text-[#4B7B7B] text-[8px] font-mono font-semibold px-2 py-0.5 rounded tracking-wide border border-[#4B7B7B]/20 shrink-0">
+                    ENTERPRISE
+                  </span>
                 </button>
 
-                {/* LUMINA */}
+                {/* LUMINA (with Radiant AI Light Spark Logo & Outfit Typography) */}
                 <a
                   href="https://lumina-chat-flame.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-teal active:bg-teal/10 px-6 py-3 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between touch-manipulation"
+                  className="px-4 py-2.5 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between active:bg-graphite/5 touch-manipulation no-underline rounded-lg"
                 >
-                  LUMINA
-                  <span className="bg-teal/10 text-teal text-[8px] px-2 py-0.5 rounded-sm tracking-wide border border-teal/20">NEW</span>
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="relative w-5 h-5 flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 32 32" fill="none" className="w-5 h-5 drop-shadow-xs">
+                        <defs>
+                          <linearGradient id="luminaMobileNavGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#4338CA" />
+                            <stop offset="50%" stopColor="#6366F1" />
+                            <stop offset="100%" stopColor="#8B5CF6" />
+                          </linearGradient>
+                          <radialGradient id="luminaMobileNavGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stopColor="#818CF8" stopOpacity="0.35" />
+                            <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
+                          </radialGradient>
+                        </defs>
+                        <circle cx="16" cy="16" r="14" fill="url(#luminaMobileNavGlow)" />
+                        <path
+                          d="M 16 3 C 16 10.5, 21.5 16, 29 16 C 21.5 16, 16 21.5, 16 29 C 16 21.5, 10.5 16, 3 16 C 10.5 16, 16 10.5, 16 3 Z"
+                          fill="url(#luminaMobileNavGrad)"
+                        />
+                        <circle cx="16" cy="16" r="2.2" fill="#FFFFFF" />
+                      </svg>
+                    </div>
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className="font-outfit font-extrabold text-sm text-[#4F46E5] tracking-tight">
+                        Lumina
+                      </span>
+                      <ExternalLink size={10} className="text-[#818CF8] opacity-75" />
+                    </div>
+                  </div>
+                  <span className="bg-[#EEF2FF] text-[#4F46E5] text-[8px] font-sans font-semibold px-2 py-0.5 rounded tracking-wide border border-[#C7D2FE] shrink-0">
+                    NEW
+                  </span>
                 </a>
               </div>
               
@@ -1600,7 +1735,7 @@ const PROJECTS: Project[] = [
     metrics: [
       { label: "Extraction", value: "99.8%" },
       { label: "Interchange", value: "ReqIF 1.2" },
-      { label: "Compliance", value: "ASIL-D" }
+      { label: "Efforts Saved", value: "80%" }
     ]
   },
   {
@@ -1608,7 +1743,7 @@ const PROJECTS: Project[] = [
     name: "Lumina",
     tagline: "Enterprise Knowledge Assistant",
     category: "AI Knowledge Search",
-    shortDesc: "An AI search assistant for your organization. Ask questions in plain English and get instant, accurate answers directly from your company's documents, PDFs, spreadsheets, and recordings—with exact source links so your team never wastes time searching.",
+    shortDesc: "Instant answers across your organization's files. Instead of wasting hours searching through PDFs, spreadsheets, and meeting recordings, employees can simply ask questions in plain English and get verified answers with exact source links.",
     image: "/lumina-mockup.svg",
     externalUrl: "https://lumina-chat-flame.vercel.app/",
     statusBadge: "Live Production App",
@@ -1744,9 +1879,107 @@ function ProductCard({
       <div>
         {/* Title */}
         <div className="mb-2.5">
-          <h3 className="font-serif-display italic font-bold text-2xl lg:text-3xl text-teal tracking-tight">
-            {project.name}
-          </h3>
+          {project.id === "prism" ? (
+            <h3 className="flex items-center gap-3 tracking-tight flex-wrap">
+              {/* 3D Obsidian Prism Logo Emblem in front of name (Prism only, no light paths) */}
+              <div className="relative w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+                <svg
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-7 h-7 sm:w-8 sm:h-8 drop-shadow-sm overflow-visible"
+                >
+                  <defs>
+                    <linearGradient id="prismOnlyFacetLeft" x1="15%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#2E353D" />
+                      <stop offset="30%" stopColor="#1C2127" />
+                      <stop offset="70%" stopColor="#0B0D10" />
+                      <stop offset="100%" stopColor="#020304" />
+                    </linearGradient>
+                    <linearGradient id="prismOnlyFacetRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#20252B" />
+                      <stop offset="40%" stopColor="#121519" />
+                      <stop offset="80%" stopColor="#07080A" />
+                      <stop offset="100%" stopColor="#000000" />
+                    </linearGradient>
+                    <linearGradient id="prismOnlyFacetSheen" x1="0%" y1="0%" x2="100%" y2="85%">
+                      <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+                      <stop offset="35%" stopColor="#FFFFFF" stopOpacity="0.18" />
+                      <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Soft ground ellipse shadow */}
+                  <ellipse cx="16" cy="29" rx="11" ry="2.5" fill="#000000" opacity="0.22" />
+
+                  {/* 3D Obsidian Prism Body */}
+                  {/* Left Facet */}
+                  <polygon points="16,4 6,26 16,28" fill="url(#prismOnlyFacetLeft)" stroke="#0B0D10" strokeWidth="0.5" />
+                  {/* Right Facet */}
+                  <polygon points="16,4 26,26 16,28" fill="url(#prismOnlyFacetRight)" stroke="#07080A" strokeWidth="0.5" />
+                  {/* Specular Sheen on Left Corner */}
+                  <polygon points="16,4 11,17 16,19" fill="url(#prismOnlyFacetSheen)" />
+
+                  {/* Center Vertical Ridge Gleam */}
+                  <line x1="16" y1="4" x2="16" y2="28" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" opacity="0.95" />
+
+                  {/* Apex Glint Sparkle Star */}
+                  <circle cx="16" cy="4" r="1.4" fill="#FFFFFF" />
+                  <line x1="16" y1="1.8" x2="16" y2="6.2" stroke="#FFFFFF" strokeWidth="0.75" strokeLinecap="round" />
+                  <line x1="13.8" y1="4" x2="18.2" y2="4" stroke="#FFFFFF" strokeWidth="0.75" strokeLinecap="round" />
+                </svg>
+              </div>
+
+              {/* Exact typography & colors from the Prism logo emblem on Prism page */}
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading font-extrabold text-2xl lg:text-3xl tracking-tight text-[#1A1A1A]">
+                  PRISM
+                </span>
+                <span className="font-mono font-bold text-xs sm:text-sm text-[#4B7B7B] tracking-wide">
+                  (PDF2ReqIf)
+                </span>
+              </div>
+            </h3>
+          ) : (
+            <h3 className="flex items-center gap-2.5 tracking-tight flex-wrap">
+              {/* Luminous AI Radiant Spark Emblem */}
+              <div className="relative w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+                <svg
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-7 h-7 sm:w-8 sm:h-8 drop-shadow-xs"
+                >
+                  <defs>
+                    <linearGradient id="luminaEmblemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#4338CA" />
+                      <stop offset="50%" stopColor="#6366F1" />
+                      <stop offset="100%" stopColor="#8B5CF6" />
+                    </linearGradient>
+                    <radialGradient id="luminaAuraGlow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#818CF8" stopOpacity="0.35" />
+                      <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
+                    </radialGradient>
+                  </defs>
+                  {/* Subtle Aura */}
+                  <circle cx="16" cy="16" r="14" fill="url(#luminaAuraGlow)" />
+                  {/* Luminous 4-Point Star Spark */}
+                  <path
+                    d="M 16 3 C 16 10.5, 21.5 16, 29 16 C 21.5 16, 16 21.5, 16 29 C 16 21.5, 10.5 16, 3 16 C 10.5 16, 16 10.5, 16 3 Z"
+                    fill="url(#luminaEmblemGrad)"
+                  />
+                  {/* Brilliant Center Glint */}
+                  <circle cx="16" cy="16" r="2.5" fill="#FFFFFF" />
+                  <circle cx="16" cy="16" r="1" fill="#E0E7FF" />
+                </svg>
+              </div>
+
+              {/* Lumina Brand Title in Outfit Font with Vibrant Royal Indigo Palette */}
+              <span className="font-outfit font-extrabold text-2xl lg:text-3xl tracking-tight text-[#4F46E5]">
+                {project.name}
+              </span>
+            </h3>
+          )}
         </div>
 
         {/* Thumbnail Preview Frame with Static 16:9 Image */}
