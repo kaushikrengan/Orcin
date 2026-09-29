@@ -1292,7 +1292,7 @@ function Navbar({ onSelectPrism }: { onSelectPrism?: () => void }) {
                     <motion.a 
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      href="https://lumina-chat-flame.vercel.app/"
+                      href="https://lumina-frontend-ma7n.onrender.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex justify-between items-center px-3.5 py-2.5 rounded-lg bg-transparent border-none text-left hover:bg-[#FAF8F5] transition-all cursor-pointer w-full group/item no-underline"
@@ -1432,7 +1432,7 @@ function Navbar({ onSelectPrism }: { onSelectPrism?: () => void }) {
 
                 {/* LUMINA (with Radiant AI Light Spark Logo & Outfit Typography) */}
                 <a
-                  href="https://lumina-chat-flame.vercel.app/"
+                  href="https://lumina-frontend-ma7n.onrender.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2.5 text-left cursor-pointer bg-transparent border-none w-full transition-all duration-100 flex items-center justify-between active:bg-graphite/5 touch-manipulation no-underline rounded-lg"
@@ -1745,7 +1745,7 @@ const PROJECTS: Project[] = [
     category: "AI Knowledge Search",
     shortDesc: "Instant answers across your organization's files. Instead of wasting hours searching through PDFs, spreadsheets, and meeting recordings, employees can simply ask questions in plain English and get verified answers with exact source links.",
     image: "/lumina-mockup.svg",
-    externalUrl: "https://lumina-chat-flame.vercel.app/",
+    externalUrl: "https://lumina-frontend-ma7n.onrender.com/",
     statusBadge: "Live Production App",
     metrics: [
       { label: "Search Speed", value: "Instant" },
