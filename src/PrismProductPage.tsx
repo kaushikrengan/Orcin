@@ -1618,7 +1618,7 @@ Best regards,`;
 
           <div className="relative z-10 max-w-6xl mx-auto">
             {/* Section Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-16 p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-3xl bg-black/45 backdrop-blur-md border border-white/15 shadow-2xl shadow-black/30">
               <h2
                 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-extrabold tracking-tight leading-tight text-balance drop-shadow-md text-white"
                 style={{ color: "#ffffff" }}
