@@ -1733,22 +1733,22 @@ Best regards,`;
                     Local / On-Premises
                   </h3>
                   <p className="text-sm text-[#1A1A1A]/70 font-sans leading-relaxed mb-4">
-                    Zero data egress, air-gapped environments, local VLM execution.
+                    Keep all your files 100% private, secure, and offline on your own computers.
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#E6E2DE] font-mono text-xs text-[#1A1A1A]/60 space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600" />
-                    <span>Quantized 4-bit local VLM via Vulkan / llama.cpp</span>
+                <div className="pt-4 border-t border-[#E6E2DE] text-xs sm:text-sm text-[#1A1A1A]/75 space-y-2 font-sans">
+                  <div className="flex items-start gap-2.5">
+                    <Check size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Runs 100% privately on your device — no files or data ever leave your office</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600" />
-                    <span>Fits in 600 MB RAM on standard workstations</span>
+                  <div className="flex items-start gap-2.5">
+                    <Check size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Works completely offline without needing an active internet connection</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600" />
-                    <span>ITAR &amp; classified engineering network compliant</span>
+                  <div className="flex items-start gap-2.5">
+                    <Check size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Runs smoothly on standard work laptops — no expensive or specialized hardware needed</span>
                   </div>
                 </div>
               </div>
@@ -1765,22 +1765,22 @@ Best regards,`;
                     Cloud &amp; Hybrid
                   </h3>
                   <p className="text-sm text-[#1A1A1A]/70 font-sans leading-relaxed mb-4">
-                    Fast, scalable document processing powered by Google Gemini.
+                    Fast, effortless document reading in the cloud without using your computer's memory.
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#E6E2DE] font-mono text-xs text-[#1A1A1A]/60 space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600" />
-                    <span>Sub-second page throughput with multimodal reasoning</span>
+                <div className="pt-4 border-t border-[#E6E2DE] text-xs sm:text-sm text-[#1A1A1A]/75 space-y-2 font-sans">
+                  <div className="flex items-start gap-2.5">
+                    <Check size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Instant results in seconds — smart AI extracts requirements lightning-fast</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600" />
-                    <span>Massive multi-page specification batches in parallel</span>
+                  <div className="flex items-start gap-2.5">
+                    <Check size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Handles huge, multi-page document batches all at once with zero slowdown</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600" />
-                    <span>Zero local GPU required; seamless API key integration</span>
+                  <div className="flex items-start gap-2.5">
+                    <Check size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Zero setup required — works directly in your web browser with no complex installation</span>
                   </div>
                 </div>
               </div>
